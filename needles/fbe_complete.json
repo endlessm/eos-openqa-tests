@@ -1,0 +1,24 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_complete"
+  ],
+  "area": [
+    {
+      "xpos": 140,
+      "ypos": 90,
+      "width": 744,
+      "height": 543,
+      "type": "match"
+    },
+    {
+      "": "'Start Using Endless' button",
+      "xpos": 433,
+      "ypos": 554,
+      "width": 158,
+      "height": 34,
+      "type": "match"
+    }
+  ]
+}

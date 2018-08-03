@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "plymouth"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1023,
+      "height": 767,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_keyboard"
+  ],
+  "area": [
+    {
+      "xpos": 140,
+      "ypos": 59,
+      "width": 743,
+      "height": 604,
+      "type": "match"
+    },
+    {
+      "": "'Next' button",
+      "xpos": 814,
+      "ypos": 65,
+      "width": 63,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}
