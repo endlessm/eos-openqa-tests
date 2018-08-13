@@ -37,6 +37,9 @@
         { key => "PART_TABLE_TYPE", value => "mbr"},
         { key => "WORKER_CLASS", value => "qemu_x86_64" },
         { key => "QEMU_VIRTIO_RNG", value => "1" },
+        # TODO: workaround for https://phabricator.endlessm.com/T23545
+        { key => "QEMU_NO_KVM", value => "1" },
+        { key => "QEMU", value => "x86_64" },
       ],
     },
     {

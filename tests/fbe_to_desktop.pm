@@ -16,22 +16,22 @@ sub run {
     # wait for bootloader to appear
     # with a timeout explicitly lower than the default because
     # the bootloader screen will timeout itself
-    assert_screen "plymouth", 60;
+    assert_screen "plymouth", 6000;
 
     # press enter to boot right away
     send_key "esc";
 
     # wait for the desktop to appear
-    assert_and_click "fbe_welcome", "left", 600;
+    assert_and_click "fbe_welcome", "left", 60000;
 
     # work through FBE
-    assert_and_click "fbe_try-or-reformat", "left", 10;
-    assert_and_click "fbe_keyboard", "left", 10;
-    assert_and_click "fbe_license", "left", 10;
-    assert_and_click "fbe_complete", "left", 10;
+    assert_and_click "fbe_try-or-reformat", "left", 1000;
+    assert_and_click "fbe_keyboard", "left", 1000;
+    assert_and_click "fbe_license", "left", 1000;
+    assert_and_click "fbe_complete", "left", 1000;
 
     # desktop should be visible
-    assert_screen "desktop", 60;
+    assert_screen "desktop", 6000;
     save_screenshot;
 
     # run the terminal
