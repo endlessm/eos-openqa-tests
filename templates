@@ -1,0 +1,159 @@
+#!/usr/share/openqa/script/load_templates
+#
+# Endless OS Machines, Products, TestSuites and JobTemplates
+#
+# Use load_templates to load the file into the database. This is done
+# automatically by githook.cgi and eos-update-tests on the OpenQA server.
+#
+{
+  # JobTemplates is a subset of the combination of
+  # Machines × Products × TestSuites, chosen manually to reduce the
+  # combinatorial explosion.
+  JobTemplates => [
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "install_default_upload" },
+    },
+    # TODO: Multiply TestSuites by Machines by Products?
+  ],
+
+
+  Machines => [
+    {
+      backend   => "qemu",
+      name      => "64bit",
+      settings  => [
+        { key => "QEMUCPU", value => "Nehalem" },
+        { key => "QEMUCPUS", value => "2"},
+        { key => "QEMUVGA", value => "qxl"},
+        { key => "QEMURAM", value => "2048"},
+        { key => "PART_TABLE_TYPE", value => "mbr"},
+        { key => "WORKER_CLASS", value => "qemu_x86_64" },
+        { key => "QEMU_VIRTIO_RNG", value => "1" },
+        # TODO: workaround for https://phabricator.endlessm.com/T23545
+        { key => "QEMU_NO_KVM", value => "1" },
+        { key => "QEMU", value => "x86_64" },
+      ],
+    },
+    {
+      backend   => "qemu",
+      name      => "uefi",
+      settings  => [
+        { key => "QEMUCPU", value => "Nehalem" },
+        { key => "QEMUCPUS", value => "2"},
+        { key => "QEMUVGA", value => "qxl"},
+        { key => "QEMURAM", value => "2048"},
+        { key => "UEFI", value => "1"},
+        { key => "PART_TABLE_TYPE", value => "gpt"},
+        { key => "WORKER_CLASS", value => "qemu_x86_64" },
+        { key => "QEMU_VIRTIO_RNG", value => "1"}
+      ],
+    },
+    {
+      backend   => "qemu",
+      name      => "ARM",
+      settings  => [
+        { key => "QEMU", value => "arm" },
+        { key => "QEMUCPUS", value => "2"},
+        { key => "QEMUMACHINE", value => "virt"},
+        { key => "QEMURAM", value => "1024"},
+        { key => "QEMU_NO_KVM", value => "1"},
+        { key => "TIMEOUT_SCALE", value => "5" },
+        { key => "SERIALDEV", value => "ttyAMA0" },
+        # we're running ARM tests on x86_64 for now as we have
+        # no ARM workers
+        { key => "WORKER_CLASS", value => "qemu_x86_64" },
+        { key => "QEMU_VIRTIO_RNG", value => "1"}
+      ],
+    },
+  ],
+
+
+  # If introducing a new distribution, you need to create/symlink its tests in
+  # /var/lib/openqa/share/tests/${distri} before it will work.
+  Products => [
+    {
+      arch      => "x86_64",
+      distri    => "eos",
+      flavor    => "base",
+      name      => "",
+      version   => "*",
+    },
+
+    {
+      arch      => "x86_64",
+      distri    => "eosinstaller",
+      flavor    => "base",
+      name      => "",
+      version   => "*",
+    },
+    {
+      arch      => "x86_64",
+      distri    => "eosnonfree",
+      flavor    => "base",
+      name      => "",
+      version   => "*",
+    },
+    {
+      arch      => "arm",
+      distri    => "eosnonfree",
+      flavor    => "base",
+      name      => "",
+      version   => "*",
+    },
+    {
+      arch      => "x86_64",
+      distri    => "eos",
+      flavor    => "base",
+      name      => "",
+      settings  => [
+        { key => "LIVE", value => "1" },
+      ],
+      version   => "*",
+    },
+    {
+      arch      => "x86_64",
+      distri    => "eosinstaller",
+      flavor    => "base",
+      name      => "",
+      settings  => [
+        { key => "LIVE", value => "1" },
+      ],
+      version   => "*",
+    },
+    {
+      arch      => "x86_64",
+      distri    => "eosnonfree",
+      flavor    => "base",
+      name      => "",
+      settings  => [
+        { key => "LIVE", value => "1" },
+      ],
+      version   => "*",
+    },
+  ],
+
+
+  TestSuites => [
+    {
+      name => "install_default",
+      settings => [
+        { key => "POSTINSTALL", value => "_collect_data" },
+      ],
+    },
+    {
+      name => "install_default_upload",
+      settings => [
+        { key => "POSTINSTALL", value => "_collect_data" },
+        { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+  ],
+}

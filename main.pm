@@ -9,6 +9,6 @@ require $distri;
 testapi::set_distribution(endlessdistribution->new());
 
 # We only have the one test for the moment
-autotest::loadtest 'tests/fbe-to-desktop.pm';
+autotest::loadtest 'tests/fbe_to_desktop.pm';
 
 1;
