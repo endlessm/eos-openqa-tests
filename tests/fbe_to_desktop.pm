@@ -1,14 +1,7 @@
 use base "basetest";
 use strict;
 use testapi;
-
-# high-level 'type this string extremely safely and rather slow'
-# function whose specific implementation may vary
-sub type_very_safely {
-    my $string = shift;
-    type_string($string, wait_screen_change => 1, max_interval => 1);
-    wait_still_screen 5;
-}
+use utils;
 
 sub run {
     my $self = shift;
