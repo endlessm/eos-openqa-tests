@@ -22,6 +22,7 @@
       test_suite => { name => "install_default_upload" },
     },
     # TODO: Multiply TestSuites by Machines by Products?
+    # TODO: Add desktop_terminal
   ],
 
 
@@ -153,6 +154,15 @@
       settings => [
         { key => "POSTINSTALL", value => "_collect_data" },
         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_terminal",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_terminal" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
   ],
