@@ -10,7 +10,7 @@ sub run {
 
     # run the terminal
     type_very_safely "term\n";
-    save_screenshot;
+    assert_screen('desktop_terminal', 10);
 }
 
 sub test_flags {
