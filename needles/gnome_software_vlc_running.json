@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "gnome_software_vlc_running"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    }
+  ]
+}

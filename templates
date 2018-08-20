@@ -21,6 +21,17 @@
       },
       test_suite => { name => "install_default_upload" },
     },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "install_flatpak" },
+    },
     # TODO: Multiply TestSuites by Machines by Products?
     # TODO: Add desktop_terminal
   ],
@@ -160,6 +171,15 @@
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "install_flatpak",
+      settings => [
+        { key => "POSTINSTALL", value => "install_flatpak" },
+        #{ key => "START_AFTER_TEST", value => "install_default_upload" },
+        #{ key => "BOOTFROM", value => "c" },
+        #{ key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
   ],

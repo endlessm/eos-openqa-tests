@@ -1,0 +1,30 @@
+{
+  "tags": [
+    "gnome_software_main_screen"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Application list (changes regularly)",
+      "xpos": 307,
+      "ypos": 63,
+      "width": 612,
+      "height": 669,
+      "type": "exclude"
+    },
+    {
+      "": "Top bar buttons (updates button appears and disappears)",
+      "xpos": 321,
+      "ypos": 1,
+      "width": 378,
+      "height": 44,
+      "type": "exclude"
+    }
+  ]
+}
