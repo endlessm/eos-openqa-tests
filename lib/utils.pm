@@ -19,7 +19,7 @@ sub type_very_safely {
 # Check we are at a ‘clean’ desktop, where we should be able to start typing
 # to enter the shell’s application selector.
 sub check_desktop_clean {
-    assert_screen("desktop", 6000);
+    assert_screen("desktop", 60);
 }
 
 # Log in to a TTY (which must already be displayed; see root_console() from the

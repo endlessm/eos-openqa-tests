@@ -9,7 +9,7 @@ sub run {
     # wait for bootloader to appear
     # with a timeout explicitly lower than the default because
     # the bootloader screen will timeout itself
-    assert_screen('plymouth', 6000);
+    assert_screen('plymouth', 60);
 
     # Press Esc to show the boot progress for debugging
     send_key('esc');
