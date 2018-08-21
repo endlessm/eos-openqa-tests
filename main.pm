@@ -38,7 +38,12 @@ if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
 # ---
 
 if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
-    # Currently we only support live boot media, so go through the FBE wizzard.
+    if (!get_var('LIVE')) {
+        autotest::loadtest "tests/_fbe_install.pm";
+    }
+
+    # After installing, we need to run through the initial setup. We also need
+    # to run through it when booting a live image.
     autotest::loadtest "tests/_fbe.pm";
 }
 

@@ -2,7 +2,8 @@
   "properties": [],
   "tags": [
     "fbe",
-    "fbe_complete"
+    "fbe_complete",
+    "fbe_complete_install"
   ],
   "area": [
     {
@@ -15,7 +16,7 @@
     {
       "": "'Start Using Endless' button",
       "xpos": 433,
-      "ypos": 554,
+      "ypos": 525,
       "width": 158,
       "height": 34,
       "type": "match"

@@ -30,6 +30,17 @@
         flavor  => "base",
         version => "*",
       },
+      test_suite => { name => "live_default" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
       test_suite => { name => "desktop_terminal" },
     },
     {
@@ -168,6 +179,13 @@
       ],
     },
     {
+      name => "live_default",
+      settings => [
+        { key => "POSTINSTALL", value => "_collect_data" },
+        { key => "LIVE", value => "1" },
+      ],
+    },
+    {
       name => "install_default_upload",
       settings => [
         { key => "POSTINSTALL", value => "_collect_data" },
@@ -178,6 +196,7 @@
       name => "desktop_terminal",
       settings => [
         { key => "POSTINSTALL", value => "desktop_terminal" },
+        { key => "LIVE", value => "1" },
         #{ key => "START_AFTER_TEST", value => "install_default_upload" },
         #{ key => "BOOTFROM", value => "c" },
         #{ key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
@@ -187,6 +206,7 @@
       name => "install_flatpak",
       settings => [
         { key => "POSTINSTALL", value => "install_flatpak" },
+        { key => "LIVE", value => "1" },
         #{ key => "START_AFTER_TEST", value => "install_default_upload" },
         #{ key => "BOOTFROM", value => "c" },
         #{ key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },

@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "gnome_shutdown"
+  ],
+  "area": [
+    {
+      "": "Just the shutdown dialogue",
+      "xpos": 252,
+      "ypos": 293,
+      "width": 520,
+      "height": 181,
+      "type": "match"
+    },
+    {
+      "": "'Restart' button",
+      "xpos": 426,
+      "ypos": 434,
+      "width": 171,
+      "height": 41,
+      "type": "match"
+    }
+  ]
+}
