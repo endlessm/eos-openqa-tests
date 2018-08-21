@@ -1,4 +1,4 @@
-use base "basetest";
+use base 'basetest';
 use strict;
 use testapi;
 use utils;
@@ -7,7 +7,7 @@ sub run {
     my $self = shift;
 
     # wait for the FBE to appear
-    assert_and_click "fbe_welcome", "left", 600;
+    assert_and_click('fbe_welcome', 'left', 600);
 
     # work through FBE
     if (get_var('LIVE')) {
@@ -44,8 +44,8 @@ sub run {
     }
 
     # desktop should be visible
-    check_desktop_clean;
-    save_screenshot;
+    check_desktop_clean();
+    save_screenshot();
 }
 
 sub test_flags {
