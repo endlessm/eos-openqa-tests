@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "live_console"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 88,
+      "ypos": 60,
+      "width": 302,
+      "height": 19,
+      "type": "exclude"
+    }
+  ]
+}

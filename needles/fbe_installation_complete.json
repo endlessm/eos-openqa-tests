@@ -1,0 +1,31 @@
+{
+  "tags": [
+    "fbe",
+    "fbe_installation_complete"
+  ],
+  "area": [
+    {
+      "xpos": 165,
+      "ypos": 120,
+      "width": 692,
+      "height": 482,
+      "type": "match"
+    },
+    {
+      "": "'Power Off' button",
+      "xpos": 448,
+      "ypos": 462,
+      "width": 126,
+      "height": 32,
+      "type": "match"
+    },
+    {
+      "": "GNOME Shell power button",
+      "xpos": 993,
+      "ypos": 737,
+      "width": 25,
+      "height": 25,
+      "type": "match"
+    }
+  ]
+}

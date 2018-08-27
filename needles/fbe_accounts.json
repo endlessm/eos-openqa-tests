@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "fbe",
+    "fbe_accounts"
+  ],
+  "area": [
+    {
+      "xpos": 140,
+      "ypos": 67,
+      "width": 743,
+      "height": 586,
+      "type": "match"
+    },
+    {
+      "": "'Skip' button",
+      "xpos": 817,
+      "ypos": 74,
+      "width": 63,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}
