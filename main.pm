@@ -50,6 +50,13 @@ if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
 # Postinstall phase
 # ---
 
+# Log in, but not if we’ve just run though FBE (which leaves the desktop logged
+# in).
+if (!get_var('LIVE') &&
+    (get_var("START_AFTER_TEST") || get_var("BOOTFROM"))) {
+    autotest::loadtest "tests/_graphical_login.pm";
+}
+
 if (get_var("POSTINSTALL")) {
     my @pis = split(/ /, get_var("POSTINSTALL"));
     foreach my $pi (@pis) {

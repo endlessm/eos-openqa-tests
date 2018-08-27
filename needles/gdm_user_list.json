@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "gdm",
+    "gdm_user_list"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "'Test' user entry",
+      "xpos": 336,
+      "ypos": 293,
+      "width": 336,
+      "height": 69,
+      "type": "match"
+    }
+  ]
+}
