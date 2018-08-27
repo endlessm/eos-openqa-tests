@@ -37,13 +37,28 @@ sub console_root_login {
 
     assert_screen('text_console_login', 10);
 
-    # Log in as the live user, as that’s the only user who is passwordless.
-    # We do not know the root password.
-    type_string("live\n");
-    assert_screen('live_console', 30);
+    if (get_var('LIVE')) {
+        # Log in as the live user, as that’s the only user who is passwordless.
+        # We do not know the root password.
+        type_string("live\n");
+        assert_screen('live_console', 30);
 
-    # Now slip into a sudo session. On a live image this should not require a
-    # password.
-    type_string("sudo -s\n");
-    assert_screen('root_console', 30);
+        # Now slip into a sudo session. On a live image this should not require
+        # a password.
+        type_string("sudo -s\n");
+        assert_screen('root_console', 30);
+    } else {
+        # If we’re not in a live session, use the standard test username.
+        type_string("test\n");
+        sleep(1);
+        type_string("123\n");
+        assert_screen('test_console', 30);
+
+        # Now slip into a sudo session. This will require the user’s password
+        # again.
+        type_string("sudo -s\n");
+        sleep(1);
+        type_string("123\n");
+        assert_screen('root_console', 30);
+    }
 }
