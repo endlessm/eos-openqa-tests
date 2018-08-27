@@ -190,6 +190,7 @@
       settings => [
         { key => "POSTINSTALL", value => "_collect_data" },
         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "HDDSIZEGB", value => "12" },
       ],
     },
     {
