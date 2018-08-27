@@ -29,10 +29,8 @@ testapi::set_distribution(endlessdistribution->new());
 # Boot phase
 # ---
 
-if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
-    # boot phase is loaded automatically every time
-    autotest::loadtest "tests/_boot.pm";
-}
+# Boot phase is loaded automatically every time
+autotest::loadtest "tests/_boot.pm";
 
 # Install/First boot phase
 # ---
