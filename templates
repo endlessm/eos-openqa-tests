@@ -138,36 +138,6 @@
       name      => "",
       version   => "*",
     },
-    {
-      arch      => "x86_64",
-      distri    => "eos",
-      flavor    => "base",
-      name      => "",
-      settings  => [
-        { key => "LIVE", value => "1" },
-      ],
-      version   => "*",
-    },
-    {
-      arch      => "x86_64",
-      distri    => "eosinstaller",
-      flavor    => "base",
-      name      => "",
-      settings  => [
-        { key => "LIVE", value => "1" },
-      ],
-      version   => "*",
-    },
-    {
-      arch      => "x86_64",
-      distri    => "eosnonfree",
-      flavor    => "base",
-      name      => "",
-      settings  => [
-        { key => "LIVE", value => "1" },
-      ],
-      version   => "*",
-    },
   ],
 
 
