@@ -43,6 +43,10 @@ if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
     # After installing, we need to run through the initial setup. We also need
     # to run through it when booting a live image.
     autotest::loadtest "tests/_fbe.pm";
+
+    if (get_var('OS_UPDATE_TO')) {
+        autotest::loadtest "tests/_os_update.pm";
+    }
 }
 
 # Postinstall phase

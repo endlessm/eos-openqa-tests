@@ -14,7 +14,7 @@ sub root_console {
     # Switch to a default or specified TTY and log in as root.
     my $self = shift;
     my %args = (
-        tty => 1, # what TTY to login to
+        tty => 3, # what TTY to login to
         @_);
 
     send_key("ctrl-alt-f$args{tty}");
