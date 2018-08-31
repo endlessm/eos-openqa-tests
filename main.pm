@@ -66,6 +66,10 @@ if (get_var("POSTINSTALL")) {
     }
 }
 
+# Always check for and collect data about systemic failures
+autotest::loadtest "tests/_check_crashes.pm";
+autotest::loadtest "tests/_collect_data.pm";
+
 # We need to shut down before uploading disk images, otherwise OpenQA complains
 # and fails the test run.
 if (get_var("STORE_HDD_1") || get_var("PUBLISH_HDD_1")) {
