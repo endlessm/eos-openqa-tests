@@ -26,6 +26,7 @@ sub run {
     $self->root_console();
     my $expected_booted_version = get_var('OS_UPDATE_TO');
     my $booted_version = script_output('grep VERSION_ID /etc/os-release');
+    $self->exit_root_console();
 
     if ($booted_version ne "VERSION_ID=\"$expected_booted_version\"") {
         die("Unexpected version $booted_version instead of $expected_booted_version");

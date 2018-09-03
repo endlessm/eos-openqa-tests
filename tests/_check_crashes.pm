@@ -12,6 +12,8 @@ sub run {
     # Check there are no errors in the journal.
     # FIXME: Ramp this up to check emerg..err. Currently a lot of true (unfixed) positives there.
     assert_script_run('[[ ! $(journalctl --priority emerg..crit --quiet --no-pager) ]]');
+
+    $self->exit_root_console();
 }
 
 sub test_flags {

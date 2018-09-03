@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-our @EXPORT = qw/check_desktop_clean console_root_login type_very_safely/;
+our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login type_very_safely/;
 
 # high-level 'type this string extremely safely and rather slow'
 # function whose specific implementation may vary
@@ -26,6 +26,7 @@ sub check_desktop_clean {
 # distribution class) and get a root console. On live images, we have to do this
 # by logging in as the live user then entering a sudo session, as that’s the
 # only pathway which doesn’t require any passwords.
+# Use console_root_exit() to exit from it.
 sub console_root_login {
     # There's a timing problem when we switch from a logged-in console
     # to a non-logged in console and immediately call this function;
@@ -61,4 +62,9 @@ sub console_root_login {
         type_string("123\n");
         assert_screen('root_console', 30);
     }
+}
+
+sub console_root_exit {
+    script_run('exit', 0);
+    script_run('exit', 0);
 }

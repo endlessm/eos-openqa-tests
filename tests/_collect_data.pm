@@ -31,6 +31,8 @@ sub run {
     # lastlog can mess up tar sometimes and it's not much use
     assert_script_run("tar czvf /var/tmp/var_log.tar.gz --exclude='lastlog' /var/log");
     upload_logs('/var/tmp/var_log.tar.gz');
+
+    $self->exit_root_console();
 }
 
 sub test_flags {

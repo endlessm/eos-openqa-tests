@@ -12,6 +12,7 @@ use utils;
 
 sub root_console {
     # Switch to a default or specified TTY and log in as root.
+    # Use exit_root_console() to exit.
     my $self = shift;
     my %args = (
         tty => 3, # what TTY to login to
@@ -19,6 +20,14 @@ sub root_console {
 
     send_key("ctrl-alt-f$args{tty}");
     console_root_login();
+}
+
+sub exit_root_console {
+    # Exit the console and return to a UI VT so that switching back to a
+    # terminal TTY for the next root_console() call is not a no-op (and hence
+    # causes the display to refresh).
+    console_root_exit();
+    send_key("ctrl-alt-f1");
 }
 
 sub ensure_curl_available {
@@ -60,6 +69,8 @@ sub post_fail_hook {
 
     # Sometimes useful for diagnosing FreeIPA issues
     upload_logs('/etc/nsswitch.conf', failok=>1);
+
+    $self->exit_root_console();
 }
 
 1;
