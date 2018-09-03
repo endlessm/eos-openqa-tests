@@ -57,14 +57,14 @@ sub post_fail_hook {
 
     # Note: script_run returns the exit code, so the logic looks weird.
     # upload any core dump files caught by coredumpctl
-    unless (script_run('test -n "$(ls -A /var/lib/systemd/coredump)" && cd /var/lib/systemd/coredump && tar czvf coredump.tar.gz *')) {
-        upload_logs('/var/lib/systemd/coredump/coredump.tar.gz');
+    unless (script_run('test -n "$(ls -A /var/lib/systemd/coredump)" && tar czvf /var/tmp/coredump.tar.gz /var/lib/systemd/coredump')) {
+        upload_logs('/var/tmp/coredump.tar.gz');
     }
 
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
-    unless (script_run("tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log")) {
-        upload_logs('/tmp/var_log.tar.gz');
+    unless (script_run("tar czvf /var/tmp/var_log.tar.gz --exclude='lastlog' /var/log")) {
+        upload_logs('/var/tmp/var_log.tar.gz');
     }
 
     # Sometimes useful for diagnosing FreeIPA issues
