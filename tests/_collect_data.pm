@@ -5,9 +5,7 @@ use testapi;
 sub run {
     my $self = shift;
     $self->root_console(tty=>4);
-
-    # FIXME: this skips upload_logs, which fails due to curl not being on the images
-    set_var('OFFLINE_SUT', 1);
+    $self->ensure_curl_available();
 
     assert_script_run('top -i -n20 -b > /var/tmp/top.log', 120);
     upload_logs('/var/tmp/top.log');
