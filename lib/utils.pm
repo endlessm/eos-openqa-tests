@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login type_very_safely/;
+our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login send_key_combo type_very_safely/;
 
 # high-level 'type this string extremely safely and rather slow'
 # function whose specific implementation may vary
@@ -14,6 +14,17 @@ sub type_very_safely {
     my $string = shift;
     type_string($string, wait_screen_change => 1, max_interval => 1);
     wait_still_screen 5;
+}
+
+# High level ‘type this keyboard shortcut’ utility.
+# For example, send_key_combo('ctrl', 't');
+sub send_key_combo {
+    my $modifier = shift;
+    my $key = shift;
+
+    hold_key($modifier);
+    send_key($key);
+    release_key($modifier);
 }
 
 # Check we are at a ‘clean’ desktop, where we should be able to start typing

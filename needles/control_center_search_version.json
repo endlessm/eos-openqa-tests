@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "control_center",
+    "control_center_search_version"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "‘About’ search result",
+      "xpos": 7,
+      "ypos": 102,
+      "width": 250,
+      "height": 76,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "tags": [
+    "gnome_software_details",
+    "gnome_software_encyclopedia_details",
+    "gnome_software_encyclopedia_details_installed"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Screenshots often change or are not downloaded",
+      "xpos": 94,
+      "ypos": 222,
+      "width": 827,
+      "height": 361,
+      "type": "exclude"
+    },
+    {
+      "": "'Launch' button",
+      "xpos": 298,
+      "ypos": 158,
+      "width": 103,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}

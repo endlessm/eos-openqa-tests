@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "browser_search"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Search results (vary a bit)",
+      "xpos": 116,
+      "ypos": 242,
+      "width": 692,
+      "height": 480,
+      "type": "exclude"
+    }
+  ]
+}

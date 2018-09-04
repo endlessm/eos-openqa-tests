@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "encyclopedia_search",
+    "encyclopedia_search_blobfish"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Search result link",
+      "xpos": 152,
+      "ypos": 245,
+      "width": 58,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

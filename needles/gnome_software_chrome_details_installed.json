@@ -1,0 +1,32 @@
+{
+  "tags": [
+    "gnome_software_details",
+    "gnome_software_chrome_details",
+    "gnome_software_chrome_details_installed"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Screenshots often change or are not downloaded",
+      "xpos": 85,
+      "ypos": 215,
+      "width": 841,
+      "height": 513,
+      "type": "exclude"
+    },
+    {
+      "": "'Launch' button",
+      "xpos": 299,
+      "ypos": 159,
+      "width": 103,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}

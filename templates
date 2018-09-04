@@ -41,7 +41,84 @@
         flavor  => "base",
         version => "*",
       },
+      test_suite => { name => "control_center_about" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "desktop_chrome" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "desktop_chromium" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "desktop_encyclopedia" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "desktop_libreoffice_writer" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "desktop_search" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
       test_suite => { name => "desktop_terminal" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base",
+        version => "*",
+      },
+      test_suite => { name => "discovery_feed" },
     },
     {
       machine    => { name => "64bit" },
@@ -161,9 +238,72 @@
       ],
     },
     {
+      name => "control_center_about",
+      settings => [
+        { key => "POSTINSTALL", value => "control_center_about" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_chrome",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_chrome" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_chromium",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_chromium" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_encyclopedia",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_encyclopedia" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_libreoffice_writer",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_libreoffice_writer" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_search",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_search" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
       name => "desktop_terminal",
       settings => [
         { key => "POSTINSTALL", value => "desktop_terminal" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "discovery_feed",
+      settings => [
+        { key => "POSTINSTALL", value => "discovery_feed" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
