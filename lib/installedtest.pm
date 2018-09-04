@@ -28,6 +28,11 @@ sub exit_root_console {
     # causes the display to refresh).
     console_root_exit();
     send_key("ctrl-alt-f1");
+
+    # There's a timing problem when we switch from a logged-in console
+    # to a non-logged in console and immediately call another function; just
+    # like with console_root_login().
+    sleep 4;
 }
 
 sub ensure_curl_available {
