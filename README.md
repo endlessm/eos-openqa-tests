@@ -18,6 +18,17 @@ OpenQA itself provides various pieces of documentation:
  * [Documentation overview](http://open.qa/documentation/)
  * [Test API](http://open.qa/api/testapi/)
 
+Test naming
+---
+
+Any test named with a leading underscore is part of the setup/teardown
+architecture, rather than testing a specific feature. Some combination of these
+tests is run as part of every test job.
+
+Any test with `desktop_` as a prefix is a simple smoketest for launching a
+specific application from the desktop and checking its basic functionality
+(typically, that it starts and its main window looks correct).
+
 Variables
 ---
 
