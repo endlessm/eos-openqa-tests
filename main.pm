@@ -44,6 +44,9 @@ if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
     # to run through it when booting a live image.
     autotest::loadtest "tests/_fbe.pm";
 
+    # Enable coredump collection; needed for _check_crashes.pm below.
+    autotest::loadtest "tests/_enable_coredumps.pm";
+
     if (get_var('OS_UPDATE_TO')) {
         autotest::loadtest "tests/_os_update.pm";
     }
