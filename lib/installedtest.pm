@@ -1,14 +1,12 @@
 package installedtest;
 use base 'basetest';
+use testapi;
 use utils;
 
 # Base class for tests that run on installed systems.
 #
 # This should be used with tests where the system is already installed: desktop
 # tests, upgrade tests, and generally anything in the post-install phase.
-
-use testapi;
-use utils;
 
 sub root_console {
     # Switch to a default or specified TTY and log in as root.
