@@ -33,6 +33,31 @@ sub exit_root_console {
     sleep 4;
 }
 
+sub user_console {
+    # Switch to a default or specified TTY and log in as a non-root user.
+    # Use exit_user_console() to exit.
+    my $self = shift;
+    my %args = (
+        tty => 3, # what TTY to login to
+        @_);
+
+    send_key("ctrl-alt-f$args{tty}");
+    console_user_login();
+}
+
+sub exit_user_console {
+    # Exit the console and return to a UI VT so that switching back to a
+    # terminal TTY for the next user_console() call is not a no-op (and hence
+    # causes the display to refresh).
+    console_user_exit();
+    send_key("ctrl-alt-f1");
+
+    # There's a timing problem when we switch from a logged-in console
+    # to a non-logged in console and immediately call another function; just
+    # like with console_user_login().
+    sleep 4;
+}
+
 sub ensure_curl_available {
     # EOS doesn’t install curl by default, so we might have to provide our own
     # version. We can’t install it by default in EOS to fix this, as the tests

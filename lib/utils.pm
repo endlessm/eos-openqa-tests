@@ -6,7 +6,8 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login send_key_combo type_very_safely/;
+our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login
+    console_user_exit console_user_login send_key_combo type_very_safely/;
 
 # high-level 'type this string extremely safely and rather slow'
 # function whose specific implementation may vary
@@ -77,5 +78,34 @@ sub console_root_login {
 
 sub console_root_exit {
     script_run('exit', 0);
+    script_run('exit', 0);
+}
+
+# Same as console_root_login(), but for a non-root user.
+sub console_user_login {
+    # There's a timing problem when we switch from a logged-in console
+    # to a non-logged in console and immediately call this function;
+    # if the switch lags a bit, this function will match one of the
+    # logged-in needles for the console we switched from, and get out
+    # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
+    # To avoid this, we'll sleep a few seconds before starting
+    sleep 4;
+
+    assert_screen('text_console_login', 10);
+
+    if (get_var('LIVE')) {
+        # Log in as the live user. They are passwordless.
+        type_string("live\n");
+        assert_screen('live_console', 30);
+    } else {
+        # If we’re not in a live session, use the standard test username.
+        type_string("test\n");
+        sleep(1);
+        type_string("123\n");
+        assert_screen('test_console', 30);
+    }
+}
+
+sub console_user_exit {
     script_run('exit', 0);
 }
