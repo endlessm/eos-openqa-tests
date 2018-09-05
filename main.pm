@@ -43,6 +43,13 @@ if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
     # After installing, we need to run through the initial setup. We also need
     # to run through it when booting a live image.
     autotest::loadtest "tests/_fbe.pm";
+
+    # Enable coredump collection; needed for _check_crashes.pm below.
+    autotest::loadtest "tests/_enable_coredumps.pm";
+
+    if (get_var('OS_UPDATE_TO')) {
+        autotest::loadtest "tests/_os_update.pm";
+    }
 }
 
 # Postinstall phase
@@ -61,6 +68,10 @@ if (get_var("POSTINSTALL")) {
         autotest::loadtest "tests/${pi}.pm";
     }
 }
+
+# Always check for and collect data about systemic failures
+autotest::loadtest "tests/_check_crashes.pm";
+autotest::loadtest "tests/_collect_data.pm";
 
 # We need to shut down before uploading disk images, otherwise OpenQA complains
 # and fails the test run.
