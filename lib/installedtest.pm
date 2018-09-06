@@ -110,6 +110,10 @@ sub collect_data {
     # lastlog can mess up tar sometimes and it's not much use
     assert_script_run("tar czvf /var/tmp/var_log.tar.gz --exclude='lastlog' /var/log");
     upload_logs('/var/tmp/var_log.tar.gz');
+
+    # Run eos-diagnostics and upload its results
+    assert_script_run('eos-diagnostics /var/tmp/eos-diagnostics.txt');
+    upload_logs('/var/tmp/eos-diagnostics.txt');
 }
 
 sub post_fail_hook {
