@@ -11,9 +11,9 @@
       "type": "match"
     },
     {
-      "xpos": 88,
+      "xpos": 0,
       "ypos": 60,
-      "width": 302,
+      "width": 1024,
       "height": 19,
       "type": "exclude"
     }
