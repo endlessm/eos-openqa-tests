@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "root_console"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 0,
+      "ypos": 63,
+      "width": 1024,
+      "height": 19,
+      "type": "exclude"
+    }
+  ]
+}
