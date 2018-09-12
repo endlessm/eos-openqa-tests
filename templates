@@ -234,7 +234,8 @@
       name => "install_default_upload",
       settings => [
         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
-        { key => "HDDSIZEGB", value => "12" },
+        # Minimum HDD size we support on real machines.
+        { key => "HDDSIZEGB", value => "32" },
       ],
     },
     {
