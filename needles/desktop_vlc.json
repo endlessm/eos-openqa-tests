@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "desktop_vlc"
+  ],
+  "area": [
+    {
+      "": "Main window",
+      "xpos": 214,
+      "ypos": 119,
+      "width": 596,
+      "height": 453,
+      "type": "match"
+    },
+    {
+      "": "Privacy and Network Access Policy window",
+      "xpos": 270,
+      "ypos": 155,
+      "width": 485,
+      "height": 459,
+      "type": "match"
+    }
+  ]
+}

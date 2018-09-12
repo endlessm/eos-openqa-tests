@@ -10,6 +10,14 @@
       "width": 1024,
       "height": 768,
       "type": "match"
+    },
+    {
+      "": "Screenshots often change or are not downloaded",
+      "xpos": 82,
+      "ypos": 207,
+      "width": 842,
+      "height": 386,
+      "type": "exclude"
     }
   ]
 }
