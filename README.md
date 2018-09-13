@@ -61,8 +61,10 @@ been included too, for convenience.
 | `EOS_IMAGE_OSTREE_DATE` | ISO 8601 date/time | Undefined | Timestamp of the commit of the deployed OS. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_OSTREE_REF` | OSTree ref name | Undefined | Ref name of the collection–ref used for the OS. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_OSTREE_REMOTE` | OSTree remote name | Undefined | Remote name of the refspec used for the OS. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_TYPE` | `boot`, `full`, `iso` | Undefined | Type of image this test is (or is to be) installed from; the type of image the SUT is booted from. From the `images` dictionary in the `manifest.json` file. Specific to eos-openqa-tests. |
 | `EOS_PLATFORM` | String | Undefined | `EIB_PLATFORM` from eos-image-builder. Specific to eos-openqa-tests. |
 | `FLAVOR` | String | Undefined | `EIB_PERSONALITY` from eos-image-builder. Understood by OpenQA. |
+| `HDD_1_DECOMPRESS_URL` | URI | Undefined | URI of a `.img.xz` or `.img.gz` file to download and boot the system under test from. Understood by OpenQA. |
 | `ISO_URL` | URI | Undefined | URI of a `.iso` file to download and boot the system under test from. Understood by OpenQA. |
 | `LIVE` | Boolean | False | The test is running on a live system rather than being installed. Specific to eos-openqa-tests. |
 | `OS_UPDATE_TO` | OS version number string | Undefined | EOS should be updated after installation, and the tests should expect that the update results in running the given OS version (as checked against `/etc/os-release`). If this variable is not set, the OS will not be updated. Specific to eos-openqa-tests. |
