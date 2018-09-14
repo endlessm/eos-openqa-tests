@@ -36,7 +36,7 @@ autotest::loadtest "tests/_boot.pm";
 # ---
 
 if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
-    if (!get_var('LIVE')) {
+    if (!get_var('LIVE') && get_var('EOS_IMAGE_TYPE') ne 'full') {
         autotest::loadtest "tests/_fbe_install.pm";
     }
 
