@@ -9,6 +9,12 @@
   # JobTemplates is a subset of the combination of
   # Machines × Products × TestSuites, chosen manually to reduce the
   # combinatorial explosion.
+  # Please keep this in alphabetical order of test_suite*, with all variants of
+  # a given test_suite grouped together so that cargo culting can be done from
+  # one place only.
+  #
+  # *install_default_upload and live_default should be at the top, as they are
+  # a bit special.
   JobTemplates => [
     {
       machine    => { name => "64bit" },
@@ -16,7 +22,7 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "install_default_upload" },
@@ -27,10 +33,10 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
         version => "*",
       },
-      test_suite => { name => "live_default" },
+      test_suite => { name => "install_default_upload" },
     },
     {
       machine    => { name => "64bit" },
@@ -38,7 +44,31 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "install_default_upload" },
+    },
+    # No *_full flavor of this, since only the ISO supports live boots:
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "live_default" },
+    },
+
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "control_center_about" },
@@ -49,7 +79,29 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "control_center_about" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "control_center_about" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "desktop_chrome" },
@@ -60,7 +112,29 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_chrome" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_chrome" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "desktop_chromium" },
@@ -71,7 +145,29 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_chromium" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_chromium" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "desktop_encyclopedia" },
@@ -82,7 +178,29 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_encyclopedia" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_encyclopedia" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "desktop_libreoffice_writer" },
@@ -93,7 +211,29 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_libreoffice_writer" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_libreoffice_writer" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "desktop_search" },
@@ -104,7 +244,29 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_search" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_search" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "desktop_terminal" },
@@ -115,7 +277,29 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_terminal" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_terminal" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "discovery_feed" },
@@ -126,12 +310,55 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
-        flavor  => "base",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "discovery_feed" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "discovery_feed" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
         version => "*",
       },
       test_suite => { name => "install_flatpak" },
     },
-    # TODO: Multiply TestSuites by Machines by Products?
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "install_flatpak" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "install_flatpak" },
+    },
   ],
 
 
@@ -189,7 +416,14 @@
     {
       arch      => "x86_64",
       distri    => "eos",
-      flavor    => "base",
+      flavor    => "base_full",
+      name      => "",
+      version   => "*",
+    },
+    {
+      arch      => "x86_64",
+      distri    => "eos",
+      flavor    => "base_iso",
       name      => "",
       version   => "*",
     },
@@ -197,21 +431,30 @@
     {
       arch      => "x86_64",
       distri    => "eosinstaller",
-      flavor    => "base",
+      flavor    => "base_full",
       name      => "",
       version   => "*",
     },
     {
       arch      => "x86_64",
       distri    => "eosnonfree",
-      flavor    => "base",
+      flavor    => "base_full",
       name      => "",
       version   => "*",
     },
     {
       arch      => "arm",
       distri    => "eosnonfree",
-      flavor    => "base",
+      flavor    => "base_full",
+      name      => "",
+      version   => "*",
+    },
+
+    # Update tests
+    {
+      arch      => "x86_64",
+      distri    => "eos",
+      flavor    => "base_full_update",
       name      => "",
       version   => "*",
     },
