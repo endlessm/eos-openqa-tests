@@ -1,6 +1,6 @@
 {
   "tags": [
-    "live_console"
+    "root_console"
   ],
   "area": [
     {
@@ -12,9 +12,9 @@
     },
     {
       "xpos": 0,
-      "ypos": 60,
+      "ypos": 63,
       "width": 1024,
-      "height": 19,
+      "height": 36,
       "type": "exclude"
     }
   ]

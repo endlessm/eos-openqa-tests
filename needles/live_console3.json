@@ -12,9 +12,9 @@
     },
     {
       "xpos": 0,
-      "ypos": 60,
+      "ypos": 62,
       "width": 1024,
-      "height": 19,
+      "height": 36,
       "type": "exclude"
     }
   ]

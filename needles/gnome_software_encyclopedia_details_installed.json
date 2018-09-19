@@ -1,8 +1,8 @@
 {
   "tags": [
     "gnome_software_details",
-    "gnome_software_vlc_details",
-    "gnome_software_vlc_details_installed"
+    "gnome_software_encyclopedia_details",
+    "gnome_software_encyclopedia_details_installed"
   ],
   "area": [
     {
@@ -22,8 +22,8 @@
     },
     {
       "": "'Launch' button",
-      "xpos": 300,
-      "ypos": 159,
+      "xpos": 298,
+      "ypos": 158,
       "width": 103,
       "height": 32,
       "type": "match"

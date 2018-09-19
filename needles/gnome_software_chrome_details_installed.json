@@ -1,8 +1,8 @@
 {
   "tags": [
     "gnome_software_details",
-    "gnome_software_vlc_details",
-    "gnome_software_vlc_details_installed"
+    "gnome_software_chrome_details",
+    "gnome_software_chrome_details_installed"
   ],
   "area": [
     {
@@ -14,15 +14,15 @@
     },
     {
       "": "Screenshots often change or are not downloaded",
-      "xpos": 94,
-      "ypos": 222,
-      "width": 827,
-      "height": 361,
+      "xpos": 85,
+      "ypos": 215,
+      "width": 841,
+      "height": 513,
       "type": "exclude"
     },
     {
       "": "'Launch' button",
-      "xpos": 300,
+      "xpos": 299,
       "ypos": 159,
       "width": 103,
       "height": 32,

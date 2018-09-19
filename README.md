@@ -18,6 +18,17 @@ OpenQA itself provides various pieces of documentation:
  * [Documentation overview](http://open.qa/documentation/)
  * [Test API](http://open.qa/api/testapi/)
 
+Test naming
+---
+
+Any test named with a leading underscore is part of the setup/teardown
+architecture, rather than testing a specific feature. Some combination of these
+tests is run as part of every test job.
+
+Any test with `desktop_` as a prefix is a simple smoketest for launching a
+specific application from the desktop and checking its basic functionality
+(typically, that it starts and its main window looks correct).
+
 Variables
 ---
 
@@ -37,13 +48,29 @@ been included too, for convenience.
 
 | Variable | Values allowed | Default value | Description |
 | -------- | -------------- | ------------- | ----------- |
+| `ARCH` | `x86_64`, `arm` | Undefined | Architecture the image was built for and the test will be run on. Understood by os-autoinst. |
 | `BOOTFROM` | String | Undefined | Sets the boot order for QEMU. See documentation for `qemu -boot` for accepted values and their meanings. Understood by os-autoinst. |
+| `BUILD` | String | Undefined | `EIB_BUILD_VERSION` from eos-image-builder. Understood by OpenQA. |
+| `DISTRI` | String | Undefined | `EIB_PRODUCT` from eos-image-builder. Understood by OpenQA. |
+| `EOS_IMAGE_FLATPAK_APPS` | Space-separated list of flatpak refs | Empty | List of flatpak apps preinstalled on the image. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_FLATPAK_REMOTES` | Space-separated list of flatpak remote names | Empty | List of flatpak remotes preconfigured on the image. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_FLATPAK_RUNTIMES` | Space-separated list of flatpak refs | Empty | List of flatpak runtimes preinstalled on the image. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_LANGUAGE` | `LANG` variable value | Undefined | Language the image is configured to use by default. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_OSTREE_COLLECTION_ID` | OSTree collection ID | Undefined | Collection ID of the collection–ref used for the OS. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_OSTREE_COMMIT` | OSTree commit checksum | Undefined | Commit checksum of the deployed OS. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_OSTREE_DATE` | ISO 8601 date/time | Undefined | Timestamp of the commit of the deployed OS. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_OSTREE_REF` | OSTree ref name | Undefined | Ref name of the collection–ref used for the OS. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_OSTREE_REMOTE` | OSTree remote name | Undefined | Remote name of the refspec used for the OS. Specific to eos-openqa-tests. |
+| `EOS_PLATFORM` | String | Undefined | `EIB_PLATFORM` from eos-image-builder. Specific to eos-openqa-tests. |
+| `FLAVOR` | String | Undefined | `EIB_PERSONALITY` from eos-image-builder. Understood by OpenQA. |
+| `ISO_URL` | URI | Undefined | URI of a `.iso` file to download and boot the system under test from. Understood by OpenQA. |
 | `LIVE` | Boolean | False | The test is running on a live system rather than being installed. Specific to eos-openqa-tests. |
 | `OS_UPDATE_TO` | OS version number string | Undefined | EOS should be updated after installation, and the tests should expect that the update results in running the given OS version (as checked against `/etc/os-release`). If this variable is not set, the OS will not be updated. Specific to eos-openqa-tests. |
 | `POSTINSTALL` | Space separated list of test names, string | Undefined | The given tests should be run, in order, in the post-install phase of `main.pm`, after logging in to GDM. Each test name should refer to an existing `tests/$(name).pm` module in eos-openqa-tests. Specific to eos-openqa-tests. |
 | `PUBLISH_HDD_1` | Filename for HDD image, string | Undefined | Publicly publish a qcow2 image of the VM’s HDD after the test completes successfully, using the given filename for it. Understood by os-autoinst. |
 | `START_AFTER_TEST` | Test name, string | Undefined | Schedule this test to be run only once the given test has completed, as an ordering constraint. Understood by OpenQA. |
 | `STORE_HDD_1` | Filename for HDD image, string | Undefined | As for `PUBLISH_HDD_1`, but store the image privately, so it can only be used by other tests within this test job. Understood by os-autoinst. |
+| `VERSION` | String | Undefined | `EIB_BRANCH` from eos-image-builder. Understood by os-autoinst. |
 
 Update tests
 ---

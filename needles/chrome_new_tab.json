@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "chrome_new_tab"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Content area changes regularly",
+      "xpos": 203,
+      "ypos": 160,
+      "width": 800,
+      "height": 572,
+      "type": "exclude"
+    }
+  ]
+}

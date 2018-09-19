@@ -1,14 +1,12 @@
 package installedtest;
 use base 'basetest';
+use testapi;
 use utils;
 
 # Base class for tests that run on installed systems.
 #
 # This should be used with tests where the system is already installed: desktop
 # tests, upgrade tests, and generally anything in the post-install phase.
-
-use testapi;
-use utils;
 
 sub root_console {
     # Switch to a default or specified TTY and log in as root.
@@ -28,6 +26,36 @@ sub exit_root_console {
     # causes the display to refresh).
     console_root_exit();
     send_key("ctrl-alt-f1");
+
+    # There's a timing problem when we switch from a logged-in console
+    # to a non-logged in console and immediately call another function; just
+    # like with console_root_login().
+    sleep 4;
+}
+
+sub user_console {
+    # Switch to a default or specified TTY and log in as a non-root user.
+    # Use exit_user_console() to exit.
+    my $self = shift;
+    my %args = (
+        tty => 3, # what TTY to login to
+        @_);
+
+    send_key("ctrl-alt-f$args{tty}");
+    console_user_login();
+}
+
+sub exit_user_console {
+    # Exit the console and return to a UI VT so that switching back to a
+    # terminal TTY for the next user_console() call is not a no-op (and hence
+    # causes the display to refresh).
+    console_user_exit();
+    send_key("ctrl-alt-f1");
+
+    # There's a timing problem when we switch from a logged-in console
+    # to a non-logged in console and immediately call another function; just
+    # like with console_user_login().
+    sleep 4;
 }
 
 sub ensure_curl_available {
@@ -49,11 +77,28 @@ sub ensure_curl_available {
     }
 }
 
-sub post_fail_hook {
+sub collect_data {
+    # Collect and upload a load of logs for debugging problems on SUTs. This
+    # should be used at the end of a test, or whenever a test fails.
+    # This function assumes the SUT is already at a root console.
     my $self = shift;
 
-    $self->root_console(tty=>6);
     $self->ensure_curl_available();
+
+    assert_script_run('top -i -n20 -b > /var/tmp/top.log', 120);
+    upload_logs('/var/tmp/top.log');
+
+    assert_script_run('apt list --installed | sort -u > /var/tmp/packages.log');
+    upload_logs('/var/tmp/packages.log');
+
+    assert_script_run('free > /var/tmp/free.log');
+    upload_logs('/var/tmp/free.log');
+
+    assert_script_run('df > /var/tmp/df.log');
+    upload_logs('/var/tmp/df.log');
+
+    assert_script_run('systemctl -t service --no-pager --no-legend | grep -o ".*\.service" > /var/tmp/services.log');
+    upload_logs('/var/tmp/services.log');
 
     # Note: script_run returns the exit code, so the logic looks weird.
     # upload any core dump files caught by coredumpctl
@@ -63,13 +108,20 @@ sub post_fail_hook {
 
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
-    unless (script_run("tar czvf /var/tmp/var_log.tar.gz --exclude='lastlog' /var/log")) {
-        upload_logs('/var/tmp/var_log.tar.gz');
+    assert_script_run("tar czvf /var/tmp/var_log.tar.gz --exclude='lastlog' /var/log");
+    upload_logs('/var/tmp/var_log.tar.gz');
+
+    # Run eos-diagnostics and upload its results
+    # Older versions of it can fail if $DISPLAY isn’t set
+    unless (script_run('eos-diagnostics /var/tmp/eos-diagnostics.txt')) {
+        upload_logs('/var/tmp/eos-diagnostics.txt');
     }
+}
 
-    # Sometimes useful for diagnosing FreeIPA issues
-    upload_logs('/etc/nsswitch.conf', failok=>1);
-
+sub post_fail_hook {
+    my $self = shift;
+    $self->root_console(tty=>6);
+    $self->collect_data();
     $self->exit_root_console();
 }
 

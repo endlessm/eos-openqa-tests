@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "desktop_search",
+    "desktop_search_encyclopedia"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "GNOME Software search result and activation link",
+      "xpos": 258,
+      "ypos": 324,
+      "width": 396,
+      "height": 49,
+      "type": "match"
+    }
+  ]
+}

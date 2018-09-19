@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "chrome_startup",
+    "chrome_startup_welcome"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    }
+  ]
+}

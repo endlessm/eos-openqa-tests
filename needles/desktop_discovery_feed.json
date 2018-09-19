@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "desktop_discovery_feed"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Daily content section",
+      "xpos": 93,
+      "ypos": 32,
+      "width": 848,
+      "height": 699,
+      "type": "exclude"
+    }
+  ]
+}
