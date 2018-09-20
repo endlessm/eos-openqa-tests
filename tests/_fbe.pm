@@ -18,6 +18,14 @@ sub run {
     assert_and_click('fbe_license', 'left', 10);
 
     if (!get_var('LIVE')) {
+        # If the timezone couldn’t be found automatically,
+        # select an arbitrary one.
+        if (check_screen('fbe_timezone2', 10)) {
+            type_string('Berlin');  # I hear it’s a pretty cool place
+            send_key('down');
+            send_key('ret');
+        }
+
         assert_and_click('fbe_timezone', 'left', 10);
         assert_and_click('fbe_accounts', 'left', 10);
 
