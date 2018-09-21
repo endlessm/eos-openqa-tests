@@ -471,6 +471,8 @@
       name => "live_default",
       settings => [
         { key => "LIVE", value => "1" },
+        # The ISO is provided as HDD_2 by eos-image-builder
+        { key => "NUMDISKS", value => "2" },
       ],
     },
     {
@@ -479,6 +481,8 @@
         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
         # Minimum HDD size we support on real machines.
         { key => "HDDSIZEGB", value => "32" },
+        # The raw disk image or ISO is provided as HDD_2 by eos-image-builder
+        { key => "NUMDISKS", value => "2" },
       ],
     },
     {
