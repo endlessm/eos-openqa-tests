@@ -236,6 +236,39 @@
         flavor  => "base_full",
         version => "*",
       },
+      test_suite => { name => "desktop_dinosaurs" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_dinosaurs" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_dinosaurs" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
       test_suite => { name => "desktop_search" },
     },
     {
@@ -521,6 +554,15 @@
       name => "desktop_libreoffice_writer",
       settings => [
         { key => "POSTINSTALL", value => "desktop_libreoffice_writer" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_dinosaurs",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_dinosaurs" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },

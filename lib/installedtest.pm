@@ -50,6 +50,7 @@ sub exit_user_console {
     # terminal TTY for the next user_console() call is not a no-op (and hence
     # causes the display to refresh).
     console_user_exit();
+    sleep 4;
     send_key("ctrl-alt-f1");
 
     # There's a timing problem when we switch from a logged-in console
