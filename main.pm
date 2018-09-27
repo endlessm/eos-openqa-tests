@@ -12,7 +12,7 @@ testapi::set_distribution(endlessdistribution->new());
 #  - Boot
 #  - Install/First boot
 #  - Postinstall
-#  -
+#
 # These phases are very suspiciously similar to what Fedora does
 # (https://pagure.io/fedora-qa/os-autoinst-distri-fedora/).
 # The preinstall and install phases can be skipped by tests which set HDD_1 to
@@ -21,6 +21,10 @@ testapi::set_distribution(endlessdistribution->new());
 #  - START_AFTER_TEST = install_default_upload
 #  - BOOTFROM = c
 #  - HDD_1 = disk_%FLAVOR%_%MACHINE%.qcow2
+# The initial installation test (install_default_upload) uses an installation
+# disk or raw image set as HDD_2. It is (so far) the only test with two disks
+# configured.
+#
 # For details of START_AFTER_TEST, see
 # https://github.com/os-autoinst/openQA/blob/master/docs/WritingTests.asciidoc#user-content-job-dependencies.
 # For details of BOOTFROM and HDD_1, see
