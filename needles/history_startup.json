@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "history_startup"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    }
+  ]
+}
