@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "history_search_result_world_war"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 400,
+      "ypos": 39,
+      "width": 223,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}
