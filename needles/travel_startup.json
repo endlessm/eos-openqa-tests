@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_startup"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 72,
+      "ypos": 148,
+      "width": 864,
+      "height": 280,
+      "type": "match"
+    }
+  ]
+}

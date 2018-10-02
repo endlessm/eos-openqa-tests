@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_article_uruguay"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 16,
+      "ypos": 52,
+      "width": 20,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}
