@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_categories_africa"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 529,
+      "ypos": 149,
+      "width": 407,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}
