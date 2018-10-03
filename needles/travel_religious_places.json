@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_religious_places"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 515,
+      "ypos": 494,
+      "width": 424,
+      "height": 234,
+      "type": "match"
+    }
+  ]
+}

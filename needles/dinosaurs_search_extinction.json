@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "dinosaurs_search_extinction"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Search result link",
+      "xpos": 561,
+      "ypos": 191,
+      "width": 414,
+      "height": 45,
+      "type": "match"
+    }
+  ]
+}

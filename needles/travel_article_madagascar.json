@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_article_madagascar"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 428,
+      "ypos": 4,
+      "width": 176,
+      "height": 26,
+      "type": "match"
+    }
+  ]
+}

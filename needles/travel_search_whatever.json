@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_search_whatever"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 7,
+      "ypos": 7,
+      "width": 38,
+      "height": 22,
+      "type": "match"
+    }
+  ]
+}

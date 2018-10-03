@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "history_categories"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 404,
+      "ypos": 474,
+      "width": 220,
+      "height": 190,
+      "type": "match"
+    }
+  ]
+}

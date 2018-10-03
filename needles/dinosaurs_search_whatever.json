@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "dinosaurs_search_whatever"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 890,
+      "ypos": 8,
+      "width": 24,
+      "height": 24,
+      "type": "match"
+    }
+  ]
+}
