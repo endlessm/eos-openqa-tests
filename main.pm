@@ -22,8 +22,13 @@ testapi::set_distribution(endlessdistribution->new());
 #  - BOOTFROM = c
 #  - HDD_1 = disk_%FLAVOR%_%MACHINE%.qcow2
 # The initial installation test (install_default_upload) uses an installation
-# disk or raw image set as HDD_2. It is (so far) the only test with two disks
-# configured.
+# disk set as ISO or a raw image set as HDD_1. When booting from a raw image in
+# HDD_1, some initial installation will be done, then a qcow2 image will be
+# saved containing the installed disk state. This will be used by all dependent
+# tests, to skip running the installation again. The use of the qcow2 image is
+# forced in the `templates` file by setting `+HDD_1` rather than `HDD_1`.
+# Setting the latter in `templates` would mean its value is overridden by the
+# `HDD_1` value provided by eos-image-builder.
 #
 # For details of START_AFTER_TEST, see
 # https://github.com/os-autoinst/openQA/blob/master/docs/WritingTests.asciidoc#user-content-job-dependencies.

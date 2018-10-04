@@ -471,8 +471,6 @@
       name => "live_default",
       settings => [
         { key => "LIVE", value => "1" },
-        # The ISO is provided as HDD_2 by eos-image-builder
-        { key => "NUMDISKS", value => "2" },
       ],
     },
     {
@@ -481,8 +479,6 @@
         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
         # Minimum HDD size we support on real machines.
         { key => "HDDSIZEGB", value => "32" },
-        # The raw disk image or ISO is provided as HDD_2 by eos-image-builder
-        { key => "NUMDISKS", value => "2" },
       ],
     },
     {
@@ -491,7 +487,7 @@
         { key => "POSTINSTALL", value => "control_center_about" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -500,7 +496,7 @@
         { key => "POSTINSTALL", value => "desktop_chrome" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -509,7 +505,7 @@
         { key => "POSTINSTALL", value => "desktop_chromium" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -518,7 +514,7 @@
         { key => "POSTINSTALL", value => "desktop_encyclopedia" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -527,7 +523,7 @@
         { key => "POSTINSTALL", value => "desktop_libreoffice_writer" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -536,7 +532,7 @@
         { key => "POSTINSTALL", value => "desktop_search" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -545,7 +541,7 @@
         { key => "POSTINSTALL", value => "desktop_terminal" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -554,7 +550,7 @@
         { key => "POSTINSTALL", value => "discovery_feed" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -563,7 +559,7 @@
         { key => "POSTINSTALL", value => "install_flatpak" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
   ],
