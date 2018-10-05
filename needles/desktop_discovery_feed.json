@@ -17,6 +17,15 @@
       "width": 848,
       "height": 699,
       "type": "exclude"
+    },
+
+    {
+      "": "Daily content scrollbar",
+      "xpos": 977,
+      "ypos": 30,
+      "width": 26,
+      "height": 701,
+      "type": "exclude"
     }
   ]
 }

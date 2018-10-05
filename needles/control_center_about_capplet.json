@@ -10,6 +10,14 @@
       "width": 1024,
       "height": 768,
       "type": "match"
+    },
+    {
+      "": "Build version",
+      "xpos": 561,
+      "ypos": 383,
+      "width": 134,
+      "height": 24,
+      "type": "exclude"
     }
   ]
 }

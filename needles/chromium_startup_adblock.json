@@ -9,6 +9,14 @@
       "width": 1024,
       "height": 768,
       "type": "match"
+    },
+    {
+      "": "Tab bar (different tests open different initial tabs)",
+      "xpos": 0,
+      "ypos": 0,
+      "width": 534,
+      "height": 37,
+      "type": "exclude"
     }
   ]
 }
