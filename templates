@@ -326,6 +326,29 @@
       },
       test_suite => { name => "discovery_feed" },
     },
+    # No *_update flavor of this, since it doesn’t make sense.
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "fbe_factory" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "fbe_factory" },
+    },
     {
       machine    => { name => "64bit" },
       prio       => 10,
@@ -551,6 +574,12 @@
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "fbe_factory",
+      settings => [
+        { "key" => "FBE_TEST", value => "fbe_factory" },
       ],
     },
     {
