@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright © 2018 Endless Mobile, Inc.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this library; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
+
+import argparse
+import configparser
+import eibimageserver
+import eibopenqaserver
+import json
+import logging
+import os
+import sys
+from urllib.request import urlopen
+
+
+# Image server which the manifest files live on.
+IMAGE_SERVER_HOST = 'images.endlessm.com'
+# OpenQA server hostname.
+OPENQA_SERVER_HOST = 'openqa.dev.endlessm.com'
+# OpenQA server REST API.
+OPENQA_SERVER_ENDPOINT_URI = \
+    'https://{}/api/v1/isos'.format(OPENQA_SERVER_HOST)
+# URI providing help on client.conf.
+OPENQA_CLIENT_HELP_URI = 'http://open.qa/docs/#_using_the_client_script'
+
+
+logger = logging.getLogger(__name__)
+
+
+def load_manifest_for_branch(branch):
+    """
+    Download manifest file from the image server for the latest release on the
+    given branch, using default values for all the other parameters.
+
+    Return it as a Python object.
+    If there are no matching releases on the given branch, return None.
+    """
+    fake_config = {
+        'image': {
+            'upload_api_url_root': 'http://' + IMAGE_SERVER_HOST,
+        },
+    }
+    image_infos = eibimageserver.query_images(product='eos',
+                                              branch=branch,
+                                              arch='amd64',
+                                              platform='amd64',
+                                              personality='base',
+                                              config=fake_config)
+
+    if not image_infos:
+        return None
+
+    latest_info = max(image_infos, key=lambda el: el['ostree_date'])
+
+    # Download and load the manifest.
+    with eibimageserver.download_image_manifest(latest_info, 'base') as src:
+        return json.load(src)
+
+
+def load_manifest_for_uri(uri):
+    """Download a manifest from a URI."""
+    logger.info('Downloading %s', uri)
+    with urlopen(uri) as src:
+        return json.load(src)
+
+
+def load_manifest_for_path(path):
+    """Download a manifest from a URI."""
+    logger.info('Opening local file %s', path)
+    with open(path) as src:
+        return json.load(src)
+
+
+def main():
+    # Try and load the config. It’s typically at ~/.config/openqa/client.conf,
+    # and contains key= and secret= keys in sections indexed by hostname. For
+    # example:
+    #
+    #    [openqa.dev.endlessm.com]
+    #    key=DEADBEEF
+    #    secret=A150DEADBEEF
+    #
+    # See http://open.qa/docs/#_using_the_client_script.
+    api_key = None
+    api_secret = None
+
+    try:
+        xdg_config_home = os.environ['XDG_CONFIG_HOME']
+    except KeyError:
+        xdg_config_home = os.path.expanduser('~/.config')
+    client_conf_file = os.path.join(xdg_config_home, 'openqa', 'client.conf')
+
+    config = configparser.ConfigParser()
+    config.read(client_conf_file)
+    try:
+        api_key = config[OPENQA_SERVER_HOST]['key']
+        api_secret = config[OPENQA_SERVER_HOST]['secret']
+    except KeyError:
+        pass
+
+    # Parse command line arguments.
+    parser = argparse.ArgumentParser(
+        description='Schedule OpenQA test runs for a given image manifest. '
+                    'Provide it with the URI or path to an image manifest '
+                    'JSON file, and it will schedule tests for all the images '
+                    'in that manifest.\n'
+                    '\n'
+                    'API configuration should be put in {}. See {} for '
+                    'help.'.format(client_conf_file, OPENQA_CLIENT_HELP_URI))
+    parser.add_argument('manifest', help='manifest file or URI')
+    parser.add_argument('--api-key', required=False, default='',
+                        help='OpenQA API key (default: load from '
+                             '{})'.format(client_conf_file))
+    parser.add_argument('--api-secret', required=False, default='',
+                        help='OpenQA API secret (default: load from '
+                             '{})'.format(client_conf_file))
+
+    args = parser.parse_args()
+
+    # API key/secret provided on the command line override the config file.
+    if args.api_key:
+        api_key = args.api_key
+    if args.api_secret:
+        api_secret = args.api_secret
+
+    if not api_key or not api_secret:
+        print('An --api-key and --api-secret must be provided, or specified '
+              'in {}.\nSee {}.'.format(
+                  client_conf_file, OPENQA_CLIENT_HELP_URI),
+              file=sys.stderr)
+        raise SystemExit(1)
+
+    # Download the manifest.
+    if args.manifest in ['master', 'eos3.3', 'eos3.4']:
+        manifest = load_manifest_for_branch(args.manifest)
+    if args.manifest.startswith('http'):
+        manifest = load_manifest_for_uri(args.manifest)
+    else:
+        manifest = load_manifest_for_path(args.manifest)
+
+    if 'full' in manifest['images']:
+        eibopenqaserver.send_request_for_manifest(manifest, 'full',
+                                                  IMAGE_SERVER_HOST,
+                                                  OPENQA_SERVER_ENDPOINT_URI,
+                                                  api_key, api_secret)
+    if 'iso' in manifest['images']:
+        eibopenqaserver.send_request_for_manifest(manifest, 'iso',
+                                                  IMAGE_SERVER_HOST,
+                                                  OPENQA_SERVER_ENDPOINT_URI,
+                                                  api_key, api_secret)
+
+
+if __name__ == '__main__':
+    main()
