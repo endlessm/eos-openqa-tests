@@ -44,7 +44,7 @@ autotest::loadtest "tests/_boot.pm";
 # Install/First boot phase
 # ---
 
-if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
+if (!get_var('START_AFTER_TEST') && !get_var('BOOTFROM') && !get_var('FBE_TEST')) {
     if (!get_var('LIVE') && get_var('EOS_IMAGE_TYPE') ne 'full') {
         autotest::loadtest "tests/_fbe_install.pm";
     }
@@ -64,12 +64,19 @@ if (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
     }
 }
 
+if (get_var('FBE_TEST')) {
+    my @fts = split(/ /, get_var('FBE_TEST'));
+    foreach my $ft (@fts) {
+        autotest::loadtest "tests/${ft}.pm";
+    }
+}
+
 # Postinstall phase
 # ---
 
 # Log in, but not if we’ve just run though FBE (which leaves the desktop logged
 # in).
-if (!get_var('LIVE') &&
+if (!get_var('LIVE') && !get_var('FBE_TEST') &&
     (get_var("START_AFTER_TEST") || get_var("BOOTFROM"))) {
     autotest::loadtest "tests/_graphical_login.pm";
 }
@@ -81,9 +88,12 @@ if (get_var("POSTINSTALL")) {
     }
 }
 
-# Always check for and collect data about systemic failures
-autotest::loadtest "tests/_check_crashes.pm";
-autotest::loadtest "tests/_collect_data.pm";
+# Always check for and collect data about systemic failures, apart from when
+# doing FBE tests, because we’re not in a proper environment then.
+if (!get_var('FBE_TEST')) {
+    autotest::loadtest "tests/_check_crashes.pm";
+    autotest::loadtest "tests/_collect_data.pm";
+}
 
 # We need to shut down before uploading disk images, otherwise OpenQA complains
 # and fails the test run.

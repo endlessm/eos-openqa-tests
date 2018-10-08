@@ -1,0 +1,32 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_factory_dialog"
+  ],
+  "area": [
+    {
+      "xpos": 160,
+      "ypos": 246,
+      "width": 703,
+      "height": 230,
+      "type": "match"
+    },
+    {
+      "": "eos-image-version string",
+      "xpos": 264,
+      "ypos": 374,
+      "width": 583,
+      "height": 24,
+      "type": "exclude"
+    },
+    {
+      "": "close button",
+      "xpos": 827,
+      "ypos": 259,
+      "width": 24,
+      "height": 24,
+      "type": "match"
+    }
+  ]
+}

@@ -63,6 +63,7 @@ been included too, for convenience.
 | `EOS_IMAGE_OSTREE_REMOTE` | OSTree remote name | Undefined | Remote name of the refspec used for the OS. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_TYPE` | `boot`, `full`, `iso` | Undefined | Type of image this test is (or is to be) installed from; the type of image the SUT is booted from. From the `images` dictionary in the `manifest.json` file. Specific to eos-openqa-tests. |
 | `EOS_PLATFORM` | String | Undefined | `EIB_PLATFORM` from eos-image-builder. Specific to eos-openqa-tests. |
+| `FBE_TEST` | Space separated list of test names, string | Undefined | The given tests should be run, in order, in the install/first boot phase of `main.pm`, instead of installation and the normal `_fbe.pm` test. Each test name should refer to an existing `tests/$(name).pm` module in eos-openqa-tests. Specific to eos-openqa-tests. |
 | `FLAVOR` | String | Undefined | `${EIB_PERSONALITY}_{boot,full,iso}{,_update}`,  from eos-image-builder. Understood by OpenQA. |
 | `HDD_1_DECOMPRESS_URL` | URI | Undefined | URI of a `.img.xz` or `.img.gz` file to download and boot the system under test from. Understood by OpenQA. |
 | `ISO_URL` | URI | Undefined | URI of a `.iso` file to download and boot the system under test from. Understood by OpenQA. |
