@@ -50,6 +50,13 @@ sub exit_user_console {
     # terminal TTY for the next user_console() call is not a no-op (and hence
     # causes the display to refresh).
     console_user_exit();
+    # There's a timing problem. If "sleep" is not called the test fails,
+    # because it keeps in the console.
+    # My theory is that after calling "console_user_exit" there is a small delay
+    # to refresh the console. If we send "ctrl-alt-f1" while it is refreshing
+    # the console that event will never captured and the console will be still
+    # displayed.
+    sleep 4;
     send_key("ctrl-alt-f1");
 
     # There's a timing problem when we switch from a logged-in console
@@ -75,6 +82,32 @@ sub ensure_curl_available {
                    "mv curl.py /usr/local/bin/curl && " .
                    "chmod +x /usr/local/bin/curl");
     }
+}
+
+sub disable_polkit_policy {
+    # Creates a Polkit rule to 'disable' the rules added for a given action_id.
+    my $self = shift;
+    my $action_id = shift;
+    my $filename = shift;
+
+    my $policy =
+        "polkit.addRule(function(action, subject) {" .
+        "    if (action.id == \"$action_id\") {" .
+        "        return polkit.Result.YES;" .
+        "    }" .
+        "});";
+
+    $self->root_console();
+    assert_script_run("echo '$policy' > /etc/polkit-1/rules.d/$filename");
+    $self->exit_root_console();
+}
+
+sub remove_polkit_policy {
+    my $self = shift;
+    my $filename = shift;
+    $self->root_console();
+    assert_script_run("rm /etc/polkit-1/rules.d/$filename");
+    $self->exit_root_console();
 }
 
 sub collect_data {
