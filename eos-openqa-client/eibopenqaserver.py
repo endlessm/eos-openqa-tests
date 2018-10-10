@@ -41,7 +41,7 @@ def remap_arch(eib_arch):
 
 def send_request_for_manifest(manifest, image, upload_api_host,
                               openqa_endpoint_url, api_key, api_secret,
-                              os_update_to=None):
+                              update_to_manifest=None, dev_password=None):
     image_details = manifest['images'][image]
 
     download_url = \
@@ -64,7 +64,7 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     # update version in the FLAVOR, since that would mean the `templates` file
     # in eos-openqa-tests.git would need updating for each release.
     flavor = '{}_{}{}'.format(manifest['personality'], image,
-                              '_update' if os_update_to else '')
+                              '_update' if update_to_manifest else '')
 
     # Build an API request to send to OpenQA to add the new disk image to its
     # list of images, and hence instantiate tests from the job templates for
@@ -106,8 +106,27 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     }
     if 'image_language' in manifest:
         data['EOS_IMAGE_LANGUAGE'] = manifest['image_language']
-    if os_update_to:
-        data['OS_UPDATE_TO'] = os_update_to
+    if update_to_manifest:
+        try:
+            collection_id = update_to_manifest['ostree']['collection-id']
+        except KeyError:
+            collection_id = ''
+
+        if collection_id == 'com.endlessm.Dev' or \
+           collection_id.startswith('com.endlessm.Dev.'):
+            os_update_to_stage = 'dev'
+            os_update_to_stage_password = dev_password
+        elif collection_id == 'com.endlessm.Demo' or \
+             collection_id.startswith('com.endlessm.Demo.'):
+            os_update_to_stage = 'demo'
+            os_update_to_stage_password = ''
+        else:
+            os_update_to_stage = 'prod'
+            os_update_to_stage_password = ''
+
+        data['OS_UPDATE_TO'] = update_to_manifest['ostree']['version']
+        data['OS_UPDATE_TO_STAGE'] = os_update_to_stage
+        data['OS_UPDATE_TO_STAGE_PASSWORD'] = os_update_to_stage_password
 
     # Add the image URI.
     if image == 'iso':
