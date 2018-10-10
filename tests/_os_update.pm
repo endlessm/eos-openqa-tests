@@ -6,12 +6,19 @@ use utils;
 sub run {
     my $self = shift;
 
+    $self->root_console();
+
+    # If we‘re wanting to update to master, we need to switch from production
+    # to dev.
+    my $update_to_stage = get_var('OS_UPDATE_TO_STAGE');
+    my $update_to_stage_password = get_var('OS_UPDATE_TO_STAGE_PASSWORD');
+    script_run("eos-stage-ostree $update_to_stage $update_to_stage_password", 180);
+
     # Do the upgrade.
     # FIXME: Currently we don’t fail if this fails, because the state management
     # of `eos-updater-ctl update` is a bit flaky. We’ll catch any update
     # mismatches with the version check below. It would be good to catch them
     # sooner though, once eos-updater-ctl is a little less rubbish.
-    $self->root_console();
     script_run('eos-updater-ctl update', 180);
 
     # Upgrade complete; reboot. Sleep for 2s to avoid matching the shutdown
