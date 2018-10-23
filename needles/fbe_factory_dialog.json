@@ -13,6 +13,14 @@
       "type": "match"
     },
     {
+      "": "Release version string",
+      "xpos": 545,
+      "ypos": 307,
+      "width": 134,
+      "height": 58,
+      "type": "exclude"
+    },
+    {
       "": "eos-image-version string",
       "xpos": 264,
       "ypos": 374,
