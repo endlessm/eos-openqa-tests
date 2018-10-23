@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_article_machu_picchu_image1"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 522,
+      "ypos": 676,
+      "width": 42,
+      "height": 42,
+      "type": "match"
+    }
+  ]
+}

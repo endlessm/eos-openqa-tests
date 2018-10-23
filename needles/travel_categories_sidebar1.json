@@ -1,0 +1,21 @@
+{
+  "tags": [
+    "travel_categories_sidebar1"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "xpos": 0,
+      "ypos": 154,
+      "width": 225,
+      "height": 44,
+      "type": "match"
+    }
+  ]
+}
