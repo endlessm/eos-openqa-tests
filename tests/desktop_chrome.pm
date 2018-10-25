@@ -18,7 +18,7 @@ sub run {
     # will open Chrome (if installation has already completed).
     # If the former, wait until installation completes (we never have to wait
     # long) and click the ‘Launch’ button from gnome-software to get to Chrome.
-    if (check_screen('gnome_software_chrome_details_installed', 10)) {
+    if (check_screen('gnome_software_chrome_details_installed', 60)) {
         assert_and_click('gnome_software_chrome_details_installed', 'left', 10);
     }
 
