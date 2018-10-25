@@ -45,7 +45,7 @@ sub run {
     # Search for a random article to check searching and rendering are working.
     assert_screen('encyclopedia_startup', 10);
 
-    type_string("blobfish\n");
+    type_very_safely("blobfish\n");
     assert_and_click('encyclopedia_search_blobfish', 'left', 10);
     assert_screen('encyclopedia_article_blobfish', 10);
 }

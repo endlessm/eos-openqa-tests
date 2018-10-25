@@ -18,10 +18,16 @@ sub run {
     # will open Chrome (if installation has already completed).
     # If the former, wait until installation completes (we never have to wait
     # long) and click the ‘Launch’ button from gnome-software to get to Chrome.
-    if (check_screen('gnome_software_chrome_details_installed', 10)) {
+    if (check_screen('gnome_software_chrome_details_installed', 60)) {
         assert_and_click('gnome_software_chrome_details_installed', 'left', 10);
-        send_key('ret');  # skip through the ‘Make Google Chrome the default browser dialogue
     }
+
+    # Skip through the ‘Make Google Chrome the default browser’ dialogue. Do
+    # this without waiting for a needle, since that’s one fewer thing to
+    # maintain, and pressing enter when the dialogue isn’t there shouldn’t be a
+    # problem.
+    sleep(4);
+    send_key('ret');
 
     # If Chrome is starting for the first time, it will helpfully show an
     # Adblock Plus welcome screen on top of our search results.
