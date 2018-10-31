@@ -28,7 +28,7 @@ from urllib.request import urlopen
 
 
 # Image server which the manifest files live on.
-IMAGE_SERVER_HOST = 'images.endlessm.com'
+IMAGE_SERVER_HOST = 'images.endlessm-sf.com'
 # OpenQA server hostname.
 OPENQA_SERVER_HOST = 'openqa.dev.endlessm.com'
 # OpenQA server REST API.
