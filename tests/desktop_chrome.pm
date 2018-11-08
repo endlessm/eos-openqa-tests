@@ -38,7 +38,7 @@ sub run {
     # We expect to see a ‘welcome’ screen the first time Chrome is started. On
     # subsequent starts, we expect to see the exploration centre; we test that
     # as the new tab, below.
-    assert_screen('chrome_startup_welcome', 10);
+    assert_screen('chrome_startup_welcome', 60);
 
     # Open a new tab and navigate to a deliberately boring page (which is
     # likely to always be up and unlikely to change and invalidate our needles).

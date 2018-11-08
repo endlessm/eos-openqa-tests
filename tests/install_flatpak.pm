@@ -22,7 +22,7 @@ sub run {
 
     # Check installation has succeeded
     assert_and_click('gnome_software_vlc_details_installed', 'left', 600);
-    assert_screen('desktop_vlc', 10);
+    assert_screen('desktop_vlc', 60);
 }
 
 sub test_flags {

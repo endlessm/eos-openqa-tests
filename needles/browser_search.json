@@ -17,6 +17,14 @@
       "width": 897,
       "height": 527,
       "type": "exclude"
+    },
+    {
+      "": "‘Make Google work better for you’ annoying box",
+      "xpos": 699,
+      "ypos": 130,
+      "width": 328,
+      "height": 148,
+      "type": "exclude"
     }
   ]
 }

@@ -17,6 +17,14 @@
       "width": 534,
       "height": 37,
       "type": "exclude"
+    },
+    {
+      "": "Address bar (changing ID, font rendering)",
+      "xpos": 138,
+      "ypos": 39,
+      "width": 752,
+      "height": 26,
+      "type": "exclude"
     }
   ]
 }
