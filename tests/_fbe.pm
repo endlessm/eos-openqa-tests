@@ -26,7 +26,12 @@ sub run {
             send_key('ret');
         }
 
-        assert_and_click('fbe_timezone', 'left', 10);
+        # The timezone screen is only shown if the timezone could not be
+        # detected automatically.
+        if (check_screen('fbe_timezone', 10)) {
+            assert_and_click('fbe_timezone', 'left', 10);
+        }
+
         assert_and_click('fbe_accounts', 'left', 10);
 
         assert_screen('fbe_about_you', 10);
