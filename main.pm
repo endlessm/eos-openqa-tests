@@ -57,7 +57,9 @@ if (!get_var('START_AFTER_TEST') && !get_var('BOOTFROM') && !get_var('FBE_TEST')
     autotest::loadtest "tests/_enable_coredumps.pm";
 
     # Disable notification popups because they get in the way of a lot of needles.
+    # Similarly, disable the screensaver.
     autotest::loadtest "tests/_disable_desktop_notifications.pm";
+    autotest::loadtest "tests/_disable_screensaver.pm";
 
     if (get_var('OS_UPDATE_TO')) {
         autotest::loadtest "tests/_os_update.pm";

@@ -22,7 +22,7 @@ sub install_app {
     my $runtime_id = 'com.endlessm.apps.Platform//master';
 
     $self->user_console();
-    assert_script_run('flatpak install -y eos-apps ' . $app_id);
+    assert_script_run('flatpak install -y eos-apps ' . $app_id, 1800);
     if (!$run_with_nightly_sdk) {
         $self->exit_user_console();
     }
