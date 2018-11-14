@@ -12,7 +12,7 @@ sub run {
     type_very_safely("writer\n");
     assert_screen('libreoffice_writer_main_window', 10);
 
-    type_string('hello world');
+    type_very_safely('hello world');
     assert_screen('libreoffice_writer_test_string', 10);
 }
 
