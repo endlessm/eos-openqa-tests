@@ -20,9 +20,9 @@
     },
     {
       "": "Top bar buttons (updates button appears and disappears)",
-      "xpos": 321,
+      "xpos": 281,
       "ypos": 1,
-      "width": 378,
+      "width": 463,
       "height": 44,
       "type": "exclude"
     }
