@@ -1,0 +1,30 @@
+{
+  "tags": [
+    "gnome_software_installing_chrome"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Progress bar",
+      "xpos": 87,
+      "ypos": 133,
+      "width": 838,
+      "height": 76,
+      "type": "exclude"
+    },
+    {
+      "": "Screenshot and description (changes frequently)",
+      "xpos": 87,
+      "ypos": 208,
+      "width": 838,
+      "height": 521,
+      "type": "exclude"
+    }
+  ]
+}
