@@ -1,0 +1,32 @@
+{
+  "tags": [
+    "gnome_software_details",
+    "gnome_software_libreoffice_details",
+    "gnome_software_libreoffice_details_installed_remove"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Screenshots often change or are not downloaded",
+      "xpos": 94,
+      "ypos": 222,
+      "width": 827,
+      "height": 361,
+      "type": "exclude"
+    },
+    {
+      "": "Copy to USB button may be enabled/disabled depending on mounts; Update button may appear or disappear",
+      "xpos": 294,
+      "ypos": 153,
+      "width": 627,
+      "height": 43,
+      "type": "exclude"
+    }
+  ]
+}

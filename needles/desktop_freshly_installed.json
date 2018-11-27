@@ -2,7 +2,10 @@
   "properties": [],
   "tags": [
     "desktop",
-    "desktop_freshly_installed"
+    "desktop_freshly_installed",
+    "desktop_no_libreoffice",
+    "desktop_no_endlessm",
+    "desktop_no_new_folder"
   ],
   "area": [
     {

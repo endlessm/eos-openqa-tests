@@ -1,0 +1,32 @@
+{
+  "properties": [],
+  "tags": [
+    "desktop",
+    "desktop_add_website"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "List of recommended websites may change",
+      "xpos": 20,
+      "ypos": 309,
+      "width": 977,
+      "height": 346,
+      "type": "exclude"
+    },
+    {
+      "": "Search entry",
+      "xpos": 152,
+      "ypos": 147,
+      "width": 423,
+      "height": 25,
+      "type": "match"
+    }
+  ]
+}
