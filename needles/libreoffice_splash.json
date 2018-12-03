@@ -1,0 +1,23 @@
+{
+  "tags": [
+    "libreoffice_splash"
+  ],
+  "area": [
+    {
+      "": "LibreOffice splash screen/loading dialog",
+      "xpos": 181,
+      "ypos": 299,
+      "width": 661,
+      "height": 169,
+      "type": "match"
+    },
+    {
+      "": "Loading bar",
+      "xpos": 216,
+      "ypos": 452,
+      "width": 445,
+      "height": 9,
+      "type": "exclude"
+    }
+  ]
+}

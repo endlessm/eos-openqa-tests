@@ -10,7 +10,11 @@ sub run {
 
     # Run LibreOffice Writer and write a few things.
     type_very_safely("writer\n");
-    assert_screen('libreoffice_writer_main_window', 10);
+
+    # In the unlikely event that it loads so fast that we don't see the splash
+    # screen, that's okay.
+    check_screen('libreoffice_splash', 10);
+    assert_screen('libreoffice_writer_main_window', 20);
 
     type_very_safely('hello world');
     assert_screen('libreoffice_writer_test_string', 10);
