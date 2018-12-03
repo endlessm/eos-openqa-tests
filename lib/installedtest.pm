@@ -118,6 +118,9 @@ sub collect_data {
 
     $self->ensure_curl_available();
 
+    assert_script_run('ps aux > /var/tmp/ps-aux.log');
+    upload_logs('/var/tmp/ps-aux.log');
+
     assert_script_run('top -i -n20 -b > /var/tmp/top.log', 120);
     upload_logs('/var/tmp/top.log');
 
