@@ -654,7 +654,7 @@
         { key => "POSTINSTALL", value => "desktop_history" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -663,7 +663,7 @@
         { key => "POSTINSTALL", value => "desktop_dinosaurs" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
@@ -672,7 +672,7 @@
         { key => "POSTINSTALL", value => "desktop_travel" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
-        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
