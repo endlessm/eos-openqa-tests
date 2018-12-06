@@ -3,14 +3,25 @@ use base 'installedtest';
 use testapi;
 use utils;
 
+$sdktest::nightly_remote_name = 'eos-sdk';
+
 sub add_nightly_sdk_repo {
     my $self = shift;
     my $repo = 'http://endlessm.github.io/eos-knowledge-lib/eos-sdk-nightly.flatpakrepo';
+    my $collection_id = 'com.endlessm.Dev.Sdk';
 
     $self->disable_polkit_policy('org.freedesktop.Flatpak.configure-remote',
                                  '90-flatpak-configure-remote.rules');
     $self->user_console();
-    assert_script_run('flatpak remote-add --from eos-sdk-nightly ' . $repo);
+
+    # Do we actually need to add the remote? Nightly OS images have it enabled
+    # already. Note the inverted logic here because script_run() returns the
+    # exit status of its script.
+    if(script_run('flatpak remotes -d | grep -q ' . $collection_id) != 0) {
+        $sdktest::nightly_remote_name = 'eos-sdk-nightly';
+        assert_script_run('flatpak remote-add --from eos-sdk-nightly ' . $repo);
+    }
+
     $self->exit_user_console();
     $self->remove_polkit_policy('90-flatpak-configure-remote.rules');
 }
@@ -28,7 +39,7 @@ sub install_app {
     }
 
     if ($run_with_nightly_sdk) {
-        assert_script_run('flatpak install -y eos-sdk-nightly ' . $runtime_id, 1800);
+        assert_script_run('flatpak install -y ' . $sdktest::nightly_remote_name . ' ' . $runtime_id, 1800);
         $self->exit_user_console();
 
         check_desktop_clean();
