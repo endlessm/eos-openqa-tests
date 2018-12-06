@@ -17,7 +17,7 @@ sub add_nightly_sdk_repo {
     # Do we actually need to add the remote? Nightly OS images have it enabled
     # already. Note the inverted logic here because script_run() returns the
     # exit status of its script.
-    if(script_run('flatpak remotes -d | grep -q ' . $collection_id) != 0) {
+    if (script_run('flatpak remotes -d | grep -q ' . $collection_id) != 0) {
         $sdktest::nightly_remote_name = 'eos-sdk-nightly';
         assert_script_run('flatpak remote-add --from eos-sdk-nightly ' . $repo);
     }
