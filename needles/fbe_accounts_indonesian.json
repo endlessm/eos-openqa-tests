@@ -1,0 +1,25 @@
+{
+  "tags": [
+    "fbe",
+    "fbe_accounts",
+    "fbe_accounts_indonesian"
+  ],
+  "area": [
+    {
+      "": "FBE window",
+      "xpos": 140,
+      "ypos": 67,
+      "width": 743,
+      "height": 586,
+      "type": "match"
+    },
+    {
+      "": "'Lewati' ('Skip') button",
+      "xpos": 802,
+      "ypos": 74,
+      "width": 78,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}
