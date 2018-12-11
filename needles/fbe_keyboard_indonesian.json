@@ -1,0 +1,26 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_keyboard",
+    "fbe_keyboard_indonesian"
+  ],
+  "area": [
+    {
+      "": "FBE window",
+      "xpos": 140,
+      "ypos": 59,
+      "width": 743,
+      "height": 604,
+      "type": "match"
+    },
+    {
+      "": "'Selanjutnya' (Next) button",
+      "xpos": 756,
+      "ypos": 64,
+      "width": 114,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}

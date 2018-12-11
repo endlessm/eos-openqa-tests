@@ -1,0 +1,26 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_license",
+    "fbe_license_indonesian"
+  ],
+  "area": [
+    {
+      "": "FBE window",
+      "xpos": 140,
+      "ypos": 89,
+      "width": 743,
+      "height": 544,
+      "type": "match"
+    },
+    {
+      "": "'Accept and Continue' button",
+      "xpos": 699,
+      "ypos": 95,
+      "width": 179,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}
