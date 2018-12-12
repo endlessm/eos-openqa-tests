@@ -448,6 +448,29 @@
       },
       test_suite => { name => "fbe_factory" },
     },
+    # No *_update flavor of this, since it doesn’t make sense.
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "fbe_vt_switch" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "fbe_vt_switch" },
+    },
     {
       machine    => { name => "64bit" },
       prio       => 10,
@@ -706,6 +729,12 @@
       name => "fbe_factory",
       settings => [
         { "key" => "FBE_TEST", value => "fbe_factory" },
+      ],
+    },
+    {
+      name => "fbe_vt_switch",
+      settings => [
+        { "key" => "FBE_TEST", value => "fbe_vt_switch" },
       ],
     },
     {
