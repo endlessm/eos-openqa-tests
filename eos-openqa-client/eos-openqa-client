@@ -30,7 +30,7 @@ from urllib.request import urlopen
 # Image server which the manifest files live on.
 IMAGE_SERVER_HOST = 'images.endlessm-sf.com'
 # OpenQA server hostname.
-OPENQA_SERVER_HOST = 'openqa.dev.endlessm.com'
+OPENQA_SERVER_HOST = 'openqa.endlessm.com'
 # OpenQA server REST API.
 OPENQA_SERVER_ENDPOINT_URI = \
     'https://{}/api/v1/isos'.format(OPENQA_SERVER_HOST)
@@ -90,7 +90,7 @@ def main():
     # and contains key= and secret= keys in sections indexed by hostname. For
     # example:
     #
-    #    [openqa.dev.endlessm.com]
+    #    [openqa.endlessm.com]
     #    key=DEADBEEF
     #    secret=A150DEADBEEF
     #

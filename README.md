@@ -2,7 +2,7 @@ Endless OS OpenQA tests
 ===
 
 This repository contains a set of tests for Endless OS which get run on our
-OpenQA instance (https://openqa.dev.endlessm.com/) for every OS image build
+OpenQA instance (https://openqa.endlessm.com/) for every OS image build
 produced by our image builder.
 
 Documentation
