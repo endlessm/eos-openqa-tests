@@ -68,7 +68,7 @@ def send_request_for_manifest(manifest, image, upload_api_host,
 
     # Build an API request to send to OpenQA to add the new disk image to its
     # list of images, and hence instantiate tests from the job templates for
-    # it. See the API documentation at http://openqa.dev.endlessm.com/api_help.
+    # it. See the API documentation at http://openqa.endlessm.com/api_help.
     #
     # We might expect to be called with variable values like the following:
     #     EIB_IMAGE_LANGUAGE= EIB_PLATFORM=amd64 EIB_ARCH=amd64
@@ -79,7 +79,7 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     #     EIB_OUTVERSION=eos-master-amd64-amd64.180807-224735.base
     #
     # The resulting request will be essentially equivalent to running:
-    #     openqa-client --host openqa.dev.endlessm.com isos post \
+    #     openqa-client --host openqa.endlessm.com isos post \
     #         ISO_URL=blah DISTRI=blas FLAVOR=blarf …
     #
     # Note that the request parameters have to be encoded in the URI, rather than
