@@ -137,8 +137,7 @@ def send_request_for_manifest(manifest, image, upload_api_host,
         raise ValueError('Unknown image ‘%s’' % image)
 
     request = requests.Request('POST', openqa_endpoint_url)
-    request.params = data
-    request.data = ''
+    request.data = data
     request = request.prepare()
 
     # Request hashing copied from openQA-python-client:
