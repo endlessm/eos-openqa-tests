@@ -7,9 +7,17 @@
     {
       "xpos": 0,
       "ypos": 0,
-      "width": 1023,
-      "height": 767,
+      "width": 1024,
+      "height": 768,
       "type": "match"
+    },
+    {
+      "": "Ignore the animated 'Endless' text so we don't miss a match if the animation finishes too fast",
+      "xpos": 0,
+      "ypos": 403,
+      "width": 1024,
+      "height": 82,
+      "type": "exclude"
     }
   ]
 }
