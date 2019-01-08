@@ -1,0 +1,35 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_welcome",
+    "fbe_welcome_choose_indonesian"
+  ],
+  "area": [
+    {
+      "xpos": 140,
+      "ypos": 90,
+      "width": 740,
+      "height": 540,
+      "type": "match",
+      "": "FIXME: Not 100% match due to scroll position of languages list",
+      "match": 0.93
+    },
+    {
+      "": "Rotating 'welcome' text banner",
+      "xpos": 314,
+      "ypos": 240,
+      "width": 394,
+      "height": 40,
+      "type": "exclude"
+    },
+    {
+      "": "'Bahasa Indonesia' row",
+      "xpos": 316,
+      "ypos": 329,
+      "width": 389,
+      "height": 37,
+      "type": "match"
+    }
+  ]
+}

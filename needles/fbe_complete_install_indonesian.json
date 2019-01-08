@@ -1,0 +1,27 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_complete",
+    "fbe_complete_install",
+    "fbe_complete_install_indonesian"
+  ],
+  "area": [
+    {
+      "": "FBE window",
+      "xpos": 140,
+      "ypos": 90,
+      "width": 744,
+      "height": 543,
+      "type": "match"
+    },
+    {
+      "": "'Mulai memakai Endless' ('Start Using Endless') button",
+      "xpos": 420,
+      "ypos": 525,
+      "width": 184,
+      "height": 34,
+      "type": "match"
+    }
+  ]
+}

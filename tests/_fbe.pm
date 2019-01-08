@@ -20,6 +20,11 @@ sub run {
     if (!get_var('LIVE')) {
         # If the timezone couldn’t be found automatically,
         # select an arbitrary one.
+        #
+        # FIXME: if we wait here without clicking anything, and if the network
+        # and the Mozilla Location Service are both up, a timezone should
+        # eventually be detected. This feature was added in
+        # https://phabricator.endlessm.com/T23524.
         if (check_screen('fbe_timezone2', 10)) {
             type_string('Berlin');  # I hear it’s a pretty cool place
             send_key('down');
