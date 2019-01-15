@@ -1,0 +1,26 @@
+{
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_try-or-reformat",
+    "fbe_try-or-reformat_indonesian"
+  ],
+  "area": [
+    {
+      "": "FBE window",
+      "xpos": 141,
+      "ypos": 90,
+      "width": 741,
+      "height": 540,
+      "type": "match"
+    },
+    {
+      "": "'Try It' button",
+      "xpos": 194,
+      "ypos": 480,
+      "width": 286,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}
