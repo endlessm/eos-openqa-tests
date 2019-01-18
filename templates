@@ -492,7 +492,7 @@
         flavor  => "base_iso",
         version => "*",
       },
-      test_suite => { name => "fbe_language_switch" },
+      test_suite => { name => "fbe_language_switch_live" },
     },
     {
       machine    => { name => "64bit" },
@@ -764,6 +764,13 @@
       name => "fbe_language_switch",
       settings => [
         { "key" => "FBE_TEST", value => "fbe_language_switch" },
+      ],
+    },
+    {
+      name => "fbe_language_switch_live",
+      settings => [
+        { "key" => "FBE_TEST", value => "fbe_language_switch" },
+        { key => "LIVE", value => "1" },
       ],
     },
     {
