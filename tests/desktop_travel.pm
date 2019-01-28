@@ -48,7 +48,7 @@ sub run {
     assert_and_click('travel_search_whatever');
 
     # We are in home now. Go to the page bottom.
-    assert_screen('travel_home');
+    assert_screen('travel_startup');
     # Click the hidden credits button.
     mouse_set(902, 20);
     sleep 2;
