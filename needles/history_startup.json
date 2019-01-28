@@ -9,6 +9,14 @@
       "width": 1024,
       "height": 768,
       "type": "match"
+    },
+    {
+      "": "Categories change regularly",
+      "xpos": 151,
+      "ypos": 467,
+      "width": 726,
+      "height": 204,
+      "type": "exclude"
     }
   ]
 }
