@@ -34,6 +34,14 @@ sub install_app {
 
     $self->user_console();
     assert_script_run('flatpak install -y eos-apps ' . $app_id, 1800);
+
+    # FIXME: Work around gnome-software automatically installing Chrome on first
+    # boot, and sometimes raising a polkit authentication dialogue about it, iff
+    # we are in a VT when the installation process starts (which would mark the
+    # main graphical session as inactive, and hence the normal polkit rules
+    # which allow software installation without authorisation would not apply).
+    assert_script_run('pkill gnome-software', 1800);
+
     if (!$run_with_nightly_sdk) {
         $self->exit_user_console();
     }
