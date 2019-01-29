@@ -4,16 +4,18 @@
   ],
   "area": [
     {
+      "": "Sidebar",
       "xpos": 0,
-      "ypos": 0,
-      "width": 1024,
-      "height": 768,
+      "ypos": 36,
+      "width": 222,
+      "height": 698,
       "type": "match"
     },
     {
+      "": "Africa entry in the sidebar",
       "xpos": 0,
-      "ypos": 154,
-      "width": 225,
+      "ypos": 100,
+      "width": 222,
       "height": 44,
       "type": "match"
     }
