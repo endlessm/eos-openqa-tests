@@ -46,6 +46,11 @@ sub install_app {
         type_very_safely("gnome-terminal\n");
         assert_screen('desktop_terminal', 5);
         type_string("flatpak run --runtime=$runtime_id $app_id &>/dev/null &\n");
+    } else {
+        check_desktop_clean();
+        type_very_safely("gnome-terminal\n");
+        assert_screen('desktop_terminal', 5);
+        type_string("flatpak run $app_id &>/dev/null &\n");
     }
     # We want to be sure that after switching back to the desktop, the cursor
     # is not over a part of the screen that changes its behavior when the cursor
