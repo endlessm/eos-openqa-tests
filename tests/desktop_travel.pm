@@ -11,12 +11,19 @@ sub run {
     check_desktop_clean();
     $self->install_app($app_id);
 
+    # Check the startup page is shown. Click in the centre of the content area
+    # and check that an article is shown. We can’t check which article is shown,
+    # as the featured articles rotate regularly.
+    # To exit from the article, we click the burger menu.
     assert_and_click('travel_startup');
-    assert_and_click('travel_article_uruguay');
+    assert_and_click('travel_article');
+
     # Show the sidebar and open a category.
     assert_and_click('travel_categories_sidebar1');
     assert_and_click('travel_categories_africa');
-    assert_and_click('travel_religious_places');
+
+    # Open the article for Machu Picchu from the religious places category.
+    assert_and_click('travel_archeology');
     assert_and_click('travel_article_machu_picchu');
 
     # Navigate through images.
@@ -31,7 +38,7 @@ sub run {
     send_key('esc');
     assert_screen('travel_article_machu_picchu');
 
-    # Search an article
+    # Search for an article and open it.
     mouse_set(517, 16);
     mouse_click();
     type_string('mada');
@@ -40,20 +47,19 @@ sub run {
     assert_and_click('travel_search_mada_result');
     assert_and_click('travel_article_madagascar');
 
-    # Search for an article that does not exist.
+    # Search for an article that does not exist. Go home afterwards.
     type_string("fddfdsf");
     send_key('ret');
-
-    # Go back to home.
     assert_and_click('travel_search_whatever');
 
-    # We are in home now. Go to the page bottom.
+    # We are on the home screen now.
     assert_screen('travel_startup');
+
     # Click the hidden credits button.
     mouse_set(902, 20);
-    sleep 2;
+    sleep(2);
     mouse_click();
-    sleep 2;
+    sleep(2);
     assert_screen('travel_credits');
 }
 

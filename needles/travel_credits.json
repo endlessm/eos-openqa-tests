@@ -4,10 +4,11 @@
   ],
   "area": [
     {
-      "xpos": 0,
-      "ypos": 0,
-      "width": 1024,
-      "height": 768,
+      "": "Title bar of ‘Image credits’ dialogue; everything else changes too often",
+      "xpos": 141,
+      "ypos": 122,
+      "width": 742,
+      "height": 37,
       "type": "match"
     }
   ]
