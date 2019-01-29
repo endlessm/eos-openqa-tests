@@ -1,3 +1,4 @@
+# vi: set shiftwidth=4 tabstop=4 expandtab:
 use base 'basetest';
 use strict;
 use testapi;
