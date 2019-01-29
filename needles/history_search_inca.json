@@ -19,11 +19,11 @@
       "type": "exclude"
     },
     {
-      "": "Search terms and completion drop-down",
+      "": "Search completion drop-down",
       "xpos": 304,
-      "ypos": 384,
+      "ypos": 443,
       "width": 420,
-      "height": 100,
+      "height": 41,
       "type": "match"
     }
   ]

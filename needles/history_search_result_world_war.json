@@ -11,6 +11,7 @@
       "type": "match"
     },
     {
+      "": "First entry in search completion drop-down",
       "xpos": 400,
       "ypos": 39,
       "width": 223,

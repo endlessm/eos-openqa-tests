@@ -9,6 +9,14 @@
       "width": 1024,
       "height": 768,
       "type": "match"
+    },
+    {
+      "": "Tiles in content area change regularly",
+      "xpos": 52,
+      "ypos": 198,
+      "width": 901,
+      "height": 522,
+      "type": "exclude"
     }
   ]
 }

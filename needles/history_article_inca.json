@@ -1,5 +1,6 @@
 {
   "tags": [
+    "history_article",
     "history_article_inca"
   ],
   "area": [
@@ -11,6 +12,7 @@
       "type": "match"
     },
     {
+      "": "Back button",
       "xpos": 45,
       "ypos": 7,
       "width": 38,
