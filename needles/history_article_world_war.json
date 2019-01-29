@@ -4,6 +4,7 @@
   ],
   "area": [
     {
+      "": "FIXME: This article is currently rendered incorrectly, and this needle will need to be updated once that’s fixed. See https://phabricator.endlessm.com/T25254 and https://phabricator.endlessm.com/T25255.",
       "xpos": 0,
       "ypos": 0,
       "width": 1024,
