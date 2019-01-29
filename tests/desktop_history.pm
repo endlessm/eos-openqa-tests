@@ -8,8 +8,7 @@ sub run {
     my $app_id = 'com.endlessm.history.en';
 
     check_desktop_clean();
-    $self->add_nightly_sdk_repo();
-    $self->install_app($app_id, run_with_nightly_sdk => 1);
+    $self->install_app($app_id);
 
     # Check the startup page is shown.
     assert_screen('history_startup');

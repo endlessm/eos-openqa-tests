@@ -8,8 +8,7 @@ sub run {
     my $app_id = 'com.endlessm.travel.en';
 
     check_desktop_clean();
-    $self->add_nightly_sdk_repo();
-    $self->install_app($app_id, run_with_nightly_sdk => 1);
+    $self->install_app($app_id);
 
     assert_and_click('travel_startup');
     assert_and_click('travel_article_uruguay');
