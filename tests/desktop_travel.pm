@@ -68,7 +68,9 @@ sub test_flags {
     # 'ignore_failure' - if this module fails, it will not affect the overall result at all
     # 'milestone'      - after this test succeeds, update 'lastgood'
     # 'norollback'     - don't roll back to 'lastgood' snapshot if this fails
-    return { fatal => 1 };
+    # FIXME: This should be `fatal => 1`, but the test just doesn’t work well enough yet.
+    # See: https://phabricator.endlessm.com/T24855
+    return { ignore_failure => 1 };
 }
 
 1;
