@@ -1,3 +1,4 @@
+# vi: set shiftwidth=4 tabstop=4 expandtab:
 use base 'sdktest';
 use strict;
 use testapi;
@@ -8,17 +9,25 @@ sub run {
     my $app_id = 'com.endlessm.history.en';
 
     check_desktop_clean();
-    $self->add_nightly_sdk_repo();
-    $self->install_app($app_id, run_with_nightly_sdk => 1);
+    $self->install_app($app_id);
 
+    # Check the startup page is shown.
     assert_screen('history_startup');
+
+    # Search for an article and load it.
     type_string('inca');
     assert_and_click('history_search_inca');
 
     # Click the back button.
     assert_and_click('history_article_inca');
-    # Enter into a category.
-    assert_and_click('history_categories');
+
+    # Enter into a random category. (The test was originally designed to enter
+    # the ‘Old Age’ category, but since the category tiles rotate regularly we
+    # can’t guarantee that.)
+    assert_screen('history_categories');
+    mouse_set(509, 568);
+    mouse_click();
+
     # Click the search entry and search for the word 'world war'.
     assert_and_click('history_categories_old_age');
     type_string("world war");
@@ -26,15 +35,17 @@ sub run {
     send_key('ret');
     assert_and_click('history_search_result_world_war');
     assert_and_click('history_article_world_war');
+
     # Search for an article that does not exist.
     type_string("fddfdsf");
     send_key('ret');
     assert_and_click('history_search_whatever');
+
     # Click the hidden credits button.
     mouse_set(902, 20);
-    sleep 2;
+    sleep(2);
     mouse_click();
-    sleep 2;
+    sleep(2);
     assert_screen('history_credits');
 }
 

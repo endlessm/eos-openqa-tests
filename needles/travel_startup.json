@@ -11,11 +11,12 @@
       "type": "match"
     },
     {
-      "xpos": 72,
-      "ypos": 148,
-      "width": 864,
-      "height": 280,
-      "type": "match"
+      "": "Content area changes regularly",
+      "xpos": 65,
+      "ypos": 141,
+      "width": 877,
+      "height": 592,
+      "type": "exclude"
     }
   ]
 }

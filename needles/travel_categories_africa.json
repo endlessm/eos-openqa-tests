@@ -11,10 +11,11 @@
       "type": "match"
     },
     {
-      "xpos": 529,
-      "ypos": 149,
-      "width": 407,
-      "height": 18,
+      "": "Tile for archaeology and ancient culture category",
+      "xpos": 378,
+      "ypos": 410,
+      "width": 266,
+      "height": 41,
       "type": "match"
     }
   ]

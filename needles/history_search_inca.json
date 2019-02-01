@@ -11,10 +11,19 @@
       "type": "match"
     },
     {
+      "": "Categories change regularly",
+      "xpos": 151,
+      "ypos": 467,
+      "width": 726,
+      "height": 204,
+      "type": "exclude"
+    },
+    {
+      "": "Search completion drop-down",
       "xpos": 304,
-      "ypos": 440,
-      "width": 413,
-      "height": 47,
+      "ypos": 443,
+      "width": 420,
+      "height": 41,
       "type": "match"
     }
   ]

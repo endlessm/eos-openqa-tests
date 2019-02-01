@@ -11,6 +11,15 @@
       "type": "match"
     },
     {
+      "": "Tiles in category change regularly",
+      "xpos": 54,
+      "ypos": 58,
+      "width": 907,
+      "height": 659,
+      "type": "exclude"
+    },
+    {
+      "": "Search entry",
       "xpos": 426,
       "ypos": 7,
       "width": 177,

@@ -11,6 +11,15 @@
       "type": "match"
     },
     {
+      "": "‘You might be interested in…” article list",
+      "xpos": 105,
+      "ypos": 483,
+      "width": 802,
+      "height": 204,
+      "type": "exclude"
+    },
+    {
+      "": "Home button",
       "xpos": 7,
       "ypos": 7,
       "width": 38,

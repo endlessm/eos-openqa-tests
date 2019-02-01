@@ -1,5 +1,6 @@
 {
   "tags": [
+    "travel_article",
     "travel_article_uruguay"
   ],
   "area": [
@@ -11,6 +12,23 @@
       "type": "match"
     },
     {
+      "": "Title area (content changes; we want to match articles generically)",
+      "xpos": 47,
+      "ypos": 128,
+      "width": 906,
+      "height": 200,
+      "type": "exclude"
+    },
+    {
+      "": "Content area (content changes; we want to match articles generically)",
+      "xpos": 47,
+      "ypos": 372,
+      "width": 906,
+      "height": 360,
+      "type": "exclude"
+    },
+    {
+      "": "Burger menu",
       "xpos": 16,
       "ypos": 52,
       "width": 20,

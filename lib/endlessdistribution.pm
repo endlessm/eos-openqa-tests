@@ -1,3 +1,4 @@
+# vi: set shiftwidth=4 tabstop=4 expandtab:
 package endlessdistribution;
 use base 'distribution';
 

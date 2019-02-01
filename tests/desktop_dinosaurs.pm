@@ -1,3 +1,4 @@
+# vi: set shiftwidth=4 tabstop=4 expandtab:
 use base 'sdktest';
 use strict;
 use testapi;
@@ -8,8 +9,7 @@ sub run {
     my $app_id = 'com.endlessm.dinosaurs.en';
 
     check_desktop_clean();
-    $self->add_nightly_sdk_repo();
-    $self->install_app($app_id, run_with_nightly_sdk => 1);
+    $self->install_app($app_id);
 
     # Test thematic template.
     assert_screen('dinosaurs_startup');
