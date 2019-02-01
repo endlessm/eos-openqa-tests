@@ -1,0 +1,33 @@
+{
+  "properties": [],
+  "tags": [
+    "desktop",
+    "desktop_add_website",
+    "desktop_add_website_endlessm"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "List of recommended websites may change",
+      "xpos": 20,
+      "ypos": 309,
+      "width": 977,
+      "height": 346,
+      "type": "exclude"
+    },
+    {
+      "": "Add button",
+      "xpos": 914,
+      "ypos": 155,
+      "width": 40,
+      "height": 40,
+      "type": "match"
+    }
+  ]
+}
