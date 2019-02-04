@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "control_center_users_locked"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Shared Account tab",
+      "xpos": 758,
+      "ypos": 61,
+      "width": 135,
+      "height": 96,
+      "type": "match"
+    }
+  ]
+}

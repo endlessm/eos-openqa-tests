@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "control_center_users_new_user_added_en_gb"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Shared Account tab",
+      "xpos": 585,
+      "ypos": 62,
+      "width": 137,
+      "height": 94,
+      "type": "match"
+    }
+  ]
+}
