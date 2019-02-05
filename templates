@@ -689,8 +689,12 @@
       name => "install_default_upload",
       settings => [
         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
-        # Minimum HDD size we support on real machines.
+        # Minimum HDD size we support on real machines. Specify it twice:
+        # HDDSIZEGB is for ISOs (where Qemu/Proc.pm in os-autoinst is creating
+        # a new qemu drive) and HDDSIZEGB_1 is for raw images (where Proc.pm is
+        # adding an existing disk image as a qemu drive).
         { key => "HDDSIZEGB", value => "32" },
+        { key => "HDDSIZEGB_1", value => "%HDDSIZEGB%" },
       ],
     },
     {
