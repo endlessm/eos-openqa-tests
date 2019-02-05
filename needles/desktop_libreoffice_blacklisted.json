@@ -1,0 +1,25 @@
+{
+  "properties": [],
+  "tags": [
+    "desktop",
+    "desktop_freshly_installed",
+    "desktop_libreoffice_blacklisted"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Status area differs (clock, user's avatar)",
+      "xpos": 709,
+      "ypos": 728,
+      "width": 315,
+      "height": 40,
+      "type": "exclude"
+    }
+  ]
+}

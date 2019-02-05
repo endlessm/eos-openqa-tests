@@ -1,0 +1,33 @@
+{
+  "tags": [
+    "gnome_software_details",
+    "gnome_software_cows_revenge_details",
+    "gnome_software_cows_revenge_details_uninstalled"
+  ],
+  "area": [
+    {
+      "": "Whole screen, minus shell bottom bar (changes between users; clock changes)",
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 728,
+      "type": "match"
+    },
+    {
+      "": "Screenshots often change or are not downloaded",
+      "xpos": 94,
+      "ypos": 222,
+      "width": 827,
+      "height": 361,
+      "type": "exclude"
+    },
+    {
+      "": "'Download' button",
+      "xpos": 100,
+      "ypos": 159,
+      "width": 105,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "tags": [
+    "gdm",
+    "gdm_user_list",
+    "gdm_user_list_new_user"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "'Not listed?' button (so we can manually enter any username we like); this must be the second match area in any needle tagged as gdm_user_list",
+      "xpos": 328,
+      "ypos": 500,
+      "width": 78,
+      "height": 23,
+      "type": "match"
+    },
+    {
+      "": "'Test' user entry; this must be the last match area in any needle tagged as gdm_user_list",
+      "xpos": 336,
+      "ypos": 252,
+      "width": 336,
+      "height": 69,
+      "type": "match"
+    }
+  ]
+}

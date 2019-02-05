@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "gnome_software_search_no_results"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Top bar buttons (updates button appears and disappears)",
+      "xpos": 282,
+      "ypos": 1,
+      "width": 462,
+      "height": 44,
+      "type": "exclude"
+    }
+  ]
+}
