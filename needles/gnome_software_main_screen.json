@@ -12,10 +12,26 @@
       "type": "match"
     },
     {
+      "": "Scrollbar (shown if there are many apps in the list)",
+      "xpos": 1004,
+      "ypos": 0,
+      "width": 20,
+      "height": 768,
+      "type": "exclude"
+    },
+    {
+      "": "Scroll bottom indicator (shown if there are very few apps in the list)",
+      "xpos": 0,
+      "ypos": 718,
+      "width": 1024,
+      "height": 10,
+      "type": "exclude"
+    },
+    {
       "": "Application list (changes regularly)",
-      "xpos": 307,
+      "xpos": 277,
       "ypos": 63,
-      "width": 612,
+      "width": 642,
       "height": 669,
       "type": "exclude"
     },
@@ -25,6 +41,14 @@
       "ypos": 1,
       "width": 463,
       "height": 44,
+      "type": "exclude"
+    },
+    {
+      "": "USB category (comes and goes)",
+      "xpos": 0,
+      "ypos": 545,
+      "width": 218,
+      "height": 67,
       "type": "exclude"
     }
   ]
