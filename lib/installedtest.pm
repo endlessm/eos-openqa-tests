@@ -111,6 +111,15 @@ sub remove_polkit_policy {
     $self->exit_root_console();
 }
 
+sub uninstall_flatpak_app {
+    my $self = shift;
+    my $app_id = shift;
+
+    $self->root_console();
+    assert_script_run("flatpak uninstall -y '$app_id'");
+    $self->exit_root_console();
+}
+
 sub collect_data {
     # Collect and upload a load of logs for debugging problems on SUTs. This
     # should be used at the end of a test, or whenever a test fails.
