@@ -12,7 +12,15 @@
       "type": "match"
     },
     {
-      "": "'Test' user entry",
+      "": "'Not listed?' button (so we can manually enter any username we like); this must be the second match area in any needle tagged as gdm_user_list",
+      "xpos": 328,
+      "ypos": 460,
+      "width": 78,
+      "height": 23,
+      "type": "match"
+    },
+    {
+      "": "'Test' user entry; this must be the last match area in any needle tagged as gdm_user_list",
       "xpos": 336,
       "ypos": 293,
       "width": 336,
