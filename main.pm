@@ -57,6 +57,10 @@ if (!get_var('START_AFTER_TEST') && !get_var('BOOTFROM') && !get_var('FBE_TEST')
     # Enable coredump collection; needed for _check_crashes.pm below.
     autotest::loadtest "tests/_enable_coredumps.pm";
 
+    # Add debugging output for polkit prompts, since the text shown in the UI
+    # is often unhelpful.
+    autotest::loadtest "tests/_enable_polkit_debugging.pm";
+
     # Disable notification popups because they get in the way of a lot of needles.
     # Similarly, disable the screensaver.
     autotest::loadtest "tests/_disable_desktop_notifications.pm";
