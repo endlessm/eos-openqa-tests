@@ -48,6 +48,19 @@ sub run {
 
     type_string("example.com\n");
     assert_screen('chrome_example_com', 10);
+
+    # All Endless OS systems have LibreOffice installed (unless users go out of
+    # their way to remove it) so its runtime is extremely likely to be
+    # installed. Chrome should use the same runtime, to minimize the chance
+    # that installing it (which may happen automatically) will download a new
+    # runtime. (It actually executes on the host; the runtime is not actually
+    # used.)
+    $self->user_console();
+    assert_script_run("diff -u " .
+                      "<(flatpak info org.libreoffice.LibreOffice | grep '^Runtime:') " .
+                      "<(flatpak info com.google.Chrome           | grep '^Runtime:') ");
+    $self->exit_user_console();
+
 }
 
 sub test_flags {
