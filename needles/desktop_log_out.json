@@ -1,0 +1,48 @@
+{
+  "properties": [],
+  "tags": [
+    "desktop_log_out"
+  ],
+  "area": [
+    {
+      "": "Whole screen, minus shell bottom bar (changes between users; clock changes)",
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 728,
+      "type": "match"
+    },
+    {
+      "": "User avatar (differs between users)",
+      "xpos": 269,
+      "ypos": 311,
+      "width": 60,
+      "height": 60,
+      "type": "exclude"
+    },
+    {
+      "": "Username text (differs between users)",
+      "xpos": 406,
+      "ypos": 314,
+      "width": 46,
+      "height": 27,
+      "type": "exclude"
+    },
+    {
+      "": "Log out text (differs between users)",
+      "xpos": 331,
+      "ypos": 337,
+      "width": 438,
+      "height": 50,
+      "type": "exclude"
+    },
+    {
+      "": "'Log Out' button",
+      "xpos": 512,
+      "ypos": 435,
+      "width": 261,
+      "height": 39,
+      "type": "match"
+    }
+  ]
+}

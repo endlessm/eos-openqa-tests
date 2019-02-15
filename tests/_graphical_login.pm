@@ -7,7 +7,9 @@ use utils;
 sub run {
     my $self = shift;
 
-    # Wait for the login screen to appear
+    # Wait for the login screen to appear. The final match area in any needle
+    # tagged as ‘gdm_user_list’ is guaranteed to be the ‘Test’ administrator
+    # user.
     assert_and_click('gdm_user_list', 'left', 600);
 
     # Enter our password and continue

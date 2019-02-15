@@ -1,6 +1,7 @@
 {
   "tags": [
-    "desktop_terminal"
+    "gnome_software_installing",
+    "gnome_software_cows_revenge_installing"
   ],
   "area": [
     {
@@ -10,6 +11,14 @@
       "width": 1024,
       "height": 728,
       "type": "match"
+    },
+    {
+      "": "Progress bar",
+      "xpos": 87,
+      "ypos": 133,
+      "width": 838,
+      "height": 76,
+      "type": "exclude"
     }
   ]
 }

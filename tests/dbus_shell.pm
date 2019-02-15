@@ -14,7 +14,7 @@ sub run {
     $self->user_console();
     assert_script_run('gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/Shell | grep "interface org.gnome.Shell.AppStore"');
     assert_script_run('gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/Shell | grep "interface org.gnome.Shell.AppLauncher"');
-    $self->exit_root_console();
+    $self->exit_user_console();
 }
 
 sub test_flags {

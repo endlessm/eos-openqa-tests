@@ -26,6 +26,7 @@ sub exit_root_console {
     # terminal TTY for the next root_console() call is not a no-op (and hence
     # causes the display to refresh).
     console_root_exit();
+    sleep(4);
     send_key("ctrl-alt-f1");
 
     # There's a timing problem when we switch from a logged-in console
@@ -109,6 +110,74 @@ sub remove_polkit_policy {
     $self->root_console();
     assert_script_run("rm /etc/polkit-1/rules.d/$filename");
     $self->exit_root_console();
+}
+
+sub uninstall_flatpak_app {
+    my $self = shift;
+    my $app_id = shift;
+
+    $self->root_console();
+    assert_script_run("flatpak uninstall -y '$app_id'");
+    $self->exit_root_console();
+}
+
+sub switch_user {
+    my $self = shift;
+    my $username = shift;
+    my $password = shift;
+    my $new_password = shift;
+
+    # If $password is '', no password is required to be inputted.
+    # If $new_password is not '', we expect to be prompted to change password,
+    # and will set $new_password as the new password.
+    $password //= '123';
+    $new_password //= '';
+
+    # Log out.
+    check_desktop_clean();
+    type_very_safely("log out\n");
+    assert_and_click('desktop_log_out', 'left', 10);
+
+    # Log in as the new user. This partially reimplements assert_and_click()
+    # to manually handle the match areas. We require that any needle tagged as
+    # ‘gdm_user_list’ has the ‘Not Listed?’ GDM button as its second ‘match’
+    # area. assert_and_click() only lets us click on the final match area in a
+    # needle, which gdm_user_list needles are required to have as the default
+    # admin user.
+    # FIXME: https://progress.opensuse.org/issues/47222
+    $matched_needle = assert_screen('gdm_user_list', 600);
+
+    my $not_listed_area = $matched_needle->{area}->[1];
+    my $x = int($not_listed_area->{x} + $not_listed_area->{w} / 2);
+    my $y = int($not_listed_area->{y} + $not_listed_area->{h} / 2);
+    mouse_set($x, $y);
+    mouse_click('left');
+    mouse_hide();
+
+    assert_screen('gdm_username', 10);
+    type_string($username);
+    send_key('ret');
+
+    if ($password != '') {
+        assert_screen('gdm_password', 10);
+        type_string($password);
+        send_key('ret');
+    }
+
+    if ($new_password != '') {
+        assert_screen('gdm_change_password', 10);
+        type_string($new_password);  # Password
+        send_key('ret');
+        sleep(3);
+        type_string($new_password);  # Confirm password
+        send_key('ret');
+        sleep(3);
+        type_string($new_password);  # Hint
+        send_key('ret');
+    }
+
+    # Check logging in was successful.
+    check_desktop_clean();
 }
 
 sub collect_data {

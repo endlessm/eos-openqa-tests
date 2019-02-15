@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "control_center_users_shared_unlocked"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Administrator tab",
+      "xpos": 385,
+      "ypos": 63,
+      "width": 123,
+      "height": 103,
+      "type": "match"
+    }
+  ]
+}

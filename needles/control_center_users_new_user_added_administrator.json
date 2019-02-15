@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "control_center_users_new_user_added_administrator"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    }
+  ]
+}

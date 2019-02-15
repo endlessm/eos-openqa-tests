@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "control_center_users_shared_locked"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Unlock button",
+      "xpos": 783,
+      "ypos": 8,
+      "width": 107,
+      "height": 30,
+      "type": "match"
+    }
+  ]
+}

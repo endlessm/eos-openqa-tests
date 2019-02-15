@@ -9,17 +9,8 @@ sub run {
 
     check_desktop_clean;
 
-    # Run gnome-software. Wait and ignore the initial ‘Installing Google Chrome’
-    # page if we’ve raced with that — it’s done as soon as gnome-software is run
-    # for the first time on a new installation.
+    # Run gnome-software.
     type_very_safely("gnome-software\n");
-    if (check_screen('gnome_software_installing_chrome', 10)) {
-        assert_screen('gnome_software_chrome_details_installed', 600);
-        send_key_combo('alt', 'f4');
-        sleep(1);
-        type_very_safely("gnome-software\n");
-    }
-
     assert_screen('gnome_software_main_screen', 10);
 
     # Search for VLC and select the result

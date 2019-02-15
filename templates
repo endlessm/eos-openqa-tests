@@ -571,6 +571,72 @@
       },
       test_suite => { name => "install_flatpak" },
     },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_gnome_software_oars" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_gnome_software_oars" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_gnome_software_oars" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_setup" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_setup" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_setup" },
+    },
   ],
 
 
@@ -846,6 +912,28 @@
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "parental_controls_gnome_software_oars",
+      settings => [
+        { key => "POSTINSTALL", value => "parental_controls_gnome_software_oars" },
+        { key => "START_AFTER_TEST", value => "parental_controls_setup" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%_parental_controls.qcow2" },
+      ],
+    },
+    {
+      # This is a bit of a special test: it tests the control center behaviour
+      # for parental controls, but also sets up a new user and restricts their
+      # parental controls, so needs to save state which later tests chain off.
+      name => "parental_controls_setup",
+      settings => [
+        { key => "POSTINSTALL", value => "parental_controls_setup" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+        { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%_parental_controls.qcow2" },
       ],
     },
   ],
