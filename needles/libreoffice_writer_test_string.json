@@ -10,6 +10,22 @@
       "width": 1024,
       "height": 768,
       "type": "match"
+    },
+    {
+      "": "Top toolbar (changes between LO versions; irrelevant to the test string)",
+      "xpos": 0,
+      "ypos": 63,
+      "width": 1024,
+      "height": 80,
+      "type": "exclude"
+    },
+    {
+      "": "Side toolbar (changes between LO versions; irrelevant to the test string)",
+      "xpos": 977,
+      "ypos": 143,
+      "width": 47,
+      "height": 561,
+      "type": "exclude"
     }
   ]
 }
