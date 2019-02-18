@@ -18,8 +18,11 @@ sub run {
 }
 
 sub test_flags {
-    # Treat success as a milestone worthy of updating ‘last good’ status
-    return { fatal => 1, milestone => 1 };
+    # 'fatal'          - abort whole test suite if this fails (and set overall state 'failed')
+    # 'ignore_failure' - if this module fails, it will not affect the overall result at all
+    # 'milestone'      - after this test succeeds, update 'lastgood'
+    # 'norollback'     - don't roll back to 'lastgood' snapshot if this fails
+    return { fatal => 1 };
 }
 
 1;
