@@ -7,13 +7,11 @@ use utils;
 sub run {
     my $self = shift;
 
-    # Ensure we start from a logged in desktop, so we know the user’s session
-    # (and hence session bus) has been set up correctly.
-    check_desktop_clean();
+    # Test that all of the GSettings overrides in /usr/share/glib-2.0/schemas
+    # are syntactically valid.
 
     $self->user_console();
-    assert_script_run('gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/Shell | grep "interface org.gnome.Shell.AppStore"');
-    assert_script_run('gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/Shell | grep "interface org.gnome.Shell.AppLauncher"');
+    assert_script_run('glib-compile-schemas --dry-run --strict /usr/share/glib-2.0/schemas/');
     $self->exit_user_console();
 }
 

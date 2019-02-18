@@ -538,6 +538,19 @@
       },
       test_suite => { name => "fbe_language_switch_live" },
     },
+    # No need to repeat this on ISO images, since they will have the same
+    # schema overrides:
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "glib_compile_schemas" },
+    },
     {
       machine    => { name => "64bit" },
       prio       => 10,
@@ -903,6 +916,15 @@
       settings => [
         { "key" => "FBE_TEST", value => "fbe_language_switch" },
         { key => "LIVE", value => "1" },
+      ],
+    },
+    {
+      name => "glib_compile_schemas",
+      settings => [
+        { key => "POSTINSTALL", value => "glib_compile_schemas" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
