@@ -203,8 +203,8 @@ sub collect_data {
     assert_script_run('df > /var/tmp/df.log');
     upload_logs('/var/tmp/df.log');
 
-    assert_script_run('systemctl -t service --no-pager --no-legend | grep -o ".*\.service" > /var/tmp/services.log');
-    upload_logs('/var/tmp/services.log');
+    assert_script_run('systemctl --no-pager --no-legend > /var/tmp/systemd-units.log');
+    upload_logs('/var/tmp/systemd-units.log');
 
     # Note: script_run returns the exit code, so the logic looks weird.
     # upload any core dump files caught by coredumpctl
