@@ -14,6 +14,14 @@
       "type": "match"
     },
     {
+      "": "Layouts other than English (US) may change",
+      "xpos": 264,
+      "ypos": 383,
+      "width": 390,
+      "height": 174,
+      "type": "exclude"
+    },
+    {
       "": "'Next' button",
       "xpos": 814,
       "ypos": 65,
