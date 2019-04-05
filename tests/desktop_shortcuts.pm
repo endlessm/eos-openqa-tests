@@ -15,7 +15,7 @@ sub run {
     assert_screen('desktop_popup_menu', 10);
 
     # Add App should launch gnome-software.
-    mouse_set(689, 579);
+    mouse_set(989, 579);
     mouse_click('left');
     assert_screen('gnome_software_main_screen', 10);
 
