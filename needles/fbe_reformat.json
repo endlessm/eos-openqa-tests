@@ -13,6 +13,14 @@
       "type": "match"
     },
     {
+      "": "Suffix of image selector (varies between OS branches)",
+      "xpos": 389,
+      "ypos": 297,
+      "width": 252,
+      "height": 43,
+      "type": "exclude"
+    },
+    {
       "": "'Next' button",
       "xpos": 786,
       "ypos": 124,
