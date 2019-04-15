@@ -10,12 +10,12 @@ sub run {
     check_desktop_clean();
 
     # Right-click on an empty bit of desktop and check the menu is correct.
-    mouse_set(615, 485);
+    mouse_set(915, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
 
     # Add App should launch gnome-software.
-    mouse_set(989, 579);
+    mouse_set(880, 579);
     mouse_click('left');
     assert_screen('gnome_software_main_screen', 10);
 
@@ -33,29 +33,29 @@ sub run {
 
     # Right-click on it and check the menu is correct and can launch Calc.
     # (Then quit Calc.)
-    mouse_set(446, 471);
+    mouse_set(708, 471);
     mouse_click('right');
     assert_screen('desktop_popup_menu_libreoffice', 10);
 
-    mouse_set(563, 440);
+    mouse_set(825, 440);
     mouse_click('left');
     assert_screen('libreoffice_calc_main_window', 60);
     send_key_combo('alt', 'f4');
 
     # Right-click and remove LibreOffice from the desktop.
-    mouse_set(446, 471);
+    mouse_set(708, 471);
     mouse_click('right');
     assert_screen('desktop_popup_menu_libreoffice', 10);
 
-    mouse_set(582, 627);
+    mouse_set(825, 627);
     mouse_click('left');
     assert_screen('desktop_no_libreoffice', 10);
 
     # Right-click on an empty bit of desktop again and choose to add a website.
-    mouse_set(615, 485);
+    mouse_set(915, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
-    mouse_set(689, 613);
+    mouse_set(880, 613);
     mouse_click('left');
     assert_and_click('desktop_add_website', 'left', 10);
 
@@ -68,19 +68,19 @@ sub run {
     assert_screen('desktop_with_endlessm', 10);
 
     # Right-click and remove endlessm from the desktop.
-    mouse_set(446, 471);
+    mouse_set(708, 471);
     mouse_click('right');
     assert_screen('desktop_popup_menu_endlessm', 10);
 
-    mouse_set(582, 519);
+    mouse_set(825, 519);
     mouse_click('left');
     assert_screen('desktop_no_endlessm', 10);
 
     # Right-click on an empty bit of desktop again and choose to add a folder.
-    mouse_set(615, 485);
+    mouse_set(915, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
-    mouse_set(689, 644);
+    mouse_set(880, 644);
     mouse_click('left');
     assert_screen('desktop_with_new_folder_editing', 10);
 
