@@ -7,16 +7,16 @@
       "": "Main window",
       "xpos": 212,
       "ypos": 119,
-      "width": 596,
-      "height": 453,
+      "width": 601,
+      "height": 455,
       "type": "match"
     },
     {
       "": "Privacy and Network Access Policy window",
-      "xpos": 279,
-      "ypos": 176,
-      "width": 466,
-      "height": 416,
+      "xpos": 271,
+      "ypos": 156,
+      "width": 482,
+      "height": 456,
       "type": "match"
     }
   ]

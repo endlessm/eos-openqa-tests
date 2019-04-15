@@ -15,7 +15,7 @@ sub run {
 
     # Search for VLC and select the result
     type_string("vlc");
-    assert_and_click('gnome_software_search_vlc', 'left', 10);
+    assert_and_click('gnome_software_search_vlc', 'left', 30);
 
     # Install it
     assert_and_click('gnome_software_vlc_details_uninstalled', 'left', 10);
