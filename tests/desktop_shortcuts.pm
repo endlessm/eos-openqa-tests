@@ -9,6 +9,13 @@ sub run {
 
     check_desktop_clean();
 
+    # Remove all icons from the desktop, so that we don't have to re-take all
+    # these screenshots when the default icon grid changes.
+    $self->user_console();
+    assert_script_run(q(gsettings set org.gnome.shell icon-grid-layout "{'desktop': []}"));
+    $self->exit_user_console();
+    assert_screen("desktop_blank", 60);
+
     # Right-click on an empty bit of desktop and check the menu is correct.
     mouse_set(915, 485);
     mouse_click('right');
