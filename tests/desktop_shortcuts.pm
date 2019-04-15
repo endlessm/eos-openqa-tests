@@ -17,12 +17,12 @@ sub run {
     assert_screen("desktop_blank", 60);
 
     # Right-click on an empty bit of desktop and check the menu is correct.
-    mouse_set(915, 485);
+    mouse_set(615, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
 
     # Add App should launch gnome-software.
-    mouse_set(880, 579);
+    mouse_set(989, 579);
     mouse_click('left');
     assert_screen('gnome_software_main_screen', 10);
 
@@ -59,7 +59,7 @@ sub run {
     assert_screen('desktop_no_libreoffice', 10);
 
     # Right-click on an empty bit of desktop again and choose to add a website.
-    mouse_set(915, 485);
+    mouse_set(615, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
     mouse_set(880, 613);
@@ -84,7 +84,7 @@ sub run {
     assert_screen('desktop_no_endlessm', 10);
 
     # Right-click on an empty bit of desktop again and choose to add a folder.
-    mouse_set(915, 485);
+    mouse_set(615, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
     mouse_set(880, 644);
