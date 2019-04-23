@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "gnome_contacts_add_contact"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Avatar background colour changes",
+      "xpos": 338,
+      "ypos": 84,
+      "width": 138,
+      "height": 136,
+      "type": "exclude"
+    }
+  ]
+}
