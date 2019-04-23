@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "gnome_contacts_add_contact"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    }
+  ]
+}

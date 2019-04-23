@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "gnome_contacts_setup"
+  ],
+  "area": [
+    {
+      "": "Main window",
+      "xpos": 110,
+      "ypos": 24,
+      "width": 800,
+      "height": 648,
+      "type": "match"
+    }
+  ]
+}

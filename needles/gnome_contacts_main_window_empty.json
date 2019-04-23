@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "gnome_contacts_main_window_empty"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Add button",
+      "xpos": 7,
+      "ypos": 7,
+      "width": 36,
+      "height": 36,
+      "type": "match"
+    }
+  ]
+}
