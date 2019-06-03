@@ -12,6 +12,14 @@
       "type": "match"
     },
     {
+      "": "Status area differs (clock, user's avatar)",
+      "xpos": 709,
+      "ypos": 728,
+      "width": 315,
+      "height": 40,
+      "type": "exclude"
+    },
+    {
       "": "‘About’ search result",
       "xpos": 7,
       "ypos": 102,

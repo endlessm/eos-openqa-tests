@@ -18,6 +18,14 @@
       "width": 134,
       "height": 24,
       "type": "exclude"
+    },
+    {
+      "": "Status area differs (clock, user's avatar)",
+      "xpos": 709,
+      "ypos": 728,
+      "width": 315,
+      "height": 40,
+      "type": "exclude"
     }
   ]
 }
