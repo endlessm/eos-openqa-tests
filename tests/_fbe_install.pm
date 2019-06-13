@@ -22,7 +22,6 @@ sub run {
 
     # Installation actually happens
     assert_screen('fbe_reformatting1', 10);
-    assert_screen('fbe_reformatting2', 1800);
 
     # Installation complete
     # FIXME: Rather than shutting down via the ‘Power Off’ button in

@@ -13,6 +13,14 @@
       "type": "match"
     },
     {
+      "": "Image name varies with branch",
+      "xpos": 389,
+      "ypos": 298,
+      "width": 220,
+      "height": 39,
+      "type": "exclude"
+    },
+    {
       "": "'Next' button",
       "xpos": 786,
       "ypos": 124,
