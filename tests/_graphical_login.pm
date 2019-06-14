@@ -7,10 +7,16 @@ use utils;
 sub run {
     my $self = shift;
 
-    # Wait for the login screen to appear. The final match area in any needle
+    # Wait for the login screen to appear, then give it 2s to settle. The
+    # final match area in any needle
     # tagged as ‘gdm_user_list’ is guaranteed to be the ‘Test’ administrator
     # user.
-    assert_and_click('gdm_user_list', 'left', 600);
+    assert_screen('gdm_user_list', 600);
+    sleep(2);
+    assert_and_click('gdm_user_list', 'left', 10);
+
+    # Wait for the password entry to appear.
+    assert_screen('gdm_login_password', 10);
 
     # Enter our password and continue
     type_string('123');
