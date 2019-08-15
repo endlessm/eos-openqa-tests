@@ -9,18 +9,18 @@
   "area": [
     {
       "": "FBE window",
-      "xpos": 140,
-      "ypos": 90,
-      "width": 744,
-      "height": 543,
+      "xpos": 27,
+      "ypos": 13,
+      "width": 971,
+      "height": 715,
       "type": "match"
     },
     {
       "": "'Start Using Endless' button",
       "xpos": 417,
-      "ypos": 562,
+      "ypos": 572,
       "width": 189,
-      "height": 38,
+      "height": 36,
       "type": "match"
     }
   ]
