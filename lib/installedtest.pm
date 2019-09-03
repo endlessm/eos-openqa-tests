@@ -130,7 +130,7 @@ sub switch_user {
     # If $password is '', no password is required to be inputted.
     # If $new_password is not '', we expect to be prompted to change password,
     # and will set $new_password as the new password.
-    $password //= '123';
+    $password //= get_password();
     $new_password //= '';
 
     # Log out.

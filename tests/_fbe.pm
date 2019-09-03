@@ -46,13 +46,15 @@ sub run {
         type_string(' ');  # Tick the password box
         assert_and_click('fbe_about_you2', 'left', 10);
 
+        my $password = get_password();
+
         assert_screen('fbe_password', 10);
-        type_string('123');  # Password
+        type_string($password);  # Password
         send_key('tab');  # Skip over ‘Show password’ tickbox
         send_key('tab');
-        type_string('123');  # Confirmation
+        type_string($password);  # Confirmation
         send_key('tab');
-        type_string('123');  # Hint
+        type_string($password);  # Hint
         assert_and_click('fbe_password2', 'left', 10);
     }
 

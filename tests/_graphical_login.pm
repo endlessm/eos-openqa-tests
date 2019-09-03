@@ -19,7 +19,7 @@ sub run {
     assert_screen('gdm_login_password', 10);
 
     # Enter our password and continue
-    type_string('123');
+    type_string(get_password());
     send_key('ret');
 }
 
