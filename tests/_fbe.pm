@@ -55,7 +55,10 @@ sub run {
         type_string($password);  # Confirmation
         send_key('tab');
         type_string($password);  # Hint
-        assert_and_click('fbe_password2', 'left', 10);
+
+        send_key('tab');  # ‘Previous’ button
+        send_key('tab');  # ‘Next’ button
+        send_key('ret');
     }
 
     if (get_var('LIVE')) {
