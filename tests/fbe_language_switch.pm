@@ -49,14 +49,19 @@ sub run {
         type_string(' ');  # Tick the password box
         assert_and_click('fbe_about_you2_indonesian', 'left', 10);
 
+        my $password = get_password();
+
         assert_screen('fbe_password_indonesian', 10);
-        type_string('123');  # Password
+        type_string($password);  # Password
         send_key('tab');  # Skip over ‘Show password’ tickbox
         send_key('tab');
-        type_string('123');  # Confirmation
+        type_string($password);  # Confirmation
         send_key('tab');
-        type_string('123');  # Hint
-        assert_and_click('fbe_password2_indonesian', 'left', 10);
+        type_string($password);  # Hint
+
+        send_key('tab');  # ‘Previous’ button
+        send_key('tab');  # ‘Next’ button
+        send_key('ret');
     }
 
     if (get_var('LIVE')) {

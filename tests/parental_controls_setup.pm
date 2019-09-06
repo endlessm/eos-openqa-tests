@@ -45,7 +45,7 @@ sub run {
 
     # Unlock the panel.
     assert_screen('control_center_users_polkit_unlock', 10);
-    type_string('123');  # Password
+    type_string(get_password());  # Password
     send_key('ret');
 
     # Scroll down so we can see the parental controls better. They should be

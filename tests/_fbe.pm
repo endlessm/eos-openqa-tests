@@ -34,7 +34,7 @@ sub run {
 
         # The timezone screen is only shown if the timezone could not be
         # detected automatically.
-        if (check_screen('fbe_timezone', 10)) {
+        if (!check_screen('fbe_accounts', 2)) {
             assert_and_click('fbe_timezone', 'left', 10);
         }
 
@@ -46,14 +46,19 @@ sub run {
         type_string(' ');  # Tick the password box
         assert_and_click('fbe_about_you2', 'left', 10);
 
+        my $password = get_password();
+
         assert_screen('fbe_password', 10);
-        type_string('123');  # Password
+        type_string($password);  # Password
         send_key('tab');  # Skip over ‘Show password’ tickbox
         send_key('tab');
-        type_string('123');  # Confirmation
+        type_string($password);  # Confirmation
         send_key('tab');
-        type_string('123');  # Hint
-        assert_and_click('fbe_password2', 'left', 10);
+        type_string($password);  # Hint
+
+        send_key('tab');  # ‘Previous’ button
+        send_key('tab');  # ‘Next’ button
+        send_key('ret');
     }
 
     if (get_var('LIVE')) {

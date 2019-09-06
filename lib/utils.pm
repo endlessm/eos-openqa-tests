@@ -8,7 +8,13 @@ use Exporter;
 
 use testapi;
 our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login
-    console_user_exit console_user_login send_key_combo type_very_safely/;
+    console_user_exit console_user_login send_key_combo type_very_safely
+    get_password/;
+
+# Get the standard password used everywhere.
+sub get_password {
+    return '123';
+}
 
 # high-level 'type this string extremely safely and rather slow'
 # function whose specific implementation may vary
@@ -62,17 +68,19 @@ sub console_root_login {
         type_string("sudo -s\n");
         assert_screen('root_console', 30);
     } else {
+        my $password = get_password();
+
         # If we’re not in a live session, use the standard test username.
         type_string("test\n");
         sleep(1);
-        type_string("123\n");
+        type_string($password . "\n");
         assert_screen('test_console', 30);
 
         # Now slip into a sudo session. This will require the user’s password
         # again.
         type_string("sudo -s\n");
         sleep(1);
-        type_string("123\n");
+        type_string($password . "\n");
         assert_screen('root_console', 30);
     }
 }
@@ -102,7 +110,7 @@ sub console_user_login {
         # If we’re not in a live session, use the standard test username.
         type_string("test\n");
         sleep(1);
-        type_string("123\n");
+        type_string(get_password() . "\n");
         assert_screen('test_console', 30);
     }
 }

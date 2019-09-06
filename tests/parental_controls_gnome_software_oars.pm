@@ -58,7 +58,7 @@ sub run {
     # completes too quickly after the auth dialogue.
     assert_and_click('gnome_software_cows_revenge_details_uninstalled', 'left', 10);
     assert_screen('gnome_software_cows_revenge_installing_auth', 10);
-    type_string('123');  # Password
+    type_string(get_password());  # Password
     send_key('ret');
 
     # Wait for installation to succeed.
@@ -70,7 +70,7 @@ sub run {
 
     # Switch user to Tiny Tim. Since this is the first time we’ve logged in as
     # Tiny Tim, his password needs to be set.
-    $self->switch_user('tiny', '', '123');
+    $self->switch_user('tiny', '', get_password());
 
     # Run gnome-software.
     type_very_safely("gnome-software\n");
