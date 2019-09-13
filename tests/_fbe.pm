@@ -34,7 +34,7 @@ sub run {
 
         # The timezone screen is only shown if the timezone could not be
         # detected automatically.
-        if (!check_screen('fbe_accounts', 2)) {
+        if (!check_screen('fbe_accounts', 0.5)) {
             assert_and_click('fbe_timezone', 'left', 10);
         }
 
