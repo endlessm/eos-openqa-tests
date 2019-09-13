@@ -6,17 +6,17 @@
   "area": [
     {
       "": "FBE window",
-      "xpos": 140,
-      "ypos": 67,
-      "width": 743,
-      "height": 586,
+      "xpos": 27,
+      "ypos": 13,
+      "width": 971,
+      "height": 715,
       "type": "match"
     },
     {
       "": "'Skip' button",
-      "xpos": 817,
-      "ypos": 74,
-      "width": 63,
+      "xpos": 926,
+      "ypos": 20,
+      "width": 64,
       "height": 31,
       "type": "match"
     }

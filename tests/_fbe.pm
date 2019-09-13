@@ -50,7 +50,6 @@ sub run {
 
         assert_screen('fbe_password', 10);
         type_string($password);  # Password
-        send_key('tab');  # Skip over ‘Show password’ tickbox
         send_key('tab');
         type_string($password);  # Confirmation
         send_key('tab');
