@@ -7,17 +7,17 @@
   "area": [
     {
       "": "FBE window",
-      "xpos": 141,
-      "ypos": 90,
-      "width": 741,
-      "height": 540,
+      "xpos": 27,
+      "ypos": 13,
+      "width": 971,
+      "height": 715,
       "type": "match"
     },
     {
       "": "'Try It' button",
-      "xpos": 194,
-      "ypos": 465,
-      "width": 286,
+      "xpos": 84,
+      "ypos": 474,
+      "width": 394,
       "height": 32,
       "type": "match"
     }
