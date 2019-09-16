@@ -7,17 +7,17 @@
   "area": [
     {
       "": "FBE window",
-      "xpos": 140,
-      "ypos": 89,
-      "width": 743,
-      "height": 544,
+      "xpos": 27,
+      "ypos": 13,
+      "width": 971,
+      "height": 715,
       "type": "match"
     },
     {
-      "": "'Accept and Continue' button",
-      "xpos": 699,
-      "ypos": 95,
-      "width": 179,
+      "": "'Accept' button",
+      "xpos": 909,
+      "ypos": 20,
+      "width": 81,
       "height": 31,
       "type": "match"
     }

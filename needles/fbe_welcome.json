@@ -6,26 +6,25 @@
   ],
   "area": [
     {
-      "xpos": 140,
-      "ypos": 90,
-      "width": 740,
-      "height": 540,
-      "type": "match",
-      "": "FIXME: Not 100% match due to scroll position of languages list",
-      "match": 0.93
+      "": "FBE window",
+      "xpos": 27,
+      "ypos": 13,
+      "width": 971,
+      "height": 715,
+      "type": "match"
     },
     {
       "": "Rotating 'welcome' text banner",
-      "xpos": 314,
-      "ypos": 240,
-      "width": 394,
-      "height": 40,
+      "xpos": 27,
+      "ypos": 184,
+      "width": 971,
+      "height": 55,
       "type": "exclude"
     },
     {
       "": "'Next' button",
-      "xpos": 815,
-      "ypos": 95,
+      "xpos": 926,
+      "ypos": 20,
       "width": 64,
       "height": 31,
       "type": "match"
