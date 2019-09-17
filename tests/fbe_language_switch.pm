@@ -37,7 +37,7 @@ sub run {
 
         # The timezone screen is only shown if the timezone could not be
         # detected automatically.
-        if (check_screen('fbe_timezone', 10)) {
+        if (!check_screen('fbe_accounts', 0.5)) {
             assert_and_click('fbe_timezone', 'left', 10);
         }
 
@@ -53,7 +53,6 @@ sub run {
 
         assert_screen('fbe_password_indonesian', 10);
         type_string($password);  # Password
-        send_key('tab');  # Skip over ‘Show password’ tickbox
         send_key('tab');
         type_string($password);  # Confirmation
         send_key('tab');

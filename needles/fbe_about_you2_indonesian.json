@@ -8,17 +8,17 @@
   "area": [
     {
       "": "FBE window",
-      "xpos": 140,
-      "ypos": 88,
-      "width": 743,
-      "height": 545,
+      "xpos": 27,
+      "ypos": 13,
+      "width": 971,
+      "height": 715,
       "type": "match"
     },
     {
       "": "'Selanjutnya' ('Next') button",
-      "xpos": 765,
-      "ypos": 94,
-      "width": 115,
+      "xpos": 878,
+      "ypos": 19,
+      "width": 113,
       "height": 31,
       "type": "match"
     }

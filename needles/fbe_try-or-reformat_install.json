@@ -7,17 +7,17 @@
   "area": [
     {
       "": "FBE window",
-      "xpos": 141,
-      "ypos": 90,
-      "width": 741,
-      "height": 540,
+      "xpos": 27,
+      "ypos": 13,
+      "width": 971,
+      "height": 715,
       "type": "match"
     },
     {
       "": "'Reformat' button",
       "xpos": 544,
-      "ypos": 466,
-      "width": 287,
+      "ypos": 474,
+      "width": 398,
       "height": 32,
       "type": "match"
     }
