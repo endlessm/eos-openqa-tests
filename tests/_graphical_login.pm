@@ -12,7 +12,7 @@ sub run {
     # tagged as ‘gdm_user_list’ is guaranteed to be the ‘Test’ administrator
     # user.
     assert_screen('gdm_user_list', 600);
-    sleep(2);
+    sleep(4);
     assert_and_click('gdm_user_list', 'left', 10);
 
     # Wait for the password entry to appear.
