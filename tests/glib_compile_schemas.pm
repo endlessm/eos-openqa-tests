@@ -7,6 +7,9 @@ use utils;
 sub run {
     my $self = shift;
 
+    # Start from the desktop
+    check_desktop_clean();
+
     # Test that all of the GSettings overrides in /usr/share/glib-2.0/schemas
     # are syntactically valid.
 
