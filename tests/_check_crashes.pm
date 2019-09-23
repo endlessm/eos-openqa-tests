@@ -12,8 +12,7 @@ sub run {
 
     # Check there are no errors in the journal.
     # FIXME: Ramp this up to check emerg..err. Currently a lot of true (unfixed) positives there.
-    # FIXME: Ignore smartd for now, since it’s shouty (https://phabricator.endlessm.com/T27837)
-    assert_script_run('[[ ! $(journalctl --priority emerg..crit --quiet --no-pager | grep -v smartd) ]]');
+    assert_script_run('[[ ! $(journalctl --priority emerg..crit --quiet --no-pager) ]]');
 
     # Check no systemd units failed to start up. This isn’t caught by the
     # test above, as systemd only emits a warning on unit failure, rather than
@@ -22,8 +21,8 @@ sub run {
     #
     # Note: The logic is perverse here, as is-failed returns exit status 0 if
     # any units failed, and exit status 1 if all units succeeded.
-    # FIXME: smartd and eos-paygd currently fail; smartd as above, and eos-paygd is currently under
-    # development. Ignore those failures for now.
+    # FIXME: eos-paygd currently fails (see https://phabricator.endlessm.com/T27836).
+    # Ignore that failure for now.
     # assert_script_run('! systemctl is-failed --quiet \'*\'');
 
     $self->exit_root_console();
