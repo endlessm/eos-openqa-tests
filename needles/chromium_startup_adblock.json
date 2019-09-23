@@ -20,10 +20,10 @@
     },
     {
       "": "Address bar (changing ID, font rendering)",
-      "xpos": 138,
-      "ypos": 39,
-      "width": 752,
-      "height": 26,
+      "xpos": 106,
+      "ypos": 35,
+      "width": 798,
+      "height": 34,
       "type": "exclude"
     }
   ]
