@@ -21,9 +21,7 @@ sub run {
     #
     # Note: The logic is perverse here, as is-failed returns exit status 0 if
     # any units failed, and exit status 1 if all units succeeded.
-    # FIXME: eos-paygd currently fails (see https://phabricator.endlessm.com/T27836).
-    # Ignore that failure for now.
-    # assert_script_run('! systemctl is-failed --quiet \'*\'');
+    assert_script_run('! systemctl is-failed --quiet \'*\'');
 
     $self->exit_root_console();
 }
