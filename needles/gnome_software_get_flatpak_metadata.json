@@ -12,11 +12,11 @@
       "type": "match"
     },
     {
-      "": "Progress bar",
+      "": "'Downloading ...' strings and Progress bar",
       "xpos": 259,
-      "ypos": 395,
+      "ypos": 350,
       "width": 509,
-      "height": 35,
+      "height": 80,
       "type": "exclude"
     }
   ]
