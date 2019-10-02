@@ -17,6 +17,14 @@
       "width": 135,
       "height": 96,
       "type": "match"
+    },
+    {
+      "": "Restrict Apps List",
+      "xpos": 393,
+      "ypos": 592,
+      "width": 493,
+      "height": 53,
+      "type": "match"
     }
   ]
 }
