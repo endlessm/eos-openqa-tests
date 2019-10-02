@@ -35,6 +35,14 @@
       "width": 142,
       "height": 30,
       "type": "match"
+    },
+    {
+      "": "Application rating often change and the number can vary from time to time",
+      "xpos": 751,
+      "ypos": 67,
+      "width": 173,
+      "height": 35,
+      "type": "exclude"
     }
   ]
 }
