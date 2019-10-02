@@ -24,7 +24,7 @@
       "ypos": 592,
       "width": 493,
       "height": 53,
-      "type": "match"
+      "type": "exclude"
     }
   ]
 }
