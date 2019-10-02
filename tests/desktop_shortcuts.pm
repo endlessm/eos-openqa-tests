@@ -10,7 +10,7 @@ sub run {
     check_desktop_clean();
 
     # Right-click on an empty bit of desktop and check the menu is correct.
-    mouse_set(615, 485);
+    mouse_set(815, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
 
