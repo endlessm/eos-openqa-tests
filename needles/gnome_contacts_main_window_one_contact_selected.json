@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "gnome_contacts_main_window_one_contact_selected"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Remove button",
+      "xpos": 205,
+      "ypos": 689,
+      "width": 88,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "tags": [
+    "gnome_contacts_main_window_one_contact"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Contact row",
+      "xpos": 7,
+      "ypos": 126,
+      "width": 289,
+      "height": 49,
+      "type": "match"
+    }
+  ]
+}

@@ -12,7 +12,10 @@ sub run {
     # tagged as ‘gdm_user_list’ is guaranteed to be the ‘Test’ administrator
     # user.
     assert_screen('gdm_user_list', 600);
-    sleep(4);
+    # FIXME: Increase the gdm timeout from 4 to 8 as it is guessed that the
+    # gdm is taking a while to react to mouse clicks. There might be actual
+    # issue in gdm itself and should be investigated before resetting the timeout.
+    sleep(8);
     assert_and_click('gdm_user_list', 'left', 10);
 
     # Wait for the password entry to appear.
