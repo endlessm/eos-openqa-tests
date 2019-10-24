@@ -1,6 +1,6 @@
 {
   "tags": [
-    "encyclopedia_startup"
+    "gnome_contacts_add_contact"
   ],
   "area": [
     {
@@ -10,6 +10,14 @@
       "width": 1024,
       "height": 728,
       "type": "match"
+    },
+    {
+      "": "Avatar background colour changes",
+      "xpos": 338,
+      "ypos": 84,
+      "width": 138,
+      "height": 136,
+      "type": "exclude"
     }
   ]
 }

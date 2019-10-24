@@ -5,10 +5,11 @@
   ],
   "area": [
     {
+      "": "Whole screen, minus shell bottom bar (changes between users; clock changes)",
       "xpos": 0,
       "ypos": 0,
       "width": 1024,
-      "height": 768,
+      "height": 728,
       "type": "match"
     },
     {
@@ -17,14 +18,6 @@
       "ypos": 383,
       "width": 134,
       "height": 24,
-      "type": "exclude"
-    },
-    {
-      "": "Status area differs (clock, user's avatar)",
-      "xpos": 709,
-      "ypos": 728,
-      "width": 315,
-      "height": 40,
       "type": "exclude"
     }
   ]

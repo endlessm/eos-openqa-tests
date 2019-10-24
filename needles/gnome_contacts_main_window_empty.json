@@ -1,6 +1,6 @@
 {
   "tags": [
-    "encyclopedia_startup"
+    "gnome_contacts_main_window_empty"
   ],
   "area": [
     {
@@ -9,6 +9,14 @@
       "ypos": 0,
       "width": 1024,
       "height": 728,
+      "type": "match"
+    },
+    {
+      "": "Add button",
+      "xpos": 7,
+      "ypos": 7,
+      "width": 34,
+      "height": 32,
       "type": "match"
     }
   ]

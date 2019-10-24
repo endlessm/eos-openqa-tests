@@ -225,6 +225,39 @@
         flavor  => "base_full",
         version => "*",
       },
+      test_suite => { name => "desktop_gnome_contacts" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "desktop_gnome_contacts" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "desktop_gnome_contacts" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
       test_suite => { name => "desktop_libreoffice_writer" },
     },
     {
@@ -816,6 +849,15 @@
       name => "desktop_encyclopedia",
       settings => [
         { key => "POSTINSTALL", value => "desktop_encyclopedia" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_gnome_contacts",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_gnome_contacts" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
