@@ -5,10 +5,11 @@
   ],
   "area": [
     {
+      "": "Whole screen, minus shell bottom bar (changes between users; clock changes)",
       "xpos": 0,
       "ypos": 0,
       "width": 1024,
-      "height": 768,
+      "height": 728,
       "type": "match"
     },
     {
