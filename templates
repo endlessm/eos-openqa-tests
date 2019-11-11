@@ -71,6 +71,39 @@
         flavor  => "base_full",
         version => "*",
       },
+      test_suite => { name => "check_flatpak_extra_languages" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "check_flatpak_extra_languages" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "check_flatpak_extra_languages" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
       test_suite => { name => "control_center_about" },
     },
     {
@@ -807,6 +840,15 @@
         # adding an existing disk image as a qemu drive).
         { key => "HDDSIZEGB", value => "32" },
         { key => "HDDSIZEGB_1", value => "%HDDSIZEGB%" },
+      ],
+    },
+    {
+      name => "check_flatpak_extra_languages",
+      settings => [
+        { key => "POSTINSTALL", value => "check_flatpak_extra_languages" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
