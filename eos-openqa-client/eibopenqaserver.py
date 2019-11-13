@@ -54,6 +54,9 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     image_flatpak_runtimes = manifest['flatpak']['runtimes'].keys()
     image_flatpak_apps = manifest['flatpak']['apps'].keys()
 
+    # Work out which locales were set on an image
+    image_flatpak_locales = manifest['flatpak_locales']
+
     # Get the OSTree collection ID.
     image_ostree_collection_id = manifest['ostree'].get('collection-id', '')
 
@@ -97,6 +100,7 @@ def send_request_for_manifest(manifest, image, upload_api_host,
         'EOS_IMAGE_FLATPAK_REMOTES': ' '.join(image_flatpak_remotes),
         'EOS_IMAGE_FLATPAK_RUNTIMES': ' '.join(image_flatpak_runtimes),
         'EOS_IMAGE_FLATPAK_APPS': ' '.join(image_flatpak_apps),
+        'EOS_IMAGE_FLATPAK_LOCALES': ' '.join(image_flatpak_locales),
         'EOS_IMAGE_OSTREE_COLLECTION_ID': image_ostree_collection_id,
         'EOS_IMAGE_OSTREE_COMMIT': manifest['ostree']['commit'],
         'EOS_IMAGE_OSTREE_DATE': manifest['ostree']['date'],

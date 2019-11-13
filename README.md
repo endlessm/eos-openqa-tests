@@ -55,6 +55,7 @@ been included too, for convenience.
 | `EOS_IMAGE_FLATPAK_APPS` | Space-separated list of flatpak refs | Empty | List of flatpak apps preinstalled on the image. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_FLATPAK_REMOTES` | Space-separated list of flatpak remote names | Empty | List of flatpak remotes preconfigured on the image. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_FLATPAK_RUNTIMES` | Space-separated list of flatpak refs | Empty | List of flatpak runtimes preinstalled on the image. Specific to eos-openqa-tests. |
+| `EOS_IMAGE_FLATPAK_LOCALES` | Space-separated list of flatpak locales | Empty | List of locales downloaded when pulling flatpak refs on the image. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_LANGUAGE` | `LANG` variable value | Undefined | Language the image is configured to use by default. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_OSTREE_COLLECTION_ID` | OSTree collection ID | Undefined | Collection ID of the collection–ref used for the OS. Specific to eos-openqa-tests. |
 | `EOS_IMAGE_OSTREE_COMMIT` | OSTree commit checksum | Undefined | Commit checksum of the deployed OS. Specific to eos-openqa-tests. |
@@ -114,3 +115,4 @@ installed 3.`$x`, then stepwise update 3.`$x` → 3.`$x+1` → 3.`$x+2` → 3.`$
 → …. We will always end up testing the largest update step possible. In order to
 test stepwise updates we’d need to keep intermediate qcow2 images around from
 historic test runs. We do not currently do that.
+
