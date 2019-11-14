@@ -381,6 +381,19 @@
       },
       test_suite => { name => "desktop_dinosaurs" },
     },
+    # No need to repeat this on ISO images, since they will have the same
+    # desktop files:
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "desktop_file_validate" },
+    },
     {
       machine    => { name => "64bit" },
       prio       => 10,
@@ -927,6 +940,15 @@
       name => "desktop_dinosaurs",
       settings => [
         { key => "POSTINSTALL", value => "desktop_dinosaurs" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "desktop_file_validate",
+      settings => [
+        { key => "POSTINSTALL", value => "desktop_file_validate" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
