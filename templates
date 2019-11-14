@@ -62,6 +62,19 @@
       test_suite => { name => "live_default" },
     },
 
+    # No need to repeat this on ISO images, since they will have the same
+    # AppData files:
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "appstream_glib_validate" },
+    },
     {
       machine    => { name => "64bit" },
       prio       => 10,
@@ -853,6 +866,15 @@
         # adding an existing disk image as a qemu drive).
         { key => "HDDSIZEGB", value => "32" },
         { key => "HDDSIZEGB_1", value => "%HDDSIZEGB%" },
+      ],
+    },
+    {
+      name => "appstream_glib_validate",
+      settings => [
+        { key => "POSTINSTALL", value => "appstream_glib_validate" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
       ],
     },
     {
