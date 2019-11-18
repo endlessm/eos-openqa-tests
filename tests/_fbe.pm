@@ -66,8 +66,10 @@ sub run {
         assert_and_click('fbe_complete_install', 'left', 10);
     }
 
-    # desktop should be visible
-    check_desktop_clean();
+    # Desktop should be visible. Don’t use check_desktop_clean() here, because
+    # we want to only check the minimum amount possible for the FBE to pass.
+    # By this point, we won’t have cleared the desktop background.
+    assert_screen('desktop_bottom_bar_only', 60);
     save_screenshot();
 }
 

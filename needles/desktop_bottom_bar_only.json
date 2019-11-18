@@ -1,0 +1,32 @@
+{
+  "properties": [],
+  "tags": [
+    "desktop_bottom_bar_only"
+  ],
+  "area": [
+    {
+      "": "Only match the bottom bar",
+      "xpos": 0,
+      "ypos": 728,
+      "width": 1024,
+      "height": 40,
+      "type": "match"
+    },
+    {
+      "": "Icon list differs (live vs installed)",
+      "xpos": 66,
+      "ypos": 728,
+      "width": 345,
+      "height": 40,
+      "type": "exclude"
+    },
+    {
+      "": "Status area differs (clock, user's avatar)",
+      "xpos": 709,
+      "ypos": 728,
+      "width": 315,
+      "height": 40,
+      "type": "exclude"
+    }
+  ]
+}
