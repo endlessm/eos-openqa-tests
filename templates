@@ -141,6 +141,30 @@
       },
       test_suite => { name => "control_center_about" },
     },
+    test_suite => { name => "control_center_background" },
+  },
+  {
+    machine    => { name => "64bit" },
+    prio       => 10,
+    product    => {
+      arch    => "x86_64",
+      distri  => "eos",
+      flavor  => "base_full_update",
+      version => "*",
+    },
+    test_suite => { name => "control_center_background" },
+  },
+  {
+    machine    => { name => "64bit" },
+    prio       => 10,
+    product    => {
+      arch    => "x86_64",
+      distri  => "eos",
+      flavor  => "base_iso",
+      version => "*",
+    },
+    test_suite => { name => "control_center_background" },
+  },
     {
       machine    => { name => "64bit" },
       prio       => 10,
@@ -954,6 +978,15 @@
     },
     {
       name => "control_center_about",
+      settings => [
+        { key => "POSTINSTALL", value => "control_center_about" },
+        { key => "START_AFTER_TEST", value => "install_default_upload" },
+        { key => "BOOTFROM", value => "c" },
+        { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+      ],
+    },
+    {
+      name => "control_center_background",
       settings => [
         { key => "POSTINSTALL", value => "control_center_about" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
