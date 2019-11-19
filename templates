@@ -988,7 +988,7 @@
     {
       name => "control_center_background",
       settings => [
-        { key => "POSTINSTALL", value => "control_center_about" },
+        { key => "POSTINSTALL", value => "control_center_background" },
         { key => "START_AFTER_TEST", value => "install_default_upload" },
         { key => "BOOTFROM", value => "c" },
         { key => "+HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
