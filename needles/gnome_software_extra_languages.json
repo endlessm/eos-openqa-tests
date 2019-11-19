@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 65,
+      "ypos": 189,
+      "width": 888,
+      "height": 195,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "gnome_software_extra_languages"
+  ],
+  "properties": []
+}
