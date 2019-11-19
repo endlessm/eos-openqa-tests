@@ -140,6 +140,15 @@
         version => "*",
       },
       test_suite => { name => "control_center_about" },
+      },
+      {
+        machine    => { name => "64bit" },
+        prio       => 10,
+        product    => {
+          arch    => "x86_64",
+          distri  => "eos",
+          flavor  => "base_full",
+          version => "*",
     },
     test_suite => { name => "control_center_background" },
   },
