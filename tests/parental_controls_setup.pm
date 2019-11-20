@@ -110,7 +110,7 @@ sub run {
     send_key_combo('alt', 's');  # submit the dialog
     sleep(2);
 
-    assert_and_click('control_center_users_new_user_added_en_gb', 'left', 10);
+    assert_screen('control_center_users_new_user_added_en_gb');
 
     # Change to the ‘Shared Account’ and back; the settings should be correctly
     # loaded and restored for both accounts.
