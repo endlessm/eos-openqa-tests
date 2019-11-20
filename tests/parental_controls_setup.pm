@@ -107,7 +107,7 @@ sub run {
     sleep(1);
     send_key('ret');  # select that result
     sleep(1);
-    send_key_combo('alt', 'd');  # submit the dialog
+    send_key_combo('alt', 's');  # submit the dialog
     sleep(2);
 
     assert_and_click('control_center_users_new_user_added_en_gb', 'left', 10);
