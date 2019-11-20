@@ -114,6 +114,8 @@ sub run {
 
     # Change to the ‘Shared Account’ and back; the settings should be correctly
     # loaded and restored for both accounts.
+    mouse_set(653, 105);
+    mouse_click('left');
     assert_screen('control_center_users_shared_unlocked_with_new_user', 10);
     mouse_set(905, 104);
     mouse_click('left');
