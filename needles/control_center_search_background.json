@@ -1,7 +1,7 @@
 {
   "tags": [
     "control_center",
-    "control_center_search_version"
+    "control_center_search_background"
   ],
   "area": [
     {
@@ -13,7 +13,7 @@
       "type": "match"
     },
     {
-      "": "‘About’ search result",
+      "": "‘background’ search result",
       "xpos": 7,
       "ypos": 102,
       "width": 250,
