@@ -17,7 +17,7 @@ sub run {
     type_string('background');
     assert_and_click('control_center_search_background', 'left', 10);
 
-    assert_screen('control_center_about_capplet', 10);
+    assert_screen('control_center_background', 10);
 
 }
 
