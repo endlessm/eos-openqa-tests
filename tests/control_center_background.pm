@@ -13,16 +13,12 @@ sub run {
     type_very_safely "control center\n";
     assert_screen('desktop_control_center', 10);
 
-    # Type-ahead find for the ‘About’ panel.
+    # Type-ahead find for the ‘Background’ panel.
     type_string('background');
-    assert_and_click('control_center_search_version', 'left', 10);
+    assert_and_click('control_center_search_background', 'left', 10);
 
     assert_screen('control_center_about_capplet', 10);
 
-    # FIXME: Ideally we’d check that the version number matches what we expect,
-    # but there’s no way to do that without OCR, which isn’t at all documented
-    # in OpenQA (and isn’t used by SUSE or Fedora) — so for the moment that
-    # area is excluded.
 }
 
 sub test_flags {
