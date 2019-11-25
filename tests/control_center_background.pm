@@ -19,7 +19,7 @@ sub run {
 
     assert_screen('control_center_background', 10);
 
-    assert_and_click('background_select_image', 'background_image', 10);
+    assert_and_click('background_select_image', 'left', 10);
 
 }
 
