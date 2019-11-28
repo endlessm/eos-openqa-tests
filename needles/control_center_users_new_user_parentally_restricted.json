@@ -9,6 +9,14 @@
       "width": 1024,
       "height": 768,
       "type": "match"
+    },
+    {
+      "": "Exclude parentally controlled apps list",
+      "xpos": 391,
+      "ypos": 380,
+      "width": 503,
+      "height": 111,
+      "type": "exclude"
     }
   ]
 }

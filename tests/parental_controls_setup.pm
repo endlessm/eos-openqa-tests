@@ -101,13 +101,13 @@ sub run {
     # FIXME: It would be nice to be able to do type-ahead search in this list.
     # See: https://gitlab.gnome.org/GNOME/gnome-control-center/issues/365
     assert_and_click('control_center_users_language', 'left', 10);
-    type_string('English United Kingdom');
+    type_string('Hindi');
     sleep(1);
-    send_key('up');  # highlight the only result
+    send_key('down');  # highlight the only result
     sleep(1);
     send_key('ret');  # select that result
     sleep(1);
-    send_key_combo('alt', 'd');  # submit the dialog
+    send_key_combo('alt', 's');  # submit the dialog
     sleep(2);
 
     assert_and_click('control_center_users_new_user_added_en_gb', 'left', 10);

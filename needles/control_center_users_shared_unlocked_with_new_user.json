@@ -12,11 +12,19 @@
     },
     {
       "": "Administrator tab",
-      "xpos": 385,
-      "ypos": 63,
+      "xpos": 335,
+      "ypos": 66,
       "width": 123,
       "height": 103,
       "type": "match"
+    },
+    {
+      "": "Exclude parentally controlled apps list",
+      "xpos": 386,
+      "ypos": 379,
+      "width": 506,
+      "height": 108,
+      "type": "exclude"
     }
   ]
 }
