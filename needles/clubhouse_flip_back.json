@@ -1,0 +1,32 @@
+{
+  "tags": [
+    "clubhouse_flip_back"
+  ],
+  "area": [
+    {
+      "": "Whole screen, minus shell bottom bar (changes between users; clock changes)",
+      "xpos" : 0,
+      "ypos" : 0,
+      "width" : 1024,
+      "height" : 728,
+      "type" : "match"
+    },
+    {
+      "": "Notification image animation",
+      "xpos" : 818,
+      "ypos" : 18,
+      "width" : 164,
+      "height" : 177,
+      "type" : "exclude"
+    },
+    {
+      "": "FtH button",
+       "xpos" : 0,
+       "ypos" : 308,
+       "width" : 51,
+       "height" : 117,
+       "type" : "match"
+    }
+  ]
+}
+
