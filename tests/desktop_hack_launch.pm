@@ -15,21 +15,19 @@ sub run {
 
     # The hack first launch experience, Hack unlock
 
-    # Click on FtH
+    # Click continue
     assert_and_click('clubhouse_first_launch', 'left', 10);
-    # Solve the puzzle
-    assert_screen('hack_unlock_flipped');
-    mouse_set(555, 493);
-    mouse_click();
-    mouse_set(498, 541);
-    mouse_click();
-    mouse_set(493, 585);
-    mouse_click();
-    # Flip back
-    assert_and_click('clubhouse_flip_back', 'left', 10);
+    # Click No
+    assert_and_click('clubhouse_first_launch_1', 'left', 10);
+    # Click continue
+    assert_and_click('clubhouse_first_launch_2', 'left', 10);
+    # Click will do
+    assert_and_click('clubhouse_first_launch_3', 'left', 10);
+    # close the clubhouse
+    send_key_combo('alt', 'f4');
 
-    # wait for the clubhouse
-    assert_screen('clubhouse_launch');
+    # check that the hack icon is green
+    assert_screen('desktop_hack_icon_green');
 }
 
 sub test_flags {
