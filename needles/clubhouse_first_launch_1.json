@@ -1,6 +1,6 @@
 {
   "tags": [
-    "clubhouse_launch"
+    "clubhouse_first_launch_1"
   ],
   "area": [
     {
@@ -25,6 +25,22 @@
        "ypos" : 427,
        "width" : 135,
        "height" : 250,
+       "type" : "exclude"
+    },
+    {
+      "": "Yes button",
+       "xpos" : 430,
+       "ypos" : 155,
+       "width" : 60,
+       "height" : 60,
+       "type" : "match"
+    },
+    {
+      "": "No button",
+       "xpos" : 490,
+       "ypos" : 155,
+       "width" : 60,
+       "height" : 60,
        "type" : "match"
     }
   ]

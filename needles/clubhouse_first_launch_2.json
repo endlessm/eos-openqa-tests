@@ -1,6 +1,6 @@
 {
   "tags": [
-    "hack_unlock_flipped"
+    "clubhouse_first_launch_2"
   ],
   "area": [
     {
@@ -20,11 +20,20 @@
       "type" : "exclude"
     },
     {
-      "": "FtH button",
-       "xpos" : 0,
-       "ypos" : 308,
-       "width" : 51,
-       "height" : 117,
+      "": "Fabber animation dancing",
+       "xpos" : 430,
+       "ypos" : 427,
+       "width" : 135,
+       "height" : 250,
+       "type" : "exclude"
+    },
+    {
+      "": "Next button",
+       "xpos" : 430,
+       "ypos" : 155,
+       "width" : 60,
+       "height" : 60,
+       "match": 80,
        "type" : "match"
     }
   ]

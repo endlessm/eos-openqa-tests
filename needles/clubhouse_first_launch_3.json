@@ -1,6 +1,6 @@
 {
   "tags": [
-    "clubhouse_flip_back"
+    "clubhouse_first_launch_3"
   ],
   "area": [
     {
@@ -9,6 +9,7 @@
       "ypos" : 0,
       "width" : 1024,
       "height" : 728,
+      "match": 90,
       "type" : "match"
     },
     {
@@ -16,15 +17,24 @@
       "xpos" : 818,
       "ypos" : 18,
       "width" : 164,
-      "height" : 177,
+      "height" : 200,
       "type" : "exclude"
     },
     {
-      "": "FtH button",
-       "xpos" : 0,
-       "ypos" : 308,
-       "width" : 51,
-       "height" : 117,
+      "": "Fabber animation dancing",
+       "xpos" : 430,
+       "ypos" : 427,
+       "width" : 135,
+       "height" : 250,
+       "type" : "exclude"
+    },
+    {
+      "": "Will do button",
+       "xpos" : 485,
+       "ypos" : 172,
+       "width" : 141,
+       "height" : 32,
+       "match": 80,
        "type" : "match"
     }
   ]
