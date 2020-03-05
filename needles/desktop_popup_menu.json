@@ -6,10 +6,11 @@
   ],
   "area": [
     {
-      "xpos": 0,
-      "ypos": 0,
-      "width": 1024,
-      "height": 768,
+      "": "'Add App' menu item",
+      "xpos": 808,
+      "ypos": 559,
+      "width": 213,
+      "height": 37,
       "type": "match"
     }
   ]

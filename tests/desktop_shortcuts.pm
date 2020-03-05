@@ -10,12 +10,12 @@ sub run {
     check_desktop_clean();
 
     # Right-click on an empty bit of desktop and check the menu is correct.
-    mouse_set(615, 485);
+    mouse_set(1000, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
 
     # Add App should launch gnome-software.
-    mouse_set(689, 579);
+    mouse_set(690, 580);
     mouse_click('left');
     assert_screen('gnome_software_main_screen', 10);
 
