@@ -135,6 +135,17 @@ sub run {
     # loaded and restored for both accounts.
     assert_and_click('malcontent_control_new_user', 'left', 10);
     assert_screen('malcontent_control_new_user_hindi', 10);
+
+    # Log in a Tiny Tim on the command line and set up a few things. Since this
+    # is the first time we’ve logged in as Tiny Tim, his password needs to be
+    # set.
+    # FIXME: Work out a way to refactor this to share code with main.pm.
+    $self->user_console('tinytim', set_password => 1);
+    assert_script_run('gsettings set org.gnome.desktop.notifications show-banners false', 30);
+    assert_script_run('gsettings set org.gnome.desktop.session idle-delay 0', 30);
+    assert_script_run('gsettings set org.gnome.desktop.background picture-options none', 30);
+    assert_script_run('gsettings set org.gnome.desktop.interface enable-animations false', 30);
+    $self->exit_user_console();
 }
 
 sub test_flags {

@@ -1,0 +1,39 @@
+{
+  "properties": [],
+  "tags": [
+    "desktop_generic"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    },
+    {
+      "": "Icon grid",
+      "xpos": 122,
+      "ypos": 151,
+      "width": 784,
+      "height": 538,
+      "type": "exclude"
+    },
+    {
+      "": "Status area differs (clock, user's avatar)",
+      "xpos": 709,
+      "ypos": 728,
+      "width": 315,
+      "height": 40,
+      "type": "exclude"
+    },
+    {
+      "": "Launcher area",
+      "xpos": 64,
+      "ypos": 728,
+      "width": 128,
+      "height": 40,
+      "type": "exclude"
+    }
+  ]
+}

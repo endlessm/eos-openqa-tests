@@ -12,9 +12,9 @@
     },
     {
       "": "Unlock button",
-      "xpos": 781,
-      "ypos": 6,
-      "width": 110,
+      "xpos": 910,
+      "ypos": 60,
+      "width": 104,
       "height": 34,
       "type": "match"
     }
