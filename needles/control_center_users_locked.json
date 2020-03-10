@@ -11,20 +11,12 @@
       "type": "match"
     },
     {
-      "": "Shared Account tab",
-      "xpos": 758,
-      "ypos": 61,
-      "width": 135,
-      "height": 96,
+      "": "Unlock button",
+      "xpos": 781,
+      "ypos": 6,
+      "width": 110,
+      "height": 34,
       "type": "match"
-    },
-    {
-      "": "Exclude parentally controlled apps list",
-      "xpos": 384,
-      "ypos": 584,
-      "width": 503,
-      "height": 83,
-      "type": "exclude"
     }
   ]
 }
