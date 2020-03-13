@@ -16,10 +16,10 @@
     },
     {
       "": "'Start Using Endless' button",
-      "xpos": 433,
-      "ypos": 534,
-      "width": 158,
-      "height": 34,
+      "xpos": 427,
+      "ypos": 470,
+      "width": 170,
+      "height": 46,
       "type": "match"
     }
   ]
