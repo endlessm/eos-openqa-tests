@@ -36,9 +36,11 @@ sub send_key_combo {
 }
 
 # Check we are at a ‘clean’ desktop, where we should be able to start typing
-# to enter the shell’s application selector.
+# to enter the shell’s application selector. This explicitly doesn’t match the
+# icons in the icon grid, as they change often and are irrelevant to our ability
+# to be able to type to select an application to launch.
 sub check_desktop_clean {
-    assert_screen("desktop", 60);
+    assert_screen('desktop_generic', 60);
 }
 
 # Log in to a TTY (which must already be displayed; see root_console() from the
