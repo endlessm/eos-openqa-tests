@@ -20,10 +20,20 @@ sub run {
 
     # Wait for the password entry to appear.
     assert_screen('gdm_login_password', 10);
+    sleep(8);
+
+    # FIXME: Click out of and back into the password box, in case it’s not
+    # focused properly. This should really be investigated in gdm itself.
+    mouse_set(150, 415);
+    mouse_click('left');
+    sleep(1);
+    mouse_set(450, 415);
+    mouse_click('left');
+    sleep(2);
 
     # Enter our password and continue
-    type_string(get_password());
-    send_key('ret');
+    type_very_safely(get_password());
+    assert_screen_change { send_key('ret') };
 }
 
 sub test_flags {

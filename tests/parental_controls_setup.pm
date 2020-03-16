@@ -7,11 +7,6 @@ use utils;
 sub run {
     my $self = shift;
 
-    # Coordinates for the bottom of the scroll bar trough on the users panel,
-    # which we use a few times to scroll down to see all the parental controls.
-    my $scroll_bottom_x = 1016;
-    my $scroll_bottom_y = 640;
-
     check_desktop_clean();
 
     # This test assumes that there are two users on the system: the default user
@@ -28,55 +23,63 @@ sub run {
     # the system in is what a load of other tests expect their initial state to
     # be.
 
-    # Run the control centre users panel. The current (admin) user should not
-    # have any parental controls visible.
+    # Run the parental controls app. It will need to be unlocked.
     type_very_safely('parental');
-    send_key('down');
     send_key('ret');
 
     # Move the mouse somewhere where it won’t cause a tooltip.
     mouse_hide();
 
-    # Switch to the ‘Shared Account’ account. This should not cause a polkit
-    # prompt. The parental controls should be visible but insensitive, because
-    # the capplet is locked.
-    assert_and_click('control_center_users_locked', 'left', 10);
-    assert_and_click('control_center_users_shared_locked', 'left', 10);
+    # Unlock the app. The ‘Shared Account’ should be visible afterwards.
+    assert_screen('malcontent_control_locked', 10);
+    assert_screen_change { send_key('ret') };  # activate the Unlock button
+    type_string(get_password());  # Password
+    send_key('ret');
 
-    # Unlock the panel.
+    assert_screen('malcontent_control_shared', 'left', 10);
+
+    # Switch back to the desktop and run the control centre users panel so we
+    # can add a new user. Unlock it.
+    # FIXME: For some reason, searching for `users` drops the g-c-c search
+    # result at the last second.
+    send_key('super');
+    wait_screen_change { type_very_safely("term\n") };
+    type_very_safely("gnome-control-center user-accounts\n");
+    #type_very_safely('users');
+    #sleep(3);  # it can take a few seconds for g-c-c search provider results to appear
+    #send_key('down');
+    #sleep(1);
+    #send_key('down');
+    #sleep(1);
+    #send_key('ret');
+    assert_and_click('control_center_users_locked', 'left', 10);
     assert_screen('control_center_users_polkit_unlock', 10);
     type_string(get_password());  # Password
     send_key('ret');
 
-    # Scroll down so we can see the parental controls better. They should be
-    # visible and sensitive for the ‘Shared Account’. Switch to the admin
-    # account; the parental controls should still be hidden for them.
-    mouse_set($scroll_bottom_x, $scroll_bottom_y);
-    mouse_click('left');
-
-    assert_and_click('control_center_users_shared_unlocked', 'left', 10);
-    assert_screen('control_center_users_unlocked', 10);
-
     # Add a user. This should not present a polkit prompt.
     send_key_combo('alt', 'a');
     assert_screen('control_center_users_add_user', 10);
-    type_string('Tiny Tim');  # Username
-    send_key('ret');
+    wait_screen_change { type_string('Tiny Tim') };  # Username, then wait for validation
+    sleep(1);
+    wait_screen_change { send_key('ret') };
+    sleep(1);
 
-    # Once the new user’s added, the control center should show their details
-    # immediately. The parental controls should be visible and sensitive.
-    assert_screen('control_center_users_new_user_added', 10);
+    # Switch back to the parental controls app. The new user should be listed.
+    hold_key('alt');
+    send_key('tab');
+    send_key('tab');
+    release_key('alt');
 
-    # Scroll down so we can see the parental controls properly.
-    mouse_set($scroll_bottom_x, $scroll_bottom_y);
-    mouse_click('left');
+    # Select the new user.
+    assert_and_click('malcontent_control_new_user', 'left', 10);
 
     # Toggle the ‘Restrict Apps’ switch on a flatpak app, disable app
-    # installation, and set ‘Show Apps Suitable For’ to 7+. There should be no
-    # polkit prompts, and if we wait 2s (longer than the 1s timeout g-c-c waits
-    # before saving changes), the changes should persist.
-    mouse_set(785, 429);
-    mouse_click('left');
+    # installation, and set ‘Show Apps Suitable For’ to Everyone. There should
+    # be no polkit prompts, and the changes should persist automatically.
+    send_key_combo('alt', 'r');  # Open the ‘Restrict Apps’ dialogue
+    assert_and_click('malcontent_control_restrict_apps', 'left', 10);
+    send_key('esc');
 
     send_key_combo('alt', 'i');  # Disable app installation
 
@@ -90,13 +93,17 @@ sub run {
 
     sleep(2);
 
-    assert_screen('control_center_users_new_user_parentally_restricted', 10);
+    assert_screen('malcontent_control_new_user_parentally_restricted', 10);
 
-    # Change the user’s login language so that their ratings board changes from
-    # 7+ to 7. The default language which we are changing from is unset (so,
-    # the IARC ratings system).
+    # Switch back to the control centre and change the user’s login language so
+    # that their ratings board changes from Everyone to 3+. The default language
+    # which we are changing from is unset (so it defaults to `en_US` and hence
+    # the ESRB ratings system).
     # This requires some sleeps for the UI to work properly (otherwise we type
     # too fast).
+    send_key_combo('alt', 'tab');
+    sleep(1);
+
     send_key_combo('alt', 'l');
     # FIXME: It would be nice to be able to do type-ahead search in this list.
     # See: https://gitlab.gnome.org/GNOME/gnome-control-center/issues/365
@@ -110,14 +117,24 @@ sub run {
     send_key_combo('alt', 's');  # submit the dialog
     sleep(2);
 
-    assert_and_click('control_center_users_new_user_added_en_gb', 'left', 10);
+    send_key_combo('alt', 'tab');
+    sleep(1);
+
+    # FIXME: malcontent-control has a bug which means it doesn’t apply the
+    # user’s new locale instantly. Work around that by switching to another
+    # user and back. See https://gitlab.freedesktop.org/pwithnall/malcontent/-/merge_requests/44
+    mouse_set(274, 100);
+    mouse_click('left');
+    sleep(1);
+    mouse_set(773, 100);
+    mouse_click('left');
+
+    assert_and_click('malcontent_control_new_user_hindi', 'left', 10);
 
     # Change to the ‘Shared Account’ and back; the settings should be correctly
     # loaded and restored for both accounts.
-    assert_screen('control_center_users_shared_unlocked_with_new_user', 10);
-    mouse_set(905, 104);
-    mouse_click('left');
-    assert_screen('control_center_users_new_user_added_en_gb', 10);
+    assert_and_click('malcontent_control_new_user', 'left', 10);
+    assert_screen('malcontent_control_new_user_hindi', 10);
 }
 
 sub test_flags {

@@ -1,6 +1,6 @@
 {
   "tags": [
-    "control_center_users_add_user"
+    "malcontent_control_restrict_apps"
   ],
   "area": [
     {
@@ -9,6 +9,14 @@
       "ypos": 0,
       "width": 1024,
       "height": 728,
+      "type": "match"
+    },
+    {
+      "": "‘LibreOffice’ app toggle",
+      "xpos": 558,
+      "ypos": 281,
+      "width": 63,
+      "height": 42,
       "type": "match"
     }
   ]

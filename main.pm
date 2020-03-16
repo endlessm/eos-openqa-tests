@@ -67,6 +67,7 @@ if (!get_var('START_AFTER_TEST') && !get_var('BOOTFROM') && !get_var('FBE_TEST')
     autotest::loadtest "tests/_disable_screensaver.pm";
     autotest::loadtest "tests/_disable_chrome_installation.pm";
     autotest::loadtest "tests/_disable_background.pm";
+    autotest::loadtest "tests/_disable_animations.pm";
 
     if (get_var('OS_UPDATE_TO')) {
         autotest::loadtest "tests/_os_update.pm";

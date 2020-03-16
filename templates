@@ -775,76 +775,72 @@
       },
       test_suite => { name => "install_flatpak" },
     },
-    # FIXME: Parental controls tests are currently disabled while the controls
-    # for them are moved to an external app. See:
-    #  - https://phabricator.endlessm.com/T28737
-    #  - https://phabricator.endlessm.com/T28736
-    #{
-    #  machine    => { name => "64bit" },
-    #  prio       => 10,
-    #  product    => {
-    #    arch    => "x86_64",
-    #    distri  => "eos",
-    #    flavor  => "base_full",
-    #    version => "*",
-    #  },
-    #  test_suite => { name => "parental_controls_gnome_software_oars" },
-    #},
-    #{
-    #  machine    => { name => "64bit" },
-    #  prio       => 10,
-    #  product    => {
-    #    arch    => "x86_64",
-    #    distri  => "eos",
-    #    flavor  => "base_full_update",
-    #    version => "*",
-    #  },
-    #  test_suite => { name => "parental_controls_gnome_software_oars" },
-    #},
-    #{
-    #  machine    => { name => "64bit" },
-    #  prio       => 10,
-    #  product    => {
-    #    arch    => "x86_64",
-    #    distri  => "eos",
-    #    flavor  => "base_iso",
-    #    version => "*",
-    #  },
-    #  test_suite => { name => "parental_controls_gnome_software_oars" },
-    #},
-    #{
-    #  machine    => { name => "64bit" },
-    #  prio       => 10,
-    #  product    => {
-    #    arch    => "x86_64",
-    #    distri  => "eos",
-    #    flavor  => "base_full",
-    #    version => "*",
-    #  },
-    #  test_suite => { name => "parental_controls_setup" },
-    #},
-    #{
-    #  machine    => { name => "64bit" },
-    #  prio       => 10,
-    #  product    => {
-    #    arch    => "x86_64",
-    #    distri  => "eos",
-    #    flavor  => "base_full_update",
-    #    version => "*",
-    #  },
-    #  test_suite => { name => "parental_controls_setup" },
-    #},
-    #{
-    #  machine    => { name => "64bit" },
-    #  prio       => 10,
-    #  product    => {
-    #    arch    => "x86_64",
-    #    distri  => "eos",
-    #    flavor  => "base_iso",
-    #    version => "*",
-    #  },
-    #  test_suite => { name => "parental_controls_setup" },
-    #},
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_gnome_software_oars" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_gnome_software_oars" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_gnome_software_oars" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_setup" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_full_update",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_setup" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
+        flavor  => "base_iso",
+        version => "*",
+      },
+      test_suite => { name => "parental_controls_setup" },
+    },
     {
       machine    => { name => "64bit" },
       prio       => 10,
