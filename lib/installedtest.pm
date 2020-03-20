@@ -39,12 +39,14 @@ sub user_console {
     # Switch to a default or specified TTY and log in as a non-root user.
     # Use exit_user_console() to exit.
     my $self = shift;
+    my $username = shift;
     my %args = (
         tty => 3, # what TTY to login to
+        set_password => 0,
         @_);
 
     send_key("ctrl-alt-f$args{tty}");
-    console_user_login();
+    console_user_login($username, set_password => $args{set_password});
 }
 
 sub exit_user_console {

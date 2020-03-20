@@ -94,6 +94,11 @@ sub console_root_exit {
 
 # Same as console_root_login(), but for a non-root user.
 sub console_user_login {
+    my $username = shift // 'test';
+    my %args = (
+        set_password => 0,
+        @_);
+
     # There's a timing problem when we switch from a logged-in console
     # to a non-logged in console and immediately call this function;
     # if the switch lags a bit, this function will match one of the
@@ -110,9 +115,12 @@ sub console_user_login {
         assert_screen('live_console', 30);
     } else {
         # If we’re not in a live session, use the standard test username.
-        type_string("test\n");
+        type_string($username . "\n");
         sleep(1);
         type_string(get_password() . "\n");
+        if ($args{set_password}) {
+            type_string(get_password() . "\n");
+        }
         assert_screen('test_console', 30);
     }
 }
