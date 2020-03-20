@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "gnome_software_unable_to_install_cows_revenge_polkit"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 0,
+      "width": 1024,
+      "height": 768,
+      "type": "match"
+    }
+  ]
+}
