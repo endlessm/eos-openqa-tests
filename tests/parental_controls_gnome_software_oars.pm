@@ -68,9 +68,8 @@ sub run {
     # Uninstall it again.
     $self->uninstall_flatpak_app('com.github.dariasteam.cowsrevenge');
 
-    # Switch user to Tiny Tim. Since this is the first time we’ve logged in as
-    # Tiny Tim, his password needs to be set.
-    $self->switch_user('tiny', '', get_password());
+    # Switch user to Tiny Tim.
+    $self->switch_user('tinytim', get_password());
 
     # Run gnome-software.
     type_very_safely("gnome-software\n");
@@ -85,17 +84,14 @@ sub run {
     # Try installing Cow’s Revenge from the command line. This should also fail.
     check_desktop_clean();
     type_very_safely("gnome-terminal\n");
-    assert_screen('desktop_terminal', 5);
+    sleep(5);
     type_string("gnome-software --install system/flatpak/flathub/desktop/com.github.dariasteam.cowsrevenge/stable\n");
 
-    # FIXME: Currently it brings up a polkit authentication dialogue, which is
-    # potentially a hangover from the eos-google-chrome-installer (TODO), but
-    # potentially also an attempt to install Cow's Revenge. Dismiss the auth
-    # dialogue so we can see the gnome-software error message and check it.
-    # I can’t reproduce this on a VM.
-    sleep(5);
-    send_key('esc');  # dismiss the polkit dialogue
-    sleep(2);
+    # A polkit auth dialogue is displayed first (for installing Cow’s Revenge).
+    # Check that, then dismiss it and check that gnome-software displays a
+    # suitable error message (and none of the application details).
+    assert_screen('gnome_software_unable_to_install_cows_revenge_polkit', 10);
+    wait_screen_change { send_key('esc') };  # dismiss the polkit dialogue
     send_key_combo('alt', 'tab');  # switch from the terminal to gnome-software since it doesn’t steal focus properly
 
     assert_screen('gnome_software_unable_to_install_cows_revenge', 10);

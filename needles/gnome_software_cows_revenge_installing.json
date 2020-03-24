@@ -13,6 +13,14 @@
       "type": "match"
     },
     {
+      "": "Screenshots often change or are not downloaded",
+      "xpos": 94,
+      "ypos": 222,
+      "width": 827,
+      "height": 361,
+      "type": "exclude"
+    },
+    {
       "": "Progress bar",
       "xpos": 87,
       "ypos": 133,

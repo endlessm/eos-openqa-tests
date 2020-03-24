@@ -13,6 +13,14 @@
       "type": "match"
     },
     {
+      "": "User entries other than test, which might change order",
+      "xpos": 336,
+      "ypos": 321,
+      "width": 336,
+      "height": 170,
+      "type": "exclude"
+    },
+    {
       "": "'Not listed?' button (so we can manually enter any username we like); this must be the second match area in any needle tagged as gdm_user_list",
       "xpos": 328,
       "ypos": 500,
