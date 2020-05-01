@@ -10,12 +10,12 @@ sub run {
     check_desktop_clean();
 
     # Right-click on an empty bit of desktop and check the menu is correct.
-    mouse_set(615, 485);
+    mouse_set(1000, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
 
     # Add App should launch gnome-software.
-    mouse_set(689, 579);
+    mouse_set(1000, 568);
     mouse_click('left');
     assert_screen('gnome_software_main_screen', 10);
 
@@ -28,34 +28,32 @@ sub run {
     assert_screen('gnome_software_libreoffice_details_installed_remove', 10);
     send_key_combo('alt', 'f4');
 
-    # Check LibreOffice has appeared on the desktop.
-    assert_screen('desktop_with_libreoffice', 10);
+    # Check LibreOffice has appeared on the desktop. Right-click on it.
+    assert_and_click('desktop_with_libreoffice', 'right', 10);
 
-    # Right-click on it and check the menu is correct and can launch Calc.
+    # Check the menu is correct and can launch Calc.
     # (Then quit Calc.)
-    mouse_set(446, 471);
-    mouse_click('right');
+    # TODO: if you make the needle just match the "Calc" menu item, then
+    # assert_and_click() it, the needle matches but the click has no effect.
     assert_screen('desktop_popup_menu_libreoffice', 10);
-
-    mouse_set(563, 440);
+    mouse_set(790, 431);
     mouse_click('left');
     assert_screen('libreoffice_calc_main_window', 60);
     send_key_combo('alt', 'f4');
 
     # Right-click and remove LibreOffice from the desktop.
-    mouse_set(446, 471);
-    mouse_click('right');
+    assert_and_click('desktop_with_libreoffice', 'right', 10);
     assert_screen('desktop_popup_menu_libreoffice', 10);
 
-    mouse_set(582, 627);
+    mouse_set(870, 600);
     mouse_click('left');
     assert_screen('desktop_no_libreoffice', 10);
 
     # Right-click on an empty bit of desktop again and choose to add a website.
-    mouse_set(615, 485);
+    mouse_set(1000, 485);
     mouse_click('right');
     assert_screen('desktop_popup_menu', 10);
-    mouse_set(689, 613);
+    mouse_set(1000, 600);
     mouse_click('left');
     assert_and_click('desktop_add_website', 'left', 10);
 
