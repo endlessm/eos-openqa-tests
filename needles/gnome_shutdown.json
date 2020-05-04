@@ -5,18 +5,18 @@
   "area": [
     {
       "": "Just the shutdown dialogue",
-      "xpos": 252,
-      "ypos": 293,
-      "width": 520,
-      "height": 181,
+      "xpos": 291,
+      "ypos": 295,
+      "width": 442,
+      "height": 177,
       "type": "match"
     },
     {
       "": "'Restart' button",
-      "xpos": 426,
-      "ypos": 434,
-      "width": 171,
-      "height": 41,
+      "xpos": 438,
+      "ypos": 427,
+      "width": 148,
+      "height": 45,
       "type": "match"
     }
   ]
