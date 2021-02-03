@@ -9,11 +9,9 @@ sub run {
 
     $self->root_console();
 
-    # If we‘re wanting to update to master, we need to switch from production
-    # to dev.
+    # Switch to the appropriate OS update repo stage.
     my $update_to_stage = get_var('OS_UPDATE_TO_STAGE');
-    my $update_to_stage_password = get_var('OS_UPDATE_TO_STAGE_PASSWORD');
-    script_run("eos-stage-ostree $update_to_stage $update_to_stage_password", 180);
+    script_run("eos-stage-ostree $update_to_stage", 180);
 
     # Do the upgrade.
     # FIXME: Currently we don’t fail if this fails, because the state management
