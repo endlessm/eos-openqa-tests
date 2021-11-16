@@ -29,6 +29,7 @@ from urllib.request import urlopen
 
 # Image server which the manifest files live on.
 IMAGE_SERVER_HOST = 'images.endlessm-sf.com'
+IMAGE_DOWNLOAD_HOST = 'images-dl.endlessm.com'
 # OpenQA server hostname.
 OPENQA_SERVER_HOST = 'openqa.endlessm.com'
 # OpenQA server REST API.
@@ -154,12 +155,12 @@ def main():
 
     if 'full' in manifest['images']:
         eibopenqaserver.send_request_for_manifest(manifest, 'full',
-                                                  IMAGE_SERVER_HOST,
+                                                  IMAGE_DOWNLOAD_HOST,
                                                   OPENQA_SERVER_ENDPOINT_URI,
                                                   api_key, api_secret)
     if 'iso' in manifest['images']:
         eibopenqaserver.send_request_for_manifest(manifest, 'iso',
-                                                  IMAGE_SERVER_HOST,
+                                                  IMAGE_DOWNLOAD_HOST,
                                                   OPENQA_SERVER_ENDPOINT_URI,
                                                   api_key, api_secret)
 

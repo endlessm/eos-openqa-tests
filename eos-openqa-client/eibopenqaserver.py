@@ -46,8 +46,8 @@ def send_request_for_manifest(manifest, image, upload_api_host,
 
     download_url = \
         'nightly/{product}-{arch}-{platform}/{branch}/{personality}/{build_version}'.format(**manifest)
-    image_url = 'http://{}/{}/{}'.format(upload_api_host, download_url,
-                                         image_details['file'])
+    image_url = 'https://{}/{}/{}'.format(upload_api_host, download_url,
+                                          image_details['file'])
 
     # Work out which apps are installed on the image.
     image_flatpak_remotes = manifest['flatpak']['remotes'].keys()
