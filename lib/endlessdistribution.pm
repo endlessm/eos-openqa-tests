@@ -16,7 +16,7 @@ use base 'distribution';
 
 # importing whole testapi creates circular dependency, so import only
 # necessary functions from testapi
-use testapi qw(check_var send_key type_string wait_idle assert_screen);
+use testapi qw(check_var);
 
 sub init() {
     my ($self) = @_;
