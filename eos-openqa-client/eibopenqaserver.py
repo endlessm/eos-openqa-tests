@@ -136,6 +136,8 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     else:
         raise ValueError('Unknown image ‘%s’' % image)
 
+    logger.debug('openQA request data:\n%s', data)
+
     request = requests.Request('POST', openqa_endpoint_url)
     request.data = data
     request = request.prepare()

@@ -132,6 +132,8 @@ def main():
 
     args = parser.parse_args()
 
+    logging.basicConfig(level='DEBUG')
+
     # API key/secret provided on the command line override the config file.
     if args.api_key:
         api_key = args.api_key
