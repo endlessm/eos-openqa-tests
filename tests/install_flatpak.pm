@@ -15,14 +15,14 @@ sub run {
 
     # Search for VLC and select the result
     type_string("vlc");
-    assert_and_click('gnome_software_search_vlc', 'left', 10);
+    assert_and_click('gnome_software_search_vlc', timeout => 10);
 
     # Install it
-    assert_and_click('gnome_software_vlc_details_uninstalled', 'left', 10);
+    assert_and_click('gnome_software_vlc_details_uninstalled', timeout => 10);
     assert_screen('gnome_software_vlc_installing', 10);
 
     # Check installation has succeeded
-    assert_and_click('gnome_software_vlc_details_installed', 'left', 600);
+    assert_and_click('gnome_software_vlc_details_installed', timeout => 600);
     assert_screen('desktop_vlc', 60);
 }
 

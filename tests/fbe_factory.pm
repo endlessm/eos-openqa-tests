@@ -14,7 +14,7 @@ sub run {
     send_key_combo('ctrl', 'f');
 
     # wait for and dismiss factory dialog
-    assert_and_click('fbe_factory_dialog', 'left', 10);
+    assert_and_click('fbe_factory_dialog', timeout => 10);
 
     # check that the FBE welcome screen reappears (shift the focus away from
     # the language selector so the needle matches)

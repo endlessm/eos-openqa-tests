@@ -16,13 +16,13 @@ sub run {
     # The hack first launch experience, Hack unlock
 
     # Click continue
-    assert_and_click('clubhouse_first_launch', 'left', 10);
+    assert_and_click('clubhouse_first_launch', timeout => 10);
     # Click No
-    assert_and_click('clubhouse_first_launch_1', 'left', 10);
+    assert_and_click('clubhouse_first_launch_1', timeout => 10);
     # Click continue
-    assert_and_click('clubhouse_first_launch_2', 'left', 10);
+    assert_and_click('clubhouse_first_launch_2', timeout => 10);
     # Click will do
-    assert_and_click('clubhouse_first_launch_3', 'left', 10);
+    assert_and_click('clubhouse_first_launch_3', timeout => 10);
     # close the clubhouse
     send_key_combo('alt', 'f4');
 

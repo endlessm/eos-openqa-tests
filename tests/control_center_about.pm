@@ -15,7 +15,7 @@ sub run {
 
     # Type-ahead find for the ‘About’ panel.
     type_string('version');
-    assert_and_click('control_center_search_version', 'left', 10);
+    assert_and_click('control_center_search_version', timeout => 10);
 
     assert_screen('control_center_about_capplet', 10);
 

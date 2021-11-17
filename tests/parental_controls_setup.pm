@@ -52,7 +52,7 @@ sub run {
     #send_key('down');
     #sleep(1);
     #send_key('ret');
-    assert_and_click('control_center_users_locked', 'left', 10);
+    assert_and_click('control_center_users_locked', timeout => 10);
     assert_screen('control_center_users_polkit_unlock', 10);
     type_string(get_password());  # Password
     send_key('ret');
@@ -72,13 +72,13 @@ sub run {
     release_key('alt');
 
     # Select the new user.
-    assert_and_click('malcontent_control_new_user', 'left', 10);
+    assert_and_click('malcontent_control_new_user', timeout => 10);
 
     # Toggle the ‘Restrict Apps’ switch on a flatpak app, disable app
     # installation, and set ‘Show Apps Suitable For’ to Everyone. There should
     # be no polkit prompts, and the changes should persist automatically.
     send_key_combo('alt', 'r');  # Open the ‘Restrict Apps’ dialogue
-    assert_and_click('malcontent_control_restrict_apps', 'left', 10);
+    assert_and_click('malcontent_control_restrict_apps', timeout => 10);
     send_key('esc');
 
     send_key_combo('alt', 'i');  # Disable app installation
@@ -107,7 +107,7 @@ sub run {
     send_key_combo('alt', 'l');
     # FIXME: It would be nice to be able to do type-ahead search in this list.
     # See: https://gitlab.gnome.org/GNOME/gnome-control-center/issues/365
-    assert_and_click('control_center_users_language', 'left', 10);
+    assert_and_click('control_center_users_language', timeout => 10);
     type_string('Hindi');
     sleep(1);
     send_key('down');  # highlight the only result
@@ -129,11 +129,11 @@ sub run {
     mouse_set(773, 100);
     mouse_click('left');
 
-    assert_and_click('malcontent_control_new_user_hindi', 'left', 10);
+    assert_and_click('malcontent_control_new_user_hindi', timeout => 10);
 
     # Change to the ‘Shared Account’ and back; the settings should be correctly
     # loaded and restored for both accounts.
-    assert_and_click('malcontent_control_new_user', 'left', 10);
+    assert_and_click('malcontent_control_new_user', timeout => 10);
     assert_screen('malcontent_control_new_user_hindi', 10);
 
     # Log in a Tiny Tim on the command line and set up a few things. Since this

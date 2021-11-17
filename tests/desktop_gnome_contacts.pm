@@ -28,7 +28,7 @@ sub run {
 
     # The main window should be empty (no contacts) now.
     # Add a new contact.
-    assert_and_click('gnome_contacts_main_window_empty', 'left', 10);
+    assert_and_click('gnome_contacts_main_window_empty', timeout => 10);
 
     type_string('Boaty McBoatface');  # name
 
@@ -74,7 +74,7 @@ sub run {
     # Check that deleting a contact works.
     mouse_set(275, 150);  # checkbox for the contact
     mouse_click('left');
-    assert_and_click('gnome_contacts_main_window_one_contact_selected', 'left', 10);
+    assert_and_click('gnome_contacts_main_window_one_contact_selected', timeout => 10);
 
     assert_screen('gnome_contacts_main_window_empty', 10);
 }

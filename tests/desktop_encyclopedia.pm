@@ -29,14 +29,14 @@ sub run {
 
         # Search for encyclopedia and select the result
         type_string('encyclopedia');
-        assert_and_click('gnome_software_search_encyclopedia', 'left', 10);
+        assert_and_click('gnome_software_search_encyclopedia', timeout => 10);
 
         # Install it
-        assert_and_click('gnome_software_encyclopedia_details_uninstalled', 'left', 10);
+        assert_and_click('gnome_software_encyclopedia_details_uninstalled', timeout => 10);
         assert_screen('gnome_software_encyclopedia_installing', 10);
 
         # Wait for installation to succeed
-        assert_and_click('gnome_software_encyclopedia_details_installed', 'left', 600);
+        assert_and_click('gnome_software_encyclopedia_details_installed', timeout => 600);
         send_key_combo('alt', 'f4');
     } else {
         # Search for the encyclopedia from the desktop and launch it.
@@ -47,7 +47,7 @@ sub run {
     assert_screen('encyclopedia_startup', 10);
 
     type_very_safely("blobfish\n");
-    assert_and_click('encyclopedia_search_blobfish', 'left', 10);
+    assert_and_click('encyclopedia_search_blobfish', timeout => 10);
     assert_screen('encyclopedia_article_blobfish', 10);
 }
 

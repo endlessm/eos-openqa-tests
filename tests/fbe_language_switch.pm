@@ -8,18 +8,18 @@ sub run {
     my $self = shift;
 
     # wait for the FBE to appear; choose "Indonesian"
-    assert_and_click('fbe_welcome_choose_indonesian', 'left', 600);
+    assert_and_click('fbe_welcome_choose_indonesian', timeout => 600);
 
     # wait for the "Next" button to change to Indonesian and click it
-    assert_and_click('fbe_welcome_indonesian', 'left', 10);
+    assert_and_click('fbe_welcome_indonesian', timeout => 10);
 
     # work through FBE
     if (get_var('LIVE')) {
-        assert_and_click('fbe_try-or-reformat_indonesian', 'left', 10);
+        assert_and_click('fbe_try-or-reformat_indonesian', timeout => 10);
     }
 
-    assert_and_click('fbe_keyboard_indonesian', 'left', 10);
-    assert_and_click('fbe_license_indonesian', 'left', 10);
+    assert_and_click('fbe_keyboard_indonesian', timeout => 10);
+    assert_and_click('fbe_license_indonesian', timeout => 10);
 
     if (!get_var('LIVE')) {
         # FIXME: as and when the timezone page appears for this test, take new
@@ -38,16 +38,16 @@ sub run {
         # The timezone screen is only shown if the timezone could not be
         # detected automatically.
         if (!check_screen('fbe_accounts', 0.5)) {
-            assert_and_click('fbe_timezone', 'left', 10);
+            assert_and_click('fbe_timezone', timeout => 10);
         }
 
-        assert_and_click('fbe_accounts_indonesian', 'left', 10);
+        assert_and_click('fbe_accounts_indonesian', timeout => 10);
 
         assert_screen('fbe_about_you_indonesian', 10);
         type_string('Test');  # Username
         send_key('tab');
         type_string(' ');  # Tick the password box
-        assert_and_click('fbe_about_you2_indonesian', 'left', 10);
+        assert_and_click('fbe_about_you2_indonesian', timeout => 10);
 
         my $password = get_password();
 
@@ -64,12 +64,12 @@ sub run {
     }
 
     if (get_var('LIVE')) {
-        assert_and_click('fbe_complete_live', 'left', 10);
+        assert_and_click('fbe_complete_live', timeout => 10);
 
         # desktop should be visible
         assert_screen("desktop_live_indonesian", 60);
     } else {
-        assert_and_click('fbe_complete_install_indonesian', 'left', 10);
+        assert_and_click('fbe_complete_install_indonesian', timeout => 10);
 
         # desktop should be visible
         assert_screen("desktop_freshly_installed_indonesian", 60);

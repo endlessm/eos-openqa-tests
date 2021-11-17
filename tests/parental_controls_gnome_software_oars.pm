@@ -28,10 +28,10 @@ sub run {
     # administrator. Cow’s Revenge has some ‘intense’ OARS ratings, but a fairly
     # small download size, so shouldn’t make the test take too long.
     type_string('Cow\'s Revenge');
-    assert_and_click('gnome_software_search_cows_revenge', 'left', 10);
+    assert_and_click('gnome_software_search_cows_revenge', timeout => 10);
 
     # Install it. We don’t expect an auth dialogue.
-    assert_and_click('gnome_software_cows_revenge_details_uninstalled', 'left', 10);
+    assert_and_click('gnome_software_cows_revenge_details_uninstalled', timeout => 10);
     assert_screen('gnome_software_cows_revenge_installing', 10);
 
     # Wait for installation to succeed.
@@ -51,12 +51,12 @@ sub run {
     # Search for Cow’s Revenge. It should still appear, since we’re logged in as
     # the shared user, who has no OARS restrictions set.
     type_string('Cow\'s Revenge');
-    assert_and_click('gnome_software_search_cows_revenge', 'left', 10);
+    assert_and_click('gnome_software_search_cows_revenge', timeout => 10);
 
     # Install it. We expect an auth dialogue this time. Don’t bother checking
     # for the `gnome_software_cows_revenge_installing` screen, as it often
     # completes too quickly after the auth dialogue.
-    assert_and_click('gnome_software_cows_revenge_details_uninstalled', 'left', 10);
+    assert_and_click('gnome_software_cows_revenge_details_uninstalled', timeout => 10);
     assert_screen('gnome_software_cows_revenge_installing_auth', 10);
     type_string(get_password());  # Password
     send_key('ret');

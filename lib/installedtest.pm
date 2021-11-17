@@ -138,7 +138,7 @@ sub switch_user {
     # Log out.
     check_desktop_clean();
     type_very_safely("log out\n");
-    assert_and_click('desktop_log_out', 'left', 10);
+    assert_and_click('desktop_log_out', timeout => 10);
 
     # Log in as the new user. This partially reimplements assert_and_click()
     # to manually handle the match areas. We require that any needle tagged as

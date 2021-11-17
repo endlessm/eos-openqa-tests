@@ -8,15 +8,15 @@ sub run {
     my $self = shift;
 
     # wait for the FBE to appear
-    assert_and_click('fbe_welcome', 'left', 600);
+    assert_and_click('fbe_welcome', timeout => 600);
 
     # work through FBE
     if (get_var('LIVE')) {
-        assert_and_click('fbe_try-or-reformat', 'left', 10);
+        assert_and_click('fbe_try-or-reformat', timeout => 10);
     }
 
-    assert_and_click('fbe_keyboard', 'left', 10);
-    assert_and_click('fbe_license', 'left', 10);
+    assert_and_click('fbe_keyboard', timeout => 10);
+    assert_and_click('fbe_license', timeout => 10);
 
     if (!get_var('LIVE')) {
         # If the timezone couldn’t be found automatically,
@@ -35,16 +35,16 @@ sub run {
         # The timezone screen is only shown if the timezone could not be
         # detected automatically.
         if (!check_screen('fbe_accounts', 0.5)) {
-            assert_and_click('fbe_timezone', 'left', 10);
+            assert_and_click('fbe_timezone', timeout => 10);
         }
 
-        assert_and_click('fbe_accounts', 'left', 10);
+        assert_and_click('fbe_accounts', timeout => 10);
 
         assert_screen('fbe_about_you', 10);
         type_string('Test');  # Username
         send_key('tab');
         type_string(' ');  # Tick the password box
-        assert_and_click('fbe_about_you2', 'left', 10);
+        assert_and_click('fbe_about_you2', timeout => 10);
 
         my $password = get_password();
 
@@ -61,9 +61,9 @@ sub run {
     }
 
     if (get_var('LIVE')) {
-        assert_and_click('fbe_complete_live', 'left', 10);
+        assert_and_click('fbe_complete_live', timeout => 10);
     } else {
-        assert_and_click('fbe_complete_install', 'left', 10);
+        assert_and_click('fbe_complete_install', timeout => 10);
     }
 
     # Desktop should be visible. Don’t use check_desktop_clean() here, because

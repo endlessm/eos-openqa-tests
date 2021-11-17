@@ -23,13 +23,13 @@ sub run {
     # installed by default). Check the button in gnome-software changes to
     # ‘Remove from Desktop’. Quit.
     type_string('libreoffice');
-    assert_and_click('gnome_software_search_libreoffice', 'left', 10);
-    assert_and_click('gnome_software_libreoffice_details_installed', 'left', 60);
+    assert_and_click('gnome_software_search_libreoffice', timeout => 10);
+    assert_and_click('gnome_software_libreoffice_details_installed', timeout => 60);
     assert_screen('gnome_software_libreoffice_details_installed_remove', 10);
     send_key_combo('alt', 'f4');
 
     # Check LibreOffice has appeared on the desktop. Right-click on it.
-    assert_and_click('desktop_with_libreoffice', 'right', 10);
+    assert_and_click('desktop_with_libreoffice', button => 'right', timeout => 10);
 
     # Check the menu is correct and can launch Calc.
     # (Then quit Calc.)
@@ -42,7 +42,7 @@ sub run {
     send_key_combo('alt', 'f4');
 
     # Right-click and remove LibreOffice from the desktop.
-    assert_and_click('desktop_with_libreoffice', 'right', 10);
+    assert_and_click('desktop_with_libreoffice', button => 'right', timeout => 10);
     assert_screen('desktop_popup_menu_libreoffice', 10);
 
     mouse_set(870, 600);
@@ -55,14 +55,14 @@ sub run {
     assert_screen('desktop_popup_menu', 10);
     mouse_set(1000, 600);
     mouse_click('left');
-    assert_and_click('desktop_add_website', 'left', 10);
+    assert_and_click('desktop_add_website', timeout => 10);
 
     # Search for endlessm.com. Leave a longer timeout for matching the needle
     # because it needs to do a web request to get the description and favicon.
     # Add it to the desktop.
     type_string('endlessm.com');
     send_key('ret');
-    assert_and_click('desktop_add_website_endlessm', 'left', 60);
+    assert_and_click('desktop_add_website_endlessm', timeout => 60);
     assert_screen('desktop_with_endlessm', 10);
 
     # Right-click and remove endlessm from the desktop.

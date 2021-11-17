@@ -16,7 +16,7 @@ sub run {
     # gdm is taking a while to react to mouse clicks. There might be actual
     # issue in gdm itself and should be investigated before resetting the timeout.
     sleep(8);
-    assert_and_click('gdm_user_list', 'left', 10);
+    assert_and_click('gdm_user_list', timeout => 10);
 
     # Wait for the password entry to appear.
     assert_screen('gdm_login_password', 10);
