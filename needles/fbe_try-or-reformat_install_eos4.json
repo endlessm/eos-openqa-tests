@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "width": 971,
+      "height": 715,
+      "ypos": 3,
+      "xpos": 26,
+      "type": "match"
+    },
+    {
+      "height": 32,
+      "width": 398,
+      "type": "match",
+      "xpos": 557,
+      "ypos": 463
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_try-or-reformat_install"
+  ]
+}
