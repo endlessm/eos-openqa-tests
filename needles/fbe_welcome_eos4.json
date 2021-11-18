@@ -1,0 +1,31 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 971,
+      "height": 715,
+      "xpos": 27,
+      "ypos": 13
+    },
+    {
+      "xpos": 952,
+      "height": 31,
+      "ypos": 6,
+      "width": 64,
+      "type": "match"
+    },
+    {
+      "height": 57,
+      "ypos": 64,
+      "xpos": 27,
+      "type": "exclude",
+      "": "Rotating 'welcome' text banner",
+      "width": 971
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_welcome"
+  ]
+}
