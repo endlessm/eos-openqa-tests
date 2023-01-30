@@ -50,6 +50,7 @@ sub run {
         send_key('tab');
         if (get_var('VERSION') !~ m/^eos3./) {
             send_key('tab');  # Username in EOS4+
+            send_key('tab');
         }
         type_string(' ');  # Tick the password box
         assert_and_click('fbe_about_you2', timeout => 10);
