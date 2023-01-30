@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "height": 718,
+      "type": "match",
+      "xpos": 27,
+      "ypos": 2,
+      "width": 971
+    },
+    {
+      "width": 79,
+      "height": 31,
+      "xpos": 938,
+      "type": "match",
+      "ypos": 8
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_license"
+  ]
+}
