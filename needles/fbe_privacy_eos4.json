@@ -1,0 +1,27 @@
+{
+  "area": [
+    {
+      "xpos": 207,
+      "ypos": 6,
+      "width": 593,
+      "height": 290,
+      "type": "match",
+      "click_point": {
+        "xpos": 296.5,
+        "ypos": 145
+      }
+    },
+    {
+      "xpos": 955,
+      "ypos": 9,
+      "width": 58,
+      "height": 27,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_privacy"
+  ]
+}
