@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 217,
+      "ypos": 7,
+      "width": 592,
+      "height": 415,
+      "type": "match"
+    },
+    {
+      "xpos": 959,
+      "ypos": 10,
+      "width": 55,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe_online_accounts"
+  ]
+}
