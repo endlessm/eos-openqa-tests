@@ -1,0 +1,39 @@
+{
+  "area": [
+    {
+      "ypos": 261,
+      "height": 202,
+      "xpos": 161,
+      "width": 703,
+      "type": "match"
+    },
+    {
+      "width": 24,
+      "type": "match",
+      "ypos": 281,
+      "xpos": 826,
+      "height": 24
+    },
+    {
+      "width": 167,
+      "type": "exclude",
+      "": "Release version string",
+      "ypos": 326,
+      "xpos": 528,
+      "height": 58
+    },
+    {
+      "width": 583,
+      "type": "exclude",
+      "": "eos-image-version string",
+      "ypos": 395,
+      "height": 24,
+      "xpos": 270
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_factory_dialog"
+  ]
+}
