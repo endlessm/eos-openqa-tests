@@ -1,0 +1,31 @@
+{
+  "area": [
+    {
+      "ypos": 64,
+      "height": 616,
+      "xpos": 27,
+      "width": 971,
+      "type": "match"
+    },
+    {
+      "height": 31,
+      "xpos": 952,
+      "ypos": 6,
+      "type": "match",
+      "width": 64
+    },
+    {
+      "width": 723,
+      "type": "exclude",
+      "": "Layouts other than English (US) may change",
+      "ypos": 196,
+      "xpos": 152,
+      "height": 403
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_keyboard"
+  ]
+}
