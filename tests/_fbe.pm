@@ -61,8 +61,10 @@ sub run {
         type_string($password);  # Password
         send_key('tab');
         type_string($password);  # Confirmation
-        send_key('tab');
-        type_string($password);  # Hint
+        if (get_var('VERSION') =~ m/^eos3./) {
+            send_key('tab');
+            type_string($password);  # Hint
+        }
 
         send_key('tab');  # ‘Previous’ button
         send_key('tab');  # ‘Next’ button
