@@ -46,8 +46,11 @@ sub run {
         assert_and_click('fbe_accounts', timeout => 10);
 
         assert_screen('fbe_about_you', 10);
-        type_string('Test');  # Username
+        type_string('Test');  # Full Name
         send_key('tab');
+        if (get_var('VERSION') !~ m/^eos3./) {
+            send_key('tab');  # Username in EOS4+
+        }
         type_string(' ');  # Tick the password box
         assert_and_click('fbe_about_you2', timeout => 10);
 
