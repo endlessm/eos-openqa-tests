@@ -1,26 +1,19 @@
 {
   "area": [
     {
+      "xpos": 259,
+      "height": 704,
+      "ypos": 4,
       "type": "match",
-      "width": 971,
-      "height": 715,
-      "xpos": 27,
-      "ypos": 13
-    },
-    {
-      "xpos": 952,
-      "height": 31,
-      "ypos": 6,
-      "width": 64,
-      "type": "match"
+      "width": 500
     },
     {
       "height": 57,
+      "xpos": 259,
       "ypos": 64,
-      "xpos": 27,
-      "type": "exclude",
       "": "Rotating 'welcome' text banner",
-      "width": 971
+      "type": "exclude",
+      "width": 500
     }
   ],
   "properties": [],
