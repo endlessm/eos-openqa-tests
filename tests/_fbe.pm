@@ -17,12 +17,13 @@ sub run {
 
     assert_and_click('fbe_keyboard', timeout => 10);
     assert_and_click('fbe_license', timeout => 10);
-    if (get_var('VERSION') !~ m/^eos3./) {
-        assert_and_click('fbe_privacy', timeout => 10);
-        assert_and_click('fbe_online_accounts', timeout => 10);
-    }
 
     if (!get_var('LIVE')) {
+        # FIXME: Does this come after the timezone?
+        if (get_var('VERSION') !~ m/^eos3./) {
+            assert_and_click('fbe_privacy', timeout => 10);
+        }
+
         # If the timezone couldn’t be found automatically,
         # select an arbitrary one.
         #
