@@ -1,0 +1,24 @@
+{
+  "area": [
+    {
+      "height": 715,
+      "ypos": 5,
+      "type": "match",
+      "xpos": 27,
+      "width": 971
+    },
+    {
+      "height": 33,
+      "ypos": 467,
+      "type": "match",
+      "xpos": 432,
+      "width": 160
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_complete",
+    "fbe_complete_install"
+  ]
+}
