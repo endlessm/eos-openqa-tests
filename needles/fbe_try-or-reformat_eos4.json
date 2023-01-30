@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 970,
+      "height": 715,
+      "xpos": 27,
+      "ypos": 3
+    },
+    {
+      "height": 32,
+      "xpos": 71,
+      "ypos": 463,
+      "type": "match",
+      "width": 394
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "fbe",
+    "fbe_try-or-reformat"
+  ]
+}
