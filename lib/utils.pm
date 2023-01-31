@@ -84,7 +84,7 @@ sub console_root_login {
         # Now slip into a sudo session. This will require the user’s password
         # again.
         type_string("sudo -i\n");
-        wait_serial('\[sudo\] password for test: ', timeout => 10)
+        wait_serial('\[sudo\] password for test: ', timeout => 10);
         type_string($password . "\n");
         wait_serial('root@endless:~# ', timeout => 10);
         assert_screen('root_console', 30);
@@ -121,9 +121,13 @@ sub console_user_login {
     } else {
         # If we’re not in a live session, use the standard test username.
         type_string($username . "\n");
-        wait_serial('Password: ', timeout => 10);
-        type_string(get_password() . "\n");
         if ($args{set_password}) {
+            wait_serial('New password: ');
+            type_string(get_password() . "\n");
+            wait_serial('Retype new password: ');
+            type_string(get_password() . "\n");
+        } else {
+            wait_serial('Password: ', timeout => 10);
             type_string(get_password() . "\n");
         }
         wait_serial($username . '@endless:~\$ ', timeout => 10);
