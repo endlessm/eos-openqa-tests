@@ -67,7 +67,7 @@ sub console_root_login {
         # a password.
         type_string("sudo -i\n");
         wait_serial('root@endless:~# ', timeout => 10);
-        type_string('PS1="\$ "\n');
+        type_string("PS1='# '\n");
         wait_serial('^# ');
     } else {
         my $password = get_password();
@@ -84,7 +84,7 @@ sub console_root_login {
         wait_serial('\[sudo\] password for test: ', timeout => 10);
         type_string($password . "\n");
         wait_serial('root@endless:~# ', timeout => 10);
-        type_string('PS1="\$ "\n');
+        type_string("PS1='# '\n");
         wait_serial('^# ');
     }
 }
@@ -113,7 +113,7 @@ sub console_user_login {
         # Log in as the live user. They are passwordless.
         type_string("live\n");
         wait_serial('live@endless:~\$ ', timeout => 10);
-        type_string('PS1="\$ "\n');
+        type_string("PS1='$ '\n");
         wait_serial('^\$ ');
     } else {
         # If we’re not in a live session, use the standard test username.
@@ -128,7 +128,7 @@ sub console_user_login {
             type_string(get_password() . "\n");
         }
         wait_serial($username . '@endless:~\$ ', timeout => 10);
-        type_string('PS1="\$ "\n');
+        type_string("PS1='$ '\n");
         wait_serial('^\$ ');
     }
 }
