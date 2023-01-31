@@ -31,10 +31,22 @@ sub init_consoles {
 
     if (check_var('BACKEND', 'qemu')) {
         $self->add_console('root-virtio-terminal', 'virtio-terminal', {});
+        $self->add_console('user-virtio-terminal', 'virtio-terminal', {});
 
         $self->add_console('x11', 'tty-console', {tty => 1});
         $self->add_console('log-console', 'tty-console', {tty => 2});
         $self->add_console('user-console', 'tty-console', {tty => 3});
+    }
+}
+
+sub activate_console {
+    my ($self, $console, %args) = @_;
+
+    if ($console eq 'root-virtio-terminal') {
+        $self->{serial_term_prompt} = '# ';
+    }
+    elsif ($console eq 'user-virtio-terminal') {
+        $self->{serial_term_prompt} = '$ ';
     }
 }
 

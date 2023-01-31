@@ -17,7 +17,7 @@ sub root_console {
         tty => 3, # what TTY to login to
         @_);
 
-    send_key("ctrl-alt-f$args{tty}");
+    select_console('root-virtio-terminal');
     console_root_login();
 }
 
@@ -27,7 +27,7 @@ sub exit_root_console {
     # causes the display to refresh).
     console_root_exit();
     sleep(4);
-    send_key("ctrl-alt-f1");
+    select_console('x11');
 
     # There's a timing problem when we switch from a logged-in console
     # to a non-logged in console and immediately call another function; just
@@ -45,7 +45,7 @@ sub user_console {
         set_password => 0,
         @_);
 
-    send_key("ctrl-alt-f$args{tty}");
+    select_console('user-virtio-terminal');
     console_user_login($username, set_password => $args{set_password});
 }
 
@@ -61,7 +61,7 @@ sub exit_user_console {
     # the console that event will never captured and the console will be still
     # displayed.
     sleep 4;
-    send_key("ctrl-alt-f1");
+    select_console('x11');
 
     # There's a timing problem when we switch from a logged-in console
     # to a non-logged in console and immediately call another function; just

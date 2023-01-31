@@ -71,6 +71,8 @@ sub console_root_login {
         type_string("sudo -i\n");
         wait_serial('root@endless:~# ', timeout => 10);
         assert_screen('root_console', 30);
+        type_string('PS1="\$ "\n');
+        wait_serial('^# ');
     } else {
         my $password = get_password();
 
@@ -88,6 +90,8 @@ sub console_root_login {
         type_string($password . "\n");
         wait_serial('root@endless:~# ', timeout => 10);
         assert_screen('root_console', 30);
+        type_string('PS1="\$ "\n');
+        wait_serial('^# ');
     }
 }
 
@@ -118,6 +122,8 @@ sub console_user_login {
         type_string("live\n");
         wait_serial('live@endless:~\$ ', timeout => 10);
         assert_screen('live_console', 30);
+        type_string('PS1="\$ "\n');
+        wait_serial('^\$ ');
     } else {
         # If we’re not in a live session, use the standard test username.
         type_string($username . "\n");
@@ -132,6 +138,8 @@ sub console_user_login {
         }
         wait_serial($username . '@endless:~\$ ', timeout => 10);
         assert_screen('test_console', 30);
+        type_string('PS1="\$ "\n');
+        wait_serial('^\$ ');
     }
 }
 
