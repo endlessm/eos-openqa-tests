@@ -67,7 +67,7 @@ sub console_root_login {
 
         # Now slip into a sudo session. On a live image this should not require
         # a password.
-        type_string("sudo -s\n");
+        type_string("sudo -i\n");
         assert_screen('root_console', 30);
     } else {
         my $password = get_password();
@@ -80,7 +80,7 @@ sub console_root_login {
 
         # Now slip into a sudo session. This will require the user’s password
         # again.
-        type_string("sudo -s\n");
+        type_string("sudo -i\n");
         sleep(1);
         type_string($password . "\n");
         assert_screen('root_console', 30);
