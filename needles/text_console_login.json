@@ -1,14 +1,29 @@
 {
-  "tags": [
-    "text_console_login"
-  ],
   "area": [
     {
-      "xpos": 0,
-      "ypos": 0,
       "width": 1024,
       "height": 768,
-      "type": "match"
+      "ypos": 0,
+      "type": "match",
+      "xpos": 0
+    },
+    {
+      "xpos": 61,
+      "ypos": 15,
+      "width": 45,
+      "height": 17,
+      "type": "exclude"
+    },
+    {
+      "xpos": 174,
+      "ypos": 17,
+      "width": 41,
+      "height": 16,
+      "type": "exclude"
     }
+  ],
+  "properties": [],
+  "tags": [
+    "text_console_login"
   ]
 }
