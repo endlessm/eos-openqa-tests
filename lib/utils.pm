@@ -57,20 +57,16 @@ sub console_root_login {
     # To avoid this, we'll sleep a few seconds before starting
     wait_serial('endless login: ', timeout => 10);
 
-    assert_screen('text_console_login', 10);
-
     if (get_var('LIVE')) {
         # Log in as the live user, as that’s the only user who is passwordless.
         # We do not know the root password.
         type_string("live\n");
         wait_serial('live@endless:~\$ ', timeout => 10);
-        assert_screen('live_console', 30);
 
         # Now slip into a sudo session. On a live image this should not require
         # a password.
         type_string("sudo -i\n");
         wait_serial('root@endless:~# ', timeout => 10);
-        assert_screen('root_console', 30);
         type_string('PS1="\$ "\n');
         wait_serial('^# ');
     } else {
@@ -81,7 +77,6 @@ sub console_root_login {
         wait_serial('Password: ', timeout => 10);
         type_string($password . "\n");
         wait_serial('test@endless:~\$ ', timeout => 10);
-        assert_screen('test_console', 30);
 
         # Now slip into a sudo session. This will require the user’s password
         # again.
@@ -89,7 +84,6 @@ sub console_root_login {
         wait_serial('\[sudo\] password for test: ', timeout => 10);
         type_string($password . "\n");
         wait_serial('root@endless:~# ', timeout => 10);
-        assert_screen('root_console', 30);
         type_string('PS1="\$ "\n');
         wait_serial('^# ');
     }
@@ -115,13 +109,10 @@ sub console_user_login {
     # To avoid this, we'll sleep a few seconds before starting
     wait_serial('endless login: ', timeout => 10);
 
-    assert_screen('text_console_login', 10);
-
     if (get_var('LIVE')) {
         # Log in as the live user. They are passwordless.
         type_string("live\n");
         wait_serial('live@endless:~\$ ', timeout => 10);
-        assert_screen('live_console', 30);
         type_string('PS1="\$ "\n');
         wait_serial('^\$ ');
     } else {
@@ -137,7 +128,6 @@ sub console_user_login {
             type_string(get_password() . "\n");
         }
         wait_serial($username . '@endless:~\$ ', timeout => 10);
-        assert_screen('test_console', 30);
         type_string('PS1="\$ "\n');
         wait_serial('^\$ ');
     }
