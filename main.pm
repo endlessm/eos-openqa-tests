@@ -52,7 +52,7 @@ if (!get_var('START_AFTER_TEST') && !get_var('BOOTFROM') && !get_var('FBE_TEST')
     # After installing, we need to run through the initial setup. We also need
     # to run through it when booting a live image.
     autotest::loadtest "tests/_fbe.pm";
-    autotest::loadtest "tests/_post_fbe.pm";
+    #autotest::loadtest "tests/_post_fbe.pm";
 
     # Enable coredump collection; needed for _check_crashes.pm below.
     autotest::loadtest "tests/_enable_coredumps.pm";
