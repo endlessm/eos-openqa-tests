@@ -1,0 +1,43 @@
+{
+  "area": [
+    {
+      "width": 1024,
+      "height": 528,
+      "type": "match",
+      "ypos": 0,
+      "xpos": 0
+    },
+    {
+      "xpos": 0,
+      "type": "exclude",
+      "ypos": 79,
+      "height": 19,
+      "width": 1024
+    },
+    {
+      "xpos": 0,
+      "ypos": 207,
+      "width": 1023,
+      "height": 16,
+      "type": "exclude"
+    },
+    {
+      "xpos": 62,
+      "ypos": 16,
+      "width": 53,
+      "height": 14,
+      "type": "exclude"
+    },
+    {
+      "xpos": 182,
+      "ypos": 15,
+      "width": 49,
+      "height": 17,
+      "type": "exclude"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "test_console"
+  ]
+}
