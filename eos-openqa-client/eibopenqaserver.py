@@ -95,10 +95,11 @@ def remap_arch(eib_arch):
 
 def send_request_for_image(image_type, image_url, manifest,
                            host=OPENQA_SERVER_HOST,
+                           update_to=None,
+                           update_to_stage=None,
                            api_key=None,
                            api_secret=None,
                            session=None,
-                           update_to_manifest=None,
                            dry_run=False):
     openqa_endpoint_url = f'https://{host}/api/v1/isos'
 
@@ -123,7 +124,7 @@ def send_request_for_image(image_type, image_url, manifest,
     # update version in the FLAVOR, since that would mean the `templates` file
     # in eos-openqa-tests.git would need updating for each release.
     flavor = '{}_{}{}'.format(manifest['personality'], image_type,
-                              '_update' if update_to_manifest else '')
+                              '_update' if update_to else '')
 
     # Build an API request to send to OpenQA to add the new disk image to its
     # list of images, and hence instantiate tests from the job templates for
@@ -166,27 +167,11 @@ def send_request_for_image(image_type, image_url, manifest,
     }
     if 'image_language' in manifest:
         data['EOS_IMAGE_LANGUAGE'] = manifest['image_language']
-    if update_to_manifest:
-        try:
-            collection_id = update_to_manifest['ostree']['collection-id']
-        except KeyError:
-            collection_id = ''
-
-        if (
-            collection_id == 'com.endlessm.Dev' or
-            collection_id.startswith('com.endlessm.Dev.')
-        ):
-            os_update_to_stage = 'dev'
-        elif (
-            collection_id == 'com.endlessm.Demo' or
-            collection_id.startswith('com.endlessm.Demo.')
-        ):
-            os_update_to_stage = 'demo'
-        else:
-            os_update_to_stage = 'prod'
-
-        data['OS_UPDATE_TO'] = update_to_manifest['ostree']['version']
-        data['OS_UPDATE_TO_STAGE'] = os_update_to_stage
+    if update_to:
+        data['OS_UPDATE_TO'] = update_to
+        if update_to_stage is None:
+            update_to_stage = 'prod'
+        data['OS_UPDATE_TO_STAGE'] = update_to_stage
 
     # Add the image URI.
     if image_type == 'iso':

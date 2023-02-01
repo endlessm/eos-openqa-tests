@@ -116,6 +116,9 @@ def main():
                         help='Only show what would be done')
     parser.add_argument('-r', '--release', action='store_true',
                         help='Use the latest release image')
+    parser.add_argument('--update-to', help='OS release version to update to')
+    parser.add_argument('--update-to-stage', choices=('prod', 'demo', 'dev'),
+                        help='OSTree server stage use for update')
     parser.set_defaults(log_level='INFO')
     log_group = parser.add_mutually_exclusive_group()
     log_group.add_argument('-q', '--quiet', dest='log_level',
@@ -175,24 +178,25 @@ def main():
     logger.debug('Image build data:\n%s', image_data)
 
     # OpenQA server ISO REST API.
+    openqa_kwargs = dict(
+        update_to=args.update_to,
+        update_to_stage=args.update_to_stage,
+        host=args.openqa_host,
+        api_key=api_key,
+        api_secret=api_secret,
+        session=session,
+        dry_run=args.dry_run,
+    )
     if 'full' in image_data:
         eibopenqaserver.send_request_for_image('full',
                                                image_data['full'],
                                                image_data['manifest'],
-                                               host=args.openqa_host,
-                                               api_key=api_key,
-                                               api_secret=api_secret,
-                                               session=session,
-                                               dry_run=args.dry_run)
+                                               **openqa_kwargs)
     if 'iso' in image_data:
         eibopenqaserver.send_request_for_image('iso',
                                                image_data['iso'],
                                                image_data['manifest'],
-                                               host=args.openqa_host,
-                                               api_key=api_key,
-                                               api_secret=api_secret,
-                                               session=session,
-                                               dry_run=args.dry_run)
+                                               **openqa_kwargs)
 
 
 if __name__ == '__main__':
