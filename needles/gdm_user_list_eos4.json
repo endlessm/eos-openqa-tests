@@ -1,0 +1,30 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 0,
+      "height": 731,
+      "width": 1024,
+      "xpos": 0
+    },
+    {
+      "ypos": 419,
+      "height": 18,
+      "type": "match",
+      "xpos": 336,
+      "width": 70
+    },
+    {
+      "type": "match",
+      "ypos": 337,
+      "height": 69,
+      "width": 336,
+      "xpos": 336
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gdm",
+    "gdm_user_list"
+  ]
+}
