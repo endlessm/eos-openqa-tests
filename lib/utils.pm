@@ -132,7 +132,7 @@ sub set_root_password {
 
     assert_wait_serial('$ ', no_regex => 1, timeout => 10);
     enter_cmd("sudo passwd root");
-    assert_wait_serial("sudo_passwd_root", no_regex => 1, timeout => 10);
+    assert_wait_serial("sudo passwd root", no_regex => 1, timeout => 10);
     if (!get_var('LIVE')) {
         assert_wait_serial('\[sudo\] password for test: ', timeout => 10);
         type_string($password . "\n");
