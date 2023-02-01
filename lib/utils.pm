@@ -98,10 +98,11 @@ sub console_root_login {
 }
 
 sub console_root_exit {
-    type_string("exit\n");
+    assert_wait_serial("# ", no_regex => 1, timeout => 10);
+    enter_cmd("exit");
     assert_wait_serial("exit", no_regex => 1, timeout => 10);
     assert_wait_serial('$ ', no_regex => 1, timeout => 10);
-    type_string("exit\n");
+    enter_cmd("exit");
     assert_wait_serial("exit", no_regex => 1, timeout => 10);
 }
 
@@ -146,6 +147,7 @@ sub console_user_login {
 }
 
 sub console_user_exit {
-    type_string("exit\n");
+    assert_wait_serial('$ ', no_regex => 1, timeout => 10);
+    enter_cmd("exit");
     assert_wait_serial("exit", no_regex => 1, timeout => 10);
 }
