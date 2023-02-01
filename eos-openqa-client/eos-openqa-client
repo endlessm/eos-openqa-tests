@@ -119,20 +119,21 @@ def main():
     image_data = load_image_data_for_branch(args.branch)
 
     # OpenQA server ISO REST API.
-    openqa_endpoint = f'https://{args.openqa_host}/api/v1/isos'
     if 'full' in image_data:
         eibopenqaserver.send_request_for_image('full',
                                                image_data['full'],
                                                image_data['manifest'],
-                                               openqa_endpoint,
-                                               api_key, api_secret,
+                                               host=args.openqa_host,
+                                               api_key=api_key,
+                                               api_secret=api_secret,
                                                dry_run=args.dry_run)
     if 'iso' in image_data:
         eibopenqaserver.send_request_for_image('iso',
                                                image_data['iso'],
                                                image_data['manifest'],
-                                               openqa_endpoint,
-                                               api_key, api_secret,
+                                               host=args.openqa_host,
+                                               api_key=api_key,
+                                               api_secret=api_secret,
                                                dry_run=args.dry_run)
 
 

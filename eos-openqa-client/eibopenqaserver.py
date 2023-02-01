@@ -47,7 +47,7 @@ def get_client_config_path():
     return os.path.join(xdg_config_home, 'openqa', 'client.conf')
 
 
-def get_credentials(host):
+def get_credentials(host=OPENQA_SERVER_HOST):
     """Retrieve openQA API credentials
 
     The credentials are first from the environment variables
@@ -94,9 +94,16 @@ def remap_arch(eib_arch):
 
 
 def send_request_for_image(image_type, image_url, manifest,
-                           openqa_endpoint_url, api_key, api_secret,
+                           host=OPENQA_SERVER_HOST,
+                           api_key=None,
+                           api_secret=None,
                            update_to_manifest=None,
                            dry_run=False):
+    openqa_endpoint_url = f'https://{host}/api/v1/isos'
+
+    if not api_key or not api_secret:
+        api_key, api_secret = get_credentials(host)
+
     # Work out which apps are installed on the image.
     image_flatpak_remotes = manifest['flatpak']['remotes'].keys()
     image_flatpak_runtimes = manifest['flatpak']['runtimes'].keys()
