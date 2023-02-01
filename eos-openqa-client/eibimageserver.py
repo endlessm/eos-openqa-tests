@@ -68,12 +68,14 @@ def get_token(host=IMAGE_SERVER_HOST):
     return token
 
 
-def query_api(path, host=None, token=None, **params):
+def query_api(path, host=None, token=None, session=None, **params):
     """Query image server API"""
     if host is None:
         host = IMAGE_SERVER_HOST
     if token is None:
         token = get_token(host)
+    if session is None:
+        session = requests.Session()
 
     url = f'https://{host}{path}'
     headers = {
@@ -82,28 +84,32 @@ def query_api(path, host=None, token=None, **params):
     }
 
     logger.info(f'Requesting image API {url}')
-    with requests.get(url, headers=headers, params=params) as resp:
+    with session.get(url, headers=headers, params=params) as resp:
         resp.raise_for_status()
         return resp.json()
 
 
-def query_builds(host=None, token=None, release=False, **kwargs):
+def query_builds(host=None, token=None, release=False, session=None, **kwargs):
     """Query image server builds"""
     params = {'type': '2' if release else '1'}
     params.update(kwargs)
-    return query_api('/api/v1/builds/', host=host, token=token, **params)
+    return query_api('/api/v1/builds/',
+                     host=host, token=token, session=session, **params)
 
 
-def query_build(id, host=None, token=None):
+def query_build(id, host=None, token=None, session=None):
     """Query image server build"""
-    return query_api(f'/api/v1/builds/{id}/', host=host, token=token)
+    return query_api(f'/api/v1/builds/{id}/',
+                     host=host, token=token, session=session)
 
 
-def query_manifest(id, host=None, token=None):
+def query_manifest(id, host=None, token=None, session=None):
     """Query image server build manifest"""
-    return query_api(f'/api/v1/builds/{id}/manifest/', host=host, token=token)
+    return query_api(f'/api/v1/builds/{id}/manifest/',
+                     host=host, token=token, session=session)
 
 
-def query_file(path, host=None, token=None):
+def query_file(path, host=None, token=None, session=None):
     """Query image server file"""
-    return query_api(f'/api/v1/files/{path}', host=host, token=token)
+    return query_api(f'/api/v1/files/{path}',
+                     host=host, token=token, session=session)

@@ -97,6 +97,7 @@ def send_request_for_image(image_type, image_url, manifest,
                            host=OPENQA_SERVER_HOST,
                            api_key=None,
                            api_secret=None,
+                           session=None,
                            update_to_manifest=None,
                            dry_run=False):
     openqa_endpoint_url = f'https://{host}/api/v1/isos'
@@ -227,12 +228,12 @@ def send_request_for_image(image_type, image_url, manifest,
         return
 
     # Send the request
-    with requests.Session() as session:
-        response = session.send(request)
+    if session is None:
+        session = requests.Session()
+    with session.send(request) as response:
+        logger.debug('OpenQA response status: %d', response.status_code)
+        logger.debug('OpenQA response headers: %s', response.headers)
+        logger.debug('OpenQA response content: %s', response.content)
 
-    logger.debug('OpenQA response status: %d', response.status_code)
-    logger.debug('OpenQA response headers: %s', response.headers)
-    logger.debug('OpenQA response content: %s', response.content)
-
-    # Raise an error if the server complained
-    response.raise_for_status()
+        # Raise an error if the server complained
+        response.raise_for_status()

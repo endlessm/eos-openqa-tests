@@ -20,13 +20,14 @@ import argparse
 import eibimageserver
 import eibopenqaserver
 import logging
+import requests
 import sys
 
 logger = logging.getLogger(__name__)
 
 
 def load_image_data_for_branch(build_id=None, branch=None, release=False,
-                               host=None, token=None):
+                               host=None, token=None, session=None):
     """
     Download manifest file from the image server for the latest release on the
     given branch, using default values for all the other parameters.
@@ -38,11 +39,17 @@ def load_image_data_for_branch(build_id=None, branch=None, release=False,
         raise ValueError('one of build_id or branch must be specified')
 
     if build_id:
-        build = eibimageserver.query_build(build_id, host=host, token=token)
+        build = eibimageserver.query_build(
+            build_id,
+            host=host,
+            token=token,
+            session=session,
+        )
     else:
         builds = eibimageserver.query_builds(
             host=host,
             token=token,
+            session=session,
             product='eos',
             branch=branch,
             arch='amd64',
@@ -67,13 +74,19 @@ def load_image_data_for_branch(build_id=None, branch=None, release=False,
             asset_type = 'iso'
 
         if asset_type:
-            asset = eibimageserver.query_file(path, host=host, token=token)
+            asset = eibimageserver.query_file(
+                path,
+                host=host,
+                token=token,
+                session=session,
+            )
             data[asset_type] = asset['download_url']
 
     manifest_resp = eibimageserver.query_manifest(
         build_id,
         host=host,
         token=token,
+        session=session,
     )
     data['manifest'] = manifest_resp['data']
 
@@ -138,6 +151,9 @@ def main():
             )
             sys.exit(1)
 
+    # Start a common requests session.
+    session = requests.Session()
+
     # Fetch the image data.
     images_token = eibimageserver.get_token(args.images_host)
     image_data = load_image_data_for_branch(
@@ -146,6 +162,7 @@ def main():
         release=args.release,
         host=args.images_host,
         token=images_token,
+        session=session,
     )
     logger.debug('Image build data:\n%s', image_data)
 
@@ -157,6 +174,7 @@ def main():
                                                host=args.openqa_host,
                                                api_key=api_key,
                                                api_secret=api_secret,
+                                               session=session,
                                                dry_run=args.dry_run)
     if 'iso' in image_data:
         eibopenqaserver.send_request_for_image('iso',
@@ -165,6 +183,7 @@ def main():
                                                host=args.openqa_host,
                                                api_key=api_key,
                                                api_secret=api_secret,
+                                               session=session,
                                                dry_run=args.dry_run)
 
 
