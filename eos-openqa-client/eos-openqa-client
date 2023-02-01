@@ -116,6 +116,14 @@ def main():
                         help='Only show what would be done')
     parser.add_argument('-r', '--release', action='store_true',
                         help='Use the latest release image')
+    parser.set_defaults(log_level='INFO')
+    log_group = parser.add_mutually_exclusive_group()
+    log_group.add_argument('-q', '--quiet', dest='log_level',
+                           action='store_const', const='WARNING',
+                           help='only show warning messages')
+    log_group.add_argument('--debug', dest='log_level',
+                           action='store_const', const='DEBUG',
+                           help='show debugging messages')
     parser.add_argument('--api-key', required=False, default='',
                         help='OpenQA API key (default: load from '
                              '{})'.format(client_conf_file))
@@ -131,7 +139,7 @@ def main():
 
     args = parser.parse_args()
 
-    logging.basicConfig(level='DEBUG')
+    logging.basicConfig(level=args.log_level)
 
     # API key/secret provided on the command line override the config file.
     if args.api_key and args.api_secret:
