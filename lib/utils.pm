@@ -62,7 +62,7 @@ sub console_root_login {
         # We do not know the root password.
         type_string("live\n");
         wait_serial("live\n", no_regex => 1, timeout => 1);
-        wait_serial("$ ", no_regex => 1, timeout => 10);
+        wait_serial('$ ', no_regex => 1, timeout => 10);
 
         # Now slip into a sudo session. On a live image this should not require
         # a password.
@@ -76,7 +76,7 @@ sub console_root_login {
         wait_serial("test\n", no_regex => 1, timeout => 10);
         wait_serial('Password: ', timeout => 10);
         type_string($password . "\n");
-        wait_serial("$ ", no_regex => 1, timeout => 10);
+        wait_serial('$ ', no_regex => 1, timeout => 10);
 
         # Now slip into a sudo session. This will require the user’s password
         # again.
@@ -90,7 +90,7 @@ sub console_root_login {
 sub console_root_exit {
     type_string("exit\n");
     wait_serial("exit\n", no_regex => 1, timeout => 10);
-    wait_serial("$ ", no_regex => 1, timeout => 10);
+    wait_serial('$ ', no_regex => 1, timeout => 10);
     type_string("exit\n");
     wait_serial("exit\n", no_regex => 1, timeout => 10);
 }
