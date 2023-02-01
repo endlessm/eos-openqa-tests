@@ -9,7 +9,7 @@ use Exporter;
 use testapi;
 our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login
     console_user_exit console_user_login send_key_combo type_very_safely
-    get_password/;
+    get_password set_root_password/;
 
 # Get the standard password used everywhere.
 sub get_password {
@@ -54,6 +54,8 @@ sub assert_wait_serial {
 # only pathway which doesn’t require any passwords.
 # Use console_root_exit() to exit from it.
 sub console_root_login {
+    my $password = get_password();
+
     # There's a timing problem when we switch from a logged-in console
     # to a non-logged in console and immediately call this function;
     # if the switch lags a bit, this function will match one of the
@@ -62,34 +64,10 @@ sub console_root_login {
     # To avoid this, we'll sleep a few seconds before starting
     assert_wait_serial('endless login: ', timeout => 10);
 
-    if (get_var('LIVE')) {
-        # Log in as the live user, as that’s the only user who is passwordless.
-        # We do not know the root password.
-        type_string("live\n");
-        assert_wait_serial("live", no_regex => 1, timeout => 1);
-        assert_wait_serial('$ ', no_regex => 1, timeout => 10);
-
-        # Now slip into a sudo session. On a live image this should not require
-        # a password.
-        type_string("sudo -i\n");
-        assert_wait_serial("sudo -i", no_regex => 1, timeout => 10);
-    } else {
-        my $password = get_password();
-
-        # If we’re not in a live session, use the standard test username.
-        type_string("test\n");
-        assert_wait_serial("test", no_regex => 1, timeout => 10);
-        assert_wait_serial('Password: ', timeout => 10);
-        type_string($password . "\n");
-        assert_wait_serial('$ ', no_regex => 1, timeout => 10);
-
-        # Now slip into a sudo session. This will require the user’s password
-        # again.
-        type_string("sudo -i\n");
-        assert_wait_serial("sudo -i", no_regex => 1, timeout => 10);
-        assert_wait_serial('\[sudo\] password for test: ', timeout => 10);
-        type_string($password . "\n");
-    }
+    type_string("root\n");
+    assert_wait_serial("root", no_regex => 1, timeout => 10);
+    assert_wait_serial('Password: ', timeout => 10);
+    type_string($password . "\n");
 
     # Set PS1 to match what serial_term_prompt expects.
     assert_wait_serial("# ", no_regex => 1, timeout => 10);
@@ -99,9 +77,6 @@ sub console_root_login {
 
 sub console_root_exit {
     assert_wait_serial("# ", no_regex => 1, timeout => 10);
-    enter_cmd("exit");
-    assert_wait_serial("exit", no_regex => 1, timeout => 10);
-    assert_wait_serial('$ ', no_regex => 1, timeout => 10);
     enter_cmd("exit");
     assert_wait_serial("exit", no_regex => 1, timeout => 10);
 }
@@ -150,4 +125,20 @@ sub console_user_exit {
     assert_wait_serial('$ ', no_regex => 1, timeout => 10);
     enter_cmd("exit");
     assert_wait_serial("exit", no_regex => 1, timeout => 10);
+}
+
+sub set_root_password {
+    my $password = get_password();
+
+    assert_wait_serial('$ ', no_regex => 1, timeout => 10);
+    enter_cmd("sudo passwd root");
+    assert_wait_serial("sudo_passwd_root", no_regex => 1, timeout => 10);
+    if (!get_var('LIVE')) {
+        assert_wait_serial('\[sudo\] password for test: ', timeout => 10);
+        type_string($password . "\n");
+    }
+    assert_wait_serial('New password: ', timeout => 10);
+    type_string($password . "\n");
+    assert_wait_serial('Retype new password: ', timeout => 10);
+    type_string($password . "\n");
 }
