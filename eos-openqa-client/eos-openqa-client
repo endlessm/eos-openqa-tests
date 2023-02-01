@@ -31,10 +31,7 @@ from urllib.request import urlopen
 IMAGE_SERVER_HOST = 'images.endlessm-sf.com'
 IMAGE_DOWNLOAD_HOST = 'images-dl.endlessm.com'
 # OpenQA server hostname.
-OPENQA_SERVER_HOST = 'openqa.dev.endlessos.org'
-# OpenQA server REST API.
-OPENQA_SERVER_ENDPOINT_URI = \
-    'https://{}/api/v1/isos'.format(OPENQA_SERVER_HOST)
+OPENQA_SERVER_HOST = 'openqa.endlessos.org'
 # URI providing help on client.conf.
 OPENQA_CLIENT_HELP_URI = 'http://open.qa/docs/#_using_the_client_script'
 
@@ -105,6 +102,8 @@ def main():
     parser.add_argument('--api-secret', required=False, default='',
                         help='OpenQA API secret (default: load from '
                              '{})'.format(client_conf_file))
+    parser.add_argument('--openqa-host', default=OPENQA_SERVER_HOST,
+                        help='OpenQA server hostname (default: %(default)s)')
 
     args = parser.parse_args()
 
@@ -117,7 +116,7 @@ def main():
     else:
         try:
             api_key, api_secret = eibopenqaserver.get_credentials(
-                OPENQA_SERVER_HOST,
+                args.openqa_host,
             )
         except eibopenqaserver.OpenQAError:
             print(
@@ -135,15 +134,17 @@ def main():
     else:
         manifest = load_manifest_for_path(args.manifest)
 
+    # OpenQA server ISO REST API.
+    openqa_endpoint = f'https://{args.openqa_host}/api/v1/isos'
     if 'full' in manifest['images']:
         eibopenqaserver.send_request_for_manifest(manifest, 'full',
                                                   IMAGE_DOWNLOAD_HOST,
-                                                  OPENQA_SERVER_ENDPOINT_URI,
+                                                  openqa_endpoint,
                                                   api_key, api_secret)
     if 'iso' in manifest['images']:
         eibopenqaserver.send_request_for_manifest(manifest, 'iso',
                                                   IMAGE_DOWNLOAD_HOST,
-                                                  OPENQA_SERVER_ENDPOINT_URI,
+                                                  openqa_endpoint,
                                                   api_key, api_secret)
 
 
