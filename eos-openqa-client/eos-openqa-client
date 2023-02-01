@@ -27,9 +27,6 @@ import sys
 from urllib.request import urlopen
 
 
-# Image server which the manifest files live on.
-IMAGE_SERVER_HOST = 'images.endlessm-sf.com'
-IMAGE_DOWNLOAD_HOST = 'images-dl.endlessm.com'
 # OpenQA server hostname.
 OPENQA_SERVER_HOST = 'openqa.endlessos.org'
 # URI providing help on client.conf.
@@ -39,7 +36,7 @@ OPENQA_CLIENT_HELP_URI = 'http://open.qa/docs/#_using_the_client_script'
 logger = logging.getLogger(__name__)
 
 
-def load_manifest_for_branch(branch):
+def load_image_data_for_branch(branch, release=False, token=None):
     """
     Download manifest file from the image server for the latest release on the
     given branch, using default values for all the other parameters.
@@ -47,40 +44,37 @@ def load_manifest_for_branch(branch):
     Return it as a Python object.
     If there are no matching releases on the given branch, return None.
     """
-    fake_config = {
-        'image': {
-            'upload_api_url_root': 'http://' + IMAGE_SERVER_HOST,
-        },
-    }
-    image_infos = eibimageserver.query_images(product='eos',
-                                              branch=branch,
-                                              arch='amd64',
-                                              platform='amd64',
-                                              personality='base',
-                                              config=fake_config)
+    builds = eibimageserver.query_builds(
+        token=token,
+        product='eos',
+        branch=branch,
+        arch='amd64',
+        platform='amd64',
+        personality='base',
+        release=release,
+        limit=1,
+    )
 
-    if not image_infos:
+    if builds['count'] == 0:
         return None
 
-    latest_info = max(image_infos, key=lambda el: el['ostree_date'])
+    build = builds['results'][0]
+    data = {}
 
-    # Download and load the manifest.
-    with eibimageserver.download_image_manifest(latest_info, 'base') as src:
-        return json.load(src)
+    for path in build['files']:
+        asset_type = None
+        if path.endswith('.img.gz') or path.endswith('.img.xz'):
+            asset_type = 'full'
+        elif path.endswith('.iso'):
+            asset_type = 'iso'
 
+        if asset_type:
+            asset = eibimageserver.query_file(path)
+            data[asset_type] = asset['download_url']
 
-def load_manifest_for_uri(uri):
-    """Download a manifest from a URI."""
-    logger.info('Downloading %s', uri)
-    with urlopen(uri) as src:
-        return json.load(src)
+    data['manifest'] = eibimageserver.query_manifest(build['id'])['data']
 
-
-def load_manifest_for_path(path):
-    """Download a manifest from a URI."""
-    logger.info('Opening local file %s', path)
-    with open(path) as src:
-        return json.load(src)
+    return data
 
 
 def main():
@@ -88,14 +82,16 @@ def main():
 
     # Parse command line arguments.
     parser = argparse.ArgumentParser(
-        description='Schedule OpenQA test runs for a given image manifest. '
-                    'Provide it with the URI or path to an image manifest '
-                    'JSON file, and it will schedule tests for all the images '
-                    'in that manifest.\n'
-                    '\n'
-                    'API configuration should be put in {}. See {} for '
-                    'help.'.format(client_conf_file, OPENQA_CLIENT_HELP_URI))
-    parser.add_argument('manifest', help='manifest file or URI')
+        description=(
+            'Schedule OpenQA test runs for a given image branch. '
+            'Tests will be scheduled for all the images in the latest build '
+            'from that branch.\n'
+            '\n'
+            'API configuration should be put in {}. See {} for help.'
+            .format(client_conf_file, OPENQA_CLIENT_HELP_URI)
+        ),
+    )
+    parser.add_argument('branch', help='OS branch')
     parser.add_argument('--api-key', required=False, default='',
                         help='OpenQA API key (default: load from '
                              '{})'.format(client_conf_file))
@@ -126,26 +122,23 @@ def main():
             )
             sys.exit(1)
 
-    # Download the manifest.
-    if args.manifest in ['master', 'eos3.3', 'eos3.4']:
-        manifest = load_manifest_for_branch(args.manifest)
-    if args.manifest.startswith('http'):
-        manifest = load_manifest_for_uri(args.manifest)
-    else:
-        manifest = load_manifest_for_path(args.manifest)
+    # Fetch the image data.
+    image_data = load_image_data_for_branch(args.branch)
 
     # OpenQA server ISO REST API.
     openqa_endpoint = f'https://{args.openqa_host}/api/v1/isos'
-    if 'full' in manifest['images']:
-        eibopenqaserver.send_request_for_manifest(manifest, 'full',
-                                                  IMAGE_DOWNLOAD_HOST,
-                                                  openqa_endpoint,
-                                                  api_key, api_secret)
-    if 'iso' in manifest['images']:
-        eibopenqaserver.send_request_for_manifest(manifest, 'iso',
-                                                  IMAGE_DOWNLOAD_HOST,
-                                                  openqa_endpoint,
-                                                  api_key, api_secret)
+    if 'full' in image_data:
+        eibopenqaserver.send_request_for_image('full',
+                                               image_data['full'],
+                                               image_data['manifest'],
+                                               openqa_endpoint,
+                                               api_key, api_secret)
+    if 'iso' in image_data:
+        eibopenqaserver.send_request_for_image('iso',
+                                               image_data['iso'],
+                                               image_data['manifest'],
+                                               openqa_endpoint,
+                                               api_key, api_secret)
 
 
 if __name__ == '__main__':

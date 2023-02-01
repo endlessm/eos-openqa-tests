@@ -88,19 +88,9 @@ def remap_arch(eib_arch):
     return mappings[eib_arch] if eib_arch in mappings else eib_arch
 
 
-def send_request_for_manifest(manifest, image, upload_api_host,
-                              openqa_endpoint_url, api_key, api_secret,
-                              update_to_manifest=None):
-    image_details = manifest['images'][image]
-
-    download_url = (
-        'nightly/{product}-{arch}-{platform}/{branch}/{personality}'
-        '/{build_version}'
-        .format(**manifest)
-    )
-    image_url = 'https://{}/{}/{}'.format(upload_api_host, download_url,
-                                          image_details['file'])
-
+def send_request_for_image(image_type, image_url, manifest,
+                           openqa_endpoint_url, api_key, api_secret,
+                           update_to_manifest=None):
     # Work out which apps are installed on the image.
     image_flatpak_remotes = manifest['flatpak']['remotes'].keys()
     image_flatpak_runtimes = manifest['flatpak']['runtimes'].keys()
@@ -118,7 +108,7 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     # personality, image type, and update path. We can’t include the actual
     # update version in the FLAVOR, since that would mean the `templates` file
     # in eos-openqa-tests.git would need updating for each release.
-    flavor = '{}_{}{}'.format(manifest['personality'], image,
+    flavor = '{}_{}{}'.format(manifest['personality'], image_type,
                               '_update' if update_to_manifest else '')
 
     # Build an API request to send to OpenQA to add the new disk image to its
@@ -158,7 +148,7 @@ def send_request_for_manifest(manifest, image, upload_api_host,
         'EOS_IMAGE_OSTREE_DATE': manifest['ostree']['date'],
         'EOS_IMAGE_OSTREE_REF': manifest['ostree']['ref'],
         'EOS_IMAGE_OSTREE_REMOTE': manifest['ostree']['remote'],
-        'EOS_IMAGE_TYPE': image,
+        'EOS_IMAGE_TYPE': image_type,
     }
     if 'image_language' in manifest:
         data['EOS_IMAGE_LANGUAGE'] = manifest['image_language']
@@ -185,12 +175,12 @@ def send_request_for_manifest(manifest, image, upload_api_host,
         data['OS_UPDATE_TO_STAGE'] = os_update_to_stage
 
     # Add the image URI.
-    if image == 'iso':
+    if image_type == 'iso':
         data['ISO_URL'] = image_url
-    elif image == 'full':
+    elif image_type == 'full':
         data['HDD_1_DECOMPRESS_URL'] = image_url
     else:
-        raise ValueError('Unknown image ‘%s’' % image)
+        raise ValueError('Unknown image type ‘%s’' % image_type)
 
     logger.debug('openQA request data:\n%s', data)
 
