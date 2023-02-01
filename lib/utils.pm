@@ -61,27 +61,27 @@ sub console_root_login {
         # Log in as the live user, as that’s the only user who is passwordless.
         # We do not know the root password.
         type_string("live\n");
-        wait_serial("live\n");
-        wait_serial('\$ ', timeout => 10);
+        wait_serial("live\n", no_regex => 1, timeout => 1);
+        wait_serial("$ ", no_regex => 1, timeout => 10);
 
         # Now slip into a sudo session. On a live image this should not require
         # a password.
         type_string("sudo -i\n");
-        wait_serial("sudo -i\n", timeout => 10);
+        wait_serial("sudo -i\n", no_regex => 1, timeout => 10);
     } else {
         my $password = get_password();
 
         # If we’re not in a live session, use the standard test username.
         type_string("test\n");
-        wait_serial("test\n", timeout => 10);
+        wait_serial("test\n", no_regex => 1, timeout => 10);
         wait_serial('Password: ', timeout => 10);
         type_string($password . "\n");
-        wait_serial('\$ ', timeout => 10);
+        wait_serial("$ ", no_regex => 1, timeout => 10);
 
         # Now slip into a sudo session. This will require the user’s password
         # again.
         type_string("sudo -i\n");
-        wait_serial("sudo -i\n", timeout => 10);
+        wait_serial("sudo -i\n", no_regex => 1, timeout => 10);
         wait_serial('\[sudo\] password for test: ', timeout => 10);
         type_string($password . "\n");
     }
@@ -89,10 +89,10 @@ sub console_root_login {
 
 sub console_root_exit {
     type_string("exit\n");
-    wait_serial("exit\n", timeout => 10);
-    wait_serial('\$ ', timeout => 10);
+    wait_serial("exit\n", no_regex => 1, timeout => 10);
+    wait_serial("$ ", no_regex => 1, timeout => 10);
     type_string("exit\n");
-    wait_serial("exit\n", timeout => 10);
+    wait_serial("exit\n", no_regex => 1, timeout => 10);
 }
 
 # Same as console_root_login(), but for a non-root user.
@@ -113,11 +113,11 @@ sub console_user_login {
     if (get_var('LIVE')) {
         # Log in as the live user. They are passwordless.
         type_string("live\n");
-        wait_serial("live\n", timeout => 10);
+        wait_serial("live\n", no_regex => 1, timeout => 10);
     } else {
         # If we’re not in a live session, use the standard test username.
         type_string($username . "\n");
-        wait_serial($username . "\n", timeout => 10);
+        wait_serial($username . "\n", no_regex => 1, timeout => 10);
         if ($args{set_password}) {
             wait_serial('New password: ', timeout => 10);
             type_string(get_password() . "\n");
@@ -132,5 +132,5 @@ sub console_user_login {
 
 sub console_user_exit {
     type_string("exit\n");
-    wait_serial("exit\n", timeout => 10);
+    wait_serial("exit\n", no_regex => 1, timeout => 10);
 }
