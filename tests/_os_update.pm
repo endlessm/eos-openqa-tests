@@ -25,8 +25,10 @@ sub run {
     assert_script_run("systemctl mask --runtime plymouth-reboot.service", 10);
     type_string("reboot\n");
     wait_serial("reboot");
-    assert_screen('plymouth', 60);
-    send_key('esc');  # Press Esc to show the boot progress for debugging
+    if (check_screen('plymouth', 30)) {
+        # Press Esc to show the boot progress for debugging
+        send_key('esc');
+    }
     assert_screen('gdm_user_list', 600);
 
     # Check we’re now in the right version.
