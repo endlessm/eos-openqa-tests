@@ -22,8 +22,9 @@ sub run {
 
     # Upgrade complete; reboot. Sleep for 2s to avoid matching the shutdown
     # Plymouth screen.
+    assert_script_run("systemctl mask --runtime plymouth-reboot.service", 10);
     type_string("reboot\n");
-    sleep(2);
+    wait_serial("reboot");
     assert_screen('plymouth', 60);
     send_key('esc');  # Press Esc to show the boot progress for debugging
     assert_screen('gdm_user_list', 600);
