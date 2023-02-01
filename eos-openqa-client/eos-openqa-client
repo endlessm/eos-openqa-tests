@@ -25,7 +25,8 @@ import sys
 logger = logging.getLogger(__name__)
 
 
-def load_image_data_for_branch(branch, release=False, host=None, token=None):
+def load_image_data_for_branch(build_id=None, branch=None, release=False,
+                               host=None, token=None):
     """
     Download manifest file from the image server for the latest release on the
     given branch, using default values for all the other parameters.
@@ -33,24 +34,31 @@ def load_image_data_for_branch(branch, release=False, host=None, token=None):
     Return it as a Python object.
     If there are no matching releases on the given branch, return None.
     """
-    builds = eibimageserver.query_builds(
-        host=host,
-        token=token,
-        product='eos',
-        branch=branch,
-        arch='amd64',
-        platform='amd64',
-        personality='base',
-        release=release,
-        limit=1,
-    )
+    if not build_id and not branch:
+        raise ValueError('one of build_id or branch must be specified')
 
-    if builds['count'] == 0:
-        return None
+    if build_id:
+        build = eibimageserver.query_build(build_id, host=host, token=token)
+    else:
+        builds = eibimageserver.query_builds(
+            host=host,
+            token=token,
+            product='eos',
+            branch=branch,
+            arch='amd64',
+            platform='amd64',
+            personality='base',
+            release=release,
+            limit=1,
+        )
 
-    build = builds['results'][0]
+        if builds['count'] == 0:
+            return None
+
+        build = builds['results'][0]
+        build_id = build['id']
+
     data = {}
-
     for path in build['files']:
         asset_type = None
         if path.endswith('.img.gz') or path.endswith('.img.xz'):
@@ -63,7 +71,7 @@ def load_image_data_for_branch(branch, release=False, host=None, token=None):
             data[asset_type] = asset['download_url']
 
     manifest_resp = eibimageserver.query_manifest(
-        build['id'],
+        build_id,
         host=host,
         token=token,
     )
@@ -86,11 +94,15 @@ def main():
             .format(client_conf_file, eibopenqaserver.OPENQA_CLIENT_HELP_URI)
         ),
     )
-    parser.add_argument('branch', help='OS branch')
+    build_choice = parser.add_mutually_exclusive_group(required=True)
+    build_choice.add_argument('-b', '--branch',
+                              help='Use the latest build on BRANCH')
+    build_choice.add_argument('-i', '--id',
+                              help='Use the specific build ID')
     parser.add_argument('-n', '--dry-run', action='store_true',
                         help='Only show what would be done')
     parser.add_argument('-r', '--release', action='store_true',
-                        help='Use released images')
+                        help='Use the latest release image')
     parser.add_argument('--api-key', required=False, default='',
                         help='OpenQA API key (default: load from '
                              '{})'.format(client_conf_file))
@@ -129,11 +141,13 @@ def main():
     # Fetch the image data.
     images_token = eibimageserver.get_token(args.images_host)
     image_data = load_image_data_for_branch(
+        args.id,
         args.branch,
         release=args.release,
         host=args.images_host,
         token=images_token,
     )
+    logger.debug('Image build data:\n%s', image_data)
 
     # OpenQA server ISO REST API.
     if 'full' in image_data:

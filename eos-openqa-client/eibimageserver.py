@@ -94,9 +94,14 @@ def query_builds(host=None, token=None, release=False, **kwargs):
     return query_api('/api/v1/builds/', host=host, token=token, **params)
 
 
+def query_build(id, host=None, token=None):
+    """Query image server build"""
+    return query_api(f'/api/v1/builds/{id}/', host=host, token=token)
+
+
 def query_manifest(id, host=None, token=None):
     """Query image server build manifest"""
-    return query_api(f'/api/v1/builds/{id}/manifest', host=host, token=token)
+    return query_api(f'/api/v1/builds/{id}/manifest/', host=host, token=token)
 
 
 def query_file(path, host=None, token=None):
