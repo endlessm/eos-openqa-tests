@@ -90,6 +90,11 @@ sub console_root_login {
         assert_wait_serial('\[sudo\] password for test: ', timeout => 10);
         type_string($password . "\n");
     }
+
+    # Set PS1 to match what serial_term_prompt expects.
+    assert_wait_serial("# ", no_regex => 1, timeout => 10);
+    enter_cmd('PS1="# "');
+    assert_wait_serial('PS1="# "', no_regex => 1, timeout => 10);
 }
 
 sub console_root_exit {
@@ -133,6 +138,11 @@ sub console_user_login {
             type_string(get_password() . "\n");
         }
     }
+
+    # Set PS1 to match what serial_term_prompt expects.
+    assert_wait_serial('$ ', no_regex => 1, timeout => 10);
+    enter_cmd('PS1="$ "');
+    assert_wait_serial('PS1="$ "', no_regex => 1, timeout => 10);
 }
 
 sub console_user_exit {
