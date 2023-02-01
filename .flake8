@@ -1,0 +1,5 @@
+[flake8]
+# Include scripts in default file list
+filename =
+    *.py,
+    ./eos-openqa-client/eos-openqa-client
