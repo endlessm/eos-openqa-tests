@@ -25,7 +25,7 @@ import sys
 logger = logging.getLogger(__name__)
 
 
-def load_image_data_for_branch(branch, release=False, token=None):
+def load_image_data_for_branch(branch, release=False, host=None, token=None):
     """
     Download manifest file from the image server for the latest release on the
     given branch, using default values for all the other parameters.
@@ -34,6 +34,7 @@ def load_image_data_for_branch(branch, release=False, token=None):
     If there are no matching releases on the given branch, return None.
     """
     builds = eibimageserver.query_builds(
+        host=host,
         token=token,
         product='eos',
         branch=branch,
@@ -58,10 +59,15 @@ def load_image_data_for_branch(branch, release=False, token=None):
             asset_type = 'iso'
 
         if asset_type:
-            asset = eibimageserver.query_file(path)
+            asset = eibimageserver.query_file(path, host=host, token=token)
             data[asset_type] = asset['download_url']
 
-    data['manifest'] = eibimageserver.query_manifest(build['id'])['data']
+    manifest_resp = eibimageserver.query_manifest(
+        build['id'],
+        host=host,
+        token=token,
+    )
+    data['manifest'] = manifest_resp['data']
 
     return data
 
@@ -92,6 +98,9 @@ def main():
     parser.add_argument('--openqa-host',
                         default=eibopenqaserver.OPENQA_SERVER_HOST,
                         help='OpenQA server hostname (default: %(default)s)')
+    parser.add_argument('--images-host',
+                        default=eibimageserver.IMAGE_SERVER_HOST,
+                        help='Image server hostname (default: %(default)s)')
 
     args = parser.parse_args()
 
@@ -116,7 +125,12 @@ def main():
             sys.exit(1)
 
     # Fetch the image data.
-    image_data = load_image_data_for_branch(args.branch)
+    images_token = eibimageserver.get_token(args.images_host)
+    image_data = load_image_data_for_branch(
+        args.branch,
+        host=args.images_host,
+        token=images_token,
+    )
 
     # OpenQA server ISO REST API.
     if 'full' in image_data:

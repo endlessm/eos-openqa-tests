@@ -68,10 +68,12 @@ def get_token(host=IMAGE_SERVER_HOST):
     return token
 
 
-def query_api(path, host=IMAGE_SERVER_HOST, token=None, **params):
+def query_api(path, host=None, token=None, **params):
     """Query image server API"""
+    if host is None:
+        host = IMAGE_SERVER_HOST
     if token is None:
-        token = get_token()
+        token = get_token(host)
 
     url = f'https://{host}{path}'
     headers = {
@@ -85,18 +87,18 @@ def query_api(path, host=IMAGE_SERVER_HOST, token=None, **params):
         return resp.json()
 
 
-def query_builds(host=IMAGE_SERVER_HOST, token=None, release=False, **kwargs):
+def query_builds(host=None, token=None, release=False, **kwargs):
     """Query image server builds"""
     params = {'type': '2' if release else '1'}
     params.update(kwargs)
     return query_api('/api/v1/builds/', host=host, token=token, **params)
 
 
-def query_manifest(id, host=IMAGE_SERVER_HOST, token=None):
+def query_manifest(id, host=None, token=None):
     """Query image server build manifest"""
     return query_api(f'/api/v1/builds/{id}/manifest', host=host, token=token)
 
 
-def query_file(path, host=IMAGE_SERVER_HOST, token=None):
+def query_file(path, host=None, token=None):
     """Query image server file"""
     return query_api(f'/api/v1/files/{path}', host=host, token=token)
