@@ -19,13 +19,57 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 import codecs
+from contextlib import closing
 import json
 import logging
+import os
 import time
+try:
+    import secretstorage
+    HAVE_SECRETSTORAGE = True
+except ImportError:
+    HAVE_SECRETSTORAGE = False
 from urllib.parse import urlencode, urljoin
 from urllib.request import urlopen
 
+IMAGE_SERVER_HOST = 'images.endlessos.org'
+
 logger = logging.getLogger(__name__)
+
+
+class ImageError(Exception):
+    pass
+
+
+def get_token(host=IMAGE_SERVER_HOST):
+    """Retrieve image server API token
+
+    The token is first retrieved from the environment variable
+    IMAGE_SERVER_TOKEN. If that is not set, the token is read from the the
+    keyring using the attribute "service" set to the image server hostname.
+    Reading from the keyring is only possible when the secretstorage module is
+    available.
+    """
+    token = os.environ.get('IMAGE_SERVER_TOKEN')
+    if token:
+        logger.info('Using token from environment variables')
+    elif not HAVE_SECRETSTORAGE:
+        logger.warning('secretstorage module not available')
+    else:
+        with closing(secretstorage.dbus_init()) as conn:
+            collection = secretstorage.get_default_collection(conn)
+            attrs = {'service': host}
+            item = next(collection.search_items(attrs), None)
+            if item:
+                logger.info('Using token from keyring')
+                if item.is_locked():
+                    item.unlock()
+                token = item.get_secret().decode('utf-8')
+
+    if not token:
+        raise ImageError('Could not find image server API token')
+
+    return token
 
 
 def query_images(config, product=None, branch=None, arch=None, platform=None,
