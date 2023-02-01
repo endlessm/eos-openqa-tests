@@ -21,6 +21,7 @@
 import codecs
 import json
 import logging
+import time
 from urllib.parse import urlencode, urljoin
 from urllib.request import urlopen
 
@@ -88,7 +89,7 @@ def retry(func, *args, max_retries=3, timeout=1, **kwargs):
     while True:
         try:
             return func(*args, **kwargs)
-        except:
+        except:  # noqa: E722
             retry += 1
             if retry > max_retries:
                 logger.error('Failed %d retries; giving up', max_retries)

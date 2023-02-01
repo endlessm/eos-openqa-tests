@@ -19,14 +19,12 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 from configparser import ConfigParser
-import eibimageserver
 import hashlib
 import hmac
 import logging
 import os
 import requests
 import time
-import sys
 
 logger = logging.getLogger(__name__)
 
@@ -95,8 +93,11 @@ def send_request_for_manifest(manifest, image, upload_api_host,
                               update_to_manifest=None):
     image_details = manifest['images'][image]
 
-    download_url = \
-        'nightly/{product}-{arch}-{platform}/{branch}/{personality}/{build_version}'.format(**manifest)
+    download_url = (
+        'nightly/{product}-{arch}-{platform}/{branch}/{personality}'
+        '/{build_version}'
+        .format(**manifest)
+    )
     image_url = 'https://{}/{}/{}'.format(upload_api_host, download_url,
                                           image_details['file'])
 
@@ -136,9 +137,9 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     #     openqa-client --host openqa.endlessm.com isos post \
     #         ISO_URL=blah DISTRI=blas FLAVOR=blarf …
     #
-    # Note that the request parameters have to be encoded in the URI, rather than
-    # the payload, so they are part of the request hash (X-API-Hash) and hence
-    # cannot be replayed elsewhere.
+    # Note that the request parameters have to be encoded in the URI, rather
+    # than the payload, so they are part of the request hash (X-API-Hash) and
+    # hence cannot be replayed elsewhere.
     data = {
         # OpenQA keys
         'VERSION': manifest['branch'],
@@ -167,11 +168,15 @@ def send_request_for_manifest(manifest, image, upload_api_host,
         except KeyError:
             collection_id = ''
 
-        if collection_id == 'com.endlessm.Dev' or \
-           collection_id.startswith('com.endlessm.Dev.'):
+        if (
+            collection_id == 'com.endlessm.Dev' or
+            collection_id.startswith('com.endlessm.Dev.')
+        ):
             os_update_to_stage = 'dev'
-        elif collection_id == 'com.endlessm.Demo' or \
-             collection_id.startswith('com.endlessm.Demo.'):
+        elif (
+            collection_id == 'com.endlessm.Demo' or
+            collection_id.startswith('com.endlessm.Demo.')
+        ):
             os_update_to_stage = 'demo'
         else:
             os_update_to_stage = 'prod'
@@ -198,8 +203,11 @@ def send_request_for_manifest(manifest, image, upload_api_host,
     # (it seemed pointless to pull in a full dependency on it for just this).
     timestamp = time.time()
     path = request.path_url.replace('%20', '+').replace('~', '%7E')
-    api_hash = hmac.new(api_secret.encode(),
-                        '{0}{1}'.format(path, timestamp).encode(), hashlib.sha1)
+    api_hash = hmac.new(
+        api_secret.encode(),
+        '{0}{1}'.format(path, timestamp).encode(),
+        hashlib.sha1,
+    )
 
     headers = {
         'Accept': 'application/json',
