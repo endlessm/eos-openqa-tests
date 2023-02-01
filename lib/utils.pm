@@ -43,6 +43,11 @@ sub check_desktop_clean {
     assert_screen('desktop_generic', 60);
 }
 
+sub assert_wait_serial {
+    my $regexp = shift;
+    wait_serial($regexp, @_) || die "assert_wait_serial did not find \"$regexp\" in output";
+}
+
 # Log in to a TTY (which must already be displayed; see root_console() from the
 # distribution class) and get a root console. On live images, we have to do this
 # by logging in as the live user then entering a sudo session, as that’s the
@@ -55,44 +60,44 @@ sub console_root_login {
     # logged-in needles for the console we switched from, and get out
     # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
     # To avoid this, we'll sleep a few seconds before starting
-    wait_serial('endless login: ', timeout => 10);
+    assert_wait_serial('endless login: ', timeout => 10);
 
     if (get_var('LIVE')) {
         # Log in as the live user, as that’s the only user who is passwordless.
         # We do not know the root password.
         type_string("live\n");
-        wait_serial("live", no_regex => 1, timeout => 1);
-        wait_serial('$ ', no_regex => 1, timeout => 10);
+        assert_wait_serial("live", no_regex => 1, timeout => 1);
+        assert_wait_serial('$ ', no_regex => 1, timeout => 10);
 
         # Now slip into a sudo session. On a live image this should not require
         # a password.
         type_string("sudo -i\n");
-        wait_serial("sudo -i", no_regex => 1, timeout => 10);
+        assert_wait_serial("sudo -i", no_regex => 1, timeout => 10);
     } else {
         my $password = get_password();
 
         # If we’re not in a live session, use the standard test username.
         type_string("test\n");
-        wait_serial("test", no_regex => 1, timeout => 10);
-        wait_serial('Password: ', timeout => 10);
+        assert_wait_serial("test", no_regex => 1, timeout => 10);
+        assert_wait_serial('Password: ', timeout => 10);
         type_string($password . "\n");
-        wait_serial('$ ', no_regex => 1, timeout => 10);
+        assert_wait_serial('$ ', no_regex => 1, timeout => 10);
 
         # Now slip into a sudo session. This will require the user’s password
         # again.
         type_string("sudo -i\n");
-        wait_serial("sudo -i", no_regex => 1, timeout => 10);
-        wait_serial('\[sudo\] password for test: ', timeout => 10);
+        assert_wait_serial("sudo -i", no_regex => 1, timeout => 10);
+        assert_wait_serial('\[sudo\] password for test: ', timeout => 10);
         type_string($password . "\n");
     }
 }
 
 sub console_root_exit {
     type_string("exit\n");
-    wait_serial("exit", no_regex => 1, timeout => 10);
-    wait_serial('$ ', no_regex => 1, timeout => 10);
+    assert_wait_serial("exit", no_regex => 1, timeout => 10);
+    assert_wait_serial('$ ', no_regex => 1, timeout => 10);
     type_string("exit\n");
-    wait_serial("exit", no_regex => 1, timeout => 10);
+    assert_wait_serial("exit", no_regex => 1, timeout => 10);
 }
 
 # Same as console_root_login(), but for a non-root user.
@@ -108,23 +113,23 @@ sub console_user_login {
     # logged-in needles for the console we switched from, and get out
     # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
     # To avoid this, we'll sleep a few seconds before starting
-    wait_serial('endless login: ', timeout => 10);
+    assert_wait_serial('endless login: ', timeout => 10);
 
     if (get_var('LIVE')) {
         # Log in as the live user. They are passwordless.
         type_string("live\n");
-        wait_serial("live", no_regex => 1, timeout => 10);
+        assert_wait_serial("live", no_regex => 1, timeout => 10);
     } else {
         # If we’re not in a live session, use the standard test username.
         type_string($username . "\n");
-        wait_serial($username, no_regex => 1, timeout => 10);
+        assert_wait_serial($username, no_regex => 1, timeout => 10);
         if ($args{set_password}) {
-            wait_serial('New password: ', timeout => 10);
+            assert_wait_serial('New password: ', timeout => 10);
             type_string(get_password() . "\n");
-            wait_serial('Retype new password: ', timeout => 10);
+            assert_wait_serial('Retype new password: ', timeout => 10);
             type_string(get_password() . "\n");
         } else {
-            wait_serial('Password: ', timeout => 10);
+            assert_wait_serial('Password: ', timeout => 10);
             type_string(get_password() . "\n");
         }
     }
@@ -132,5 +137,5 @@ sub console_user_login {
 
 sub console_user_exit {
     type_string("exit\n");
-    wait_serial("exit", no_regex => 1, timeout => 10);
+    assert_wait_serial("exit", no_regex => 1, timeout => 10);
 }
