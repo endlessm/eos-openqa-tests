@@ -68,6 +68,7 @@ sub console_root_login {
         type_string("sudo -i\n");
         wait_serial('root@endless:~# ', timeout => 10);
         type_string("PS1='# '\n");
+        wait_serial("PS1='# '\n");
         wait_serial('# ');
     } else {
         my $password = get_password();
@@ -85,14 +86,17 @@ sub console_root_login {
         type_string($password . "\n");
         wait_serial('root@endless:~# ', timeout => 10);
         type_string("PS1='# '\n");
+        wait_serial("PS1='# '\n");
         wait_serial('# ');
     }
 }
 
 sub console_root_exit {
     type_string('exit\n');
+    wait_serial('exit\n');
     wait_serial('test@endless:~\$ ', timeout => 10);
     type_string('exit\n');
+    wait_serial('exit\n');
     wait_serial('endless login: ', timeout => 10);
 }
 
@@ -116,6 +120,7 @@ sub console_user_login {
         type_string("live\n");
         wait_serial('live@endless:~\$ ', timeout => 10);
         type_string("PS1='$ '\n");
+        wait_serial("PS1='$ '\n");
         wait_serial('$ ');
     } else {
         # If we’re not in a live session, use the standard test username.
@@ -131,11 +136,13 @@ sub console_user_login {
         }
         wait_serial($username . '@endless:~\$ ', timeout => 10);
         type_string("PS1='$ '\n");
+        wait_serial("PS1='$ '\n");
         wait_serial('$ ');
     }
 }
 
 sub console_user_exit {
     type_string('exit\n');
+    wait_serial('exit\n');
     wait_serial('endless login: ', timeout => 10);
 }
