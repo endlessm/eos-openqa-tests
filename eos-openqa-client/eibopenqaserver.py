@@ -26,6 +26,11 @@ import os
 import requests
 import time
 
+# OpenQA server hostname.
+OPENQA_SERVER_HOST = 'openqa.endlessos.org'
+# URI providing help on client.conf.
+OPENQA_CLIENT_HELP_URI = 'http://open.qa/docs/#_using_the_client_script'
+
 logger = logging.getLogger(__name__)
 
 

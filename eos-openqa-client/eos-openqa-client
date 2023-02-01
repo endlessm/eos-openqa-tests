@@ -22,13 +22,6 @@ import eibopenqaserver
 import logging
 import sys
 
-
-# OpenQA server hostname.
-OPENQA_SERVER_HOST = 'openqa.endlessos.org'
-# URI providing help on client.conf.
-OPENQA_CLIENT_HELP_URI = 'http://open.qa/docs/#_using_the_client_script'
-
-
 logger = logging.getLogger(__name__)
 
 
@@ -84,7 +77,7 @@ def main():
             'from that branch.\n'
             '\n'
             'API configuration should be put in {}. See {} for help.'
-            .format(client_conf_file, OPENQA_CLIENT_HELP_URI)
+            .format(client_conf_file, eibopenqaserver.OPENQA_CLIENT_HELP_URI)
         ),
     )
     parser.add_argument('branch', help='OS branch')
@@ -96,7 +89,8 @@ def main():
     parser.add_argument('--api-secret', required=False, default='',
                         help='OpenQA API secret (default: load from '
                              '{})'.format(client_conf_file))
-    parser.add_argument('--openqa-host', default=OPENQA_SERVER_HOST,
+    parser.add_argument('--openqa-host',
+                        default=eibopenqaserver.OPENQA_SERVER_HOST,
                         help='OpenQA server hostname (default: %(default)s)')
 
     args = parser.parse_args()
@@ -115,7 +109,8 @@ def main():
         except eibopenqaserver.OpenQAError:
             print(
                 'An --api-key and --api-secret must be provided, or specified '
-                f'in {client_conf_file}.\nSee {OPENQA_CLIENT_HELP_URI}.',
+                f'in {client_conf_file}.\n'
+                f'See {eibopenqaserver.OPENQA_CLIENT_HELP_URI}.',
                 file=sys.stderr
             )
             sys.exit(1)
