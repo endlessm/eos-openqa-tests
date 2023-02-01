@@ -90,7 +90,8 @@ def remap_arch(eib_arch):
 
 def send_request_for_image(image_type, image_url, manifest,
                            openqa_endpoint_url, api_key, api_secret,
-                           update_to_manifest=None):
+                           update_to_manifest=None,
+                           dry_run=False):
     # Work out which apps are installed on the image.
     image_flatpak_remotes = manifest['flatpak']['remotes'].keys()
     image_flatpak_runtimes = manifest['flatpak']['runtimes'].keys()
@@ -209,7 +210,7 @@ def send_request_for_image(image_type, image_url, manifest,
     logger.debug('Sending OpenQA request to %s', request.url)
 
     # If doing a dry run, bail before sending the request
-    if os.environ.get('EIB_DRY_RUN', None) == 'true':
+    if dry_run or os.environ.get('EIB_DRY_RUN', None) == 'true':
         logger.info('Dry run: would have POSTed request to %s', request.url)
         return
 

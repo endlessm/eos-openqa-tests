@@ -92,6 +92,8 @@ def main():
         ),
     )
     parser.add_argument('branch', help='OS branch')
+    parser.add_argument('-n', '--dry-run', action='store_true',
+                        help='Only show what would be done')
     parser.add_argument('--api-key', required=False, default='',
                         help='OpenQA API key (default: load from '
                              '{})'.format(client_conf_file))
@@ -132,13 +134,15 @@ def main():
                                                image_data['full'],
                                                image_data['manifest'],
                                                openqa_endpoint,
-                                               api_key, api_secret)
+                                               api_key, api_secret,
+                                               dry_run=args.dry_run)
     if 'iso' in image_data:
         eibopenqaserver.send_request_for_image('iso',
                                                image_data['iso'],
                                                image_data['manifest'],
                                                openqa_endpoint,
-                                               api_key, api_secret)
+                                               api_key, api_secret,
+                                               dry_run=args.dry_run)
 
 
 if __name__ == '__main__':
