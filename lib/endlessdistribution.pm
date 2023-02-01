@@ -39,7 +39,7 @@ sub init_consoles {
     }
 }
 
-sub activate_console {
+sub console_selected {
     my ($self, $console, %args) = @_;
 
     if ($console eq 'root-virtio-terminal') {
