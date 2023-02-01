@@ -89,6 +89,8 @@ def main():
     parser.add_argument('branch', help='OS branch')
     parser.add_argument('-n', '--dry-run', action='store_true',
                         help='Only show what would be done')
+    parser.add_argument('-r', '--release', action='store_true',
+                        help='Use released images')
     parser.add_argument('--api-key', required=False, default='',
                         help='OpenQA API key (default: load from '
                              '{})'.format(client_conf_file))
@@ -128,6 +130,7 @@ def main():
     images_token = eibimageserver.get_token(args.images_host)
     image_data = load_image_data_for_branch(
         args.branch,
+        release=args.release,
         host=args.images_host,
         token=images_token,
     )
