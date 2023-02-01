@@ -7,6 +7,11 @@ use utils;
 sub run {
     my $self = shift;
 
+    # Google Chrome automatic installation has been disabled since EOS 4.
+    if (get_var('VERSION') !~ m/^eos3./) {
+        return;
+    }
+
     # Disable automatic installation of Google Chrome. It pops up authentication
     # dialogues all the time, and sometimes hijacks the first instance of
     # gnome-software which a test runs (since gnome-software always runs as a
