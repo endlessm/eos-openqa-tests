@@ -18,6 +18,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from configparser import ConfigParser
 import eibimageserver
 import hashlib
 import hmac
@@ -28,6 +29,56 @@ import time
 import sys
 
 logger = logging.getLogger(__name__)
+
+
+class OpenQAError(Exception):
+    pass
+
+
+def get_client_config_path():
+    """Retrieve the openQA client config file path"""
+    xdg_config_home = os.environ.get(
+        'XDG_CONFIG_HOME',
+        os.path.expanduser('~/.config'),
+    )
+    return os.path.join(xdg_config_home, 'openqa', 'client.conf')
+
+
+def get_credentials(host):
+    """Retrieve openQA API credentials
+
+    The credentials are first from the environment variables
+    OPENQA_API_KEY and OPENQA_API_SECRET. If those are not set, the key
+    and secret are read from the ~/.config/openqa/client.conf file.
+    """
+    api_key = os.environ.get('OPENQA_API_KEY')
+    api_secret = os.environ.get('OPENQA_API_SECRET')
+    if api_key and api_secret:
+        logger.info('Using credentials from environment variables')
+    else:
+        # Try and load the config. It’s typically at
+        # ~/.config/openqa/client.conf, and contains key= and secret=
+        # keys in sections indexed by hostname. For example:
+        #
+        #    [openqa.endlessm.com]
+        #    key=DEADBEEF
+        #    secret=A150DEADBEEF
+        #
+        # See http://open.qa/docs/#_using_the_client_script.
+        conf_path = get_client_config_path()
+
+        logger.debug(f'Reading client config file {conf_path}')
+        conf = ConfigParser()
+        conf.read(conf_path)
+        api_key = conf.get(host, 'key', fallback=None)
+        api_secret = conf.get(host, 'secret', fallback=None)
+        if api_key and api_secret:
+            logger.info('Using credentials from client config file')
+
+    if not api_key and api_secret:
+        raise OpenQAError('Could not find openQA API credentials')
+
+    return (api_key, api_secret)
 
 
 def remap_arch(eib_arch):
