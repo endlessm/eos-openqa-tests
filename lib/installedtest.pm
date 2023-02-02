@@ -88,6 +88,26 @@ sub ensure_curl_available {
     }
 }
 
+sub ensure_eos_updater_status_available {
+    if (script_run ('which eos-updater-status')) {
+        my $url = autoinst_url . '/data/eos-updater-status';
+        my $cmd = "mkdir -p /usr/local/bin && " .
+            "wget -O /usr/local/bin/eos-updater-status '$url' && " .
+            "chmod +x /usr/local/bin/eos-updater-status";
+        assert_script_run($cmd, timeout => 60);
+    }
+}
+
+sub ensure_ostree_sysroot_status_available {
+    if (script_run ('which ostree-sysroot-status')) {
+        my $url = autoinst_url . '/data/ostree-sysroot-status';
+        my $cmd = "mkdir -p /usr/local/bin && " .
+            "wget -O /usr/local/bin/ostree-sysroot-status '$url' && " .
+            "chmod +x /usr/local/bin/ostree-sysroot-status"
+        assert_script_run($cmd, timeout => 60);
+    }
+}
+
 sub disable_polkit_policy {
     # Creates a Polkit rule to 'disable' the rules added for a given action_id.
     my $self = shift;

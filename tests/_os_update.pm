@@ -3,11 +3,21 @@ use base 'installedtest';
 use strict;
 use testapi;
 use utils;
+use Mojo::JSON 'decode_json';
 
 sub run {
     my $self = shift;
 
     $self->root_console();
+
+    # Download our helpers if needed.
+    $self->ensure_eos_updater_status_available();
+    $self->ensure_ostree_sysroot_status_available();
+
+    my @sysroot_status = decode_json(script_output('ostree-sysroot-status', timeout => 10));
+    if (scalar(@sysroot_status) != 1) {
+        die("There should be one deployment in ${sysroot_status}");
+    }
 
     # Switch to the appropriate OS update repo stage.
     my $update_to_stage = get_var('OS_UPDATE_TO_STAGE');
