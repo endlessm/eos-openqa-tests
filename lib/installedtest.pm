@@ -103,7 +103,7 @@ sub ensure_ostree_sysroot_status_available {
         my $url = autoinst_url . '/data/ostree-sysroot-status';
         my $cmd = "mkdir -p /usr/local/bin && " .
             "wget -O /usr/local/bin/ostree-sysroot-status '$url' && " .
-            "chmod +x /usr/local/bin/ostree-sysroot-status"
+            "chmod +x /usr/local/bin/ostree-sysroot-status";
         assert_script_run($cmd, timeout => 60);
     }
 }
