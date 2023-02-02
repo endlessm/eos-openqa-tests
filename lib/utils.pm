@@ -110,6 +110,7 @@ sub console_user_login {
             type_string(get_password() . "\n");
             assert_wait_serial('Retype new password: ', timeout => 10);
             type_string(get_password() . "\n");
+            assert_wait_serial('password updated successfully', timeout => 10);
         } else {
             assert_wait_serial('Password: ', timeout => 10);
             type_string(get_password() . "\n");
@@ -143,4 +144,5 @@ sub set_root_password {
     type_string($password . "\n");
     assert_wait_serial('Retype new password: ', timeout => 10);
     type_string($password . "\n");
+    assert_wait_serial('password updated successfully', timeout => 10);
 }
