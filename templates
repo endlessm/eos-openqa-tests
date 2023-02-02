@@ -44,6 +44,17 @@
       product    => {
         arch    => "x86_64",
         distri  => "eos",
+        flavor  => "base_full_update_only",
+        version => "*",
+      },
+      test_suite => { name => "install_default_upload" },
+    },
+    {
+      machine    => { name => "64bit" },
+      prio       => 10,
+      product    => {
+        arch    => "x86_64",
+        distri  => "eos",
         flavor  => "base_iso",
         version => "*",
       },
@@ -970,6 +981,13 @@
       arch      => "x86_64",
       distri    => "eos",
       flavor    => "base_full_update",
+      name      => "",
+      version   => "*",
+    },
+    {
+      arch      => "x86_64",
+      distri    => "eos",
+      flavor    => "base_full_update_only",
       name      => "",
       version   => "*",
     },
