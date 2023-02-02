@@ -83,7 +83,7 @@ def query_api(path, host=None, token=None, session=None, **params):
         'Authorization': f'Token {token}',
     }
 
-    logger.info(f'Requesting image API {url}')
+    logger.info(f'Sending image API GET request {url}')
     with session.get(url, headers=headers, params=params) as resp:
         resp.raise_for_status()
         return resp.json()

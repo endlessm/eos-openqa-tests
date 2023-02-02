@@ -218,6 +218,7 @@ def send_request_for_image(image_type, image_url, manifest,
         return
 
     # Send the request
+    logger.info(f'Sending openQA API {request.method} request {request.url}')
     if session is None:
         session = requests.Session()
     with session.send(request) as response:
