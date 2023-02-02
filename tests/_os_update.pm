@@ -30,6 +30,7 @@ sub run {
         send_key('esc');
     }
     assert_screen('gdm_user_list', 600);
+    reset_consoles();
 
     # Check we’re now in the right version.
     $self->root_console();
