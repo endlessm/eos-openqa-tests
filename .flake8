@@ -3,4 +3,5 @@
 filename =
     *.py,
     ./data/eos-updater-status,
+    ./data/ostree-sysroot-status,
     ./eos-openqa-client/eos-openqa-client

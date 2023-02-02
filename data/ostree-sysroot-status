@@ -1,0 +1,136 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright © 2012,2013 Colin Walters <walters@verbum.org>
+# Copyright © 2023 Endless OS Foundation, LLC
+#
+# SPDX-License-Identifier: LGPL-2.0-or-later
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; if not, write to the
+# Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+# Boston, MA  02110-1301, USA.
+
+import argparse
+import gi
+from gi.repository import Gio, GLib
+import json
+
+gi.require_version('OSTree', '1.0')
+from gi.repository import OSTree  # noqa: E402
+
+
+def get_deployment_status(deployment, repo, path=None, is_booted=False,
+                          is_pending=False, is_rollback=False):
+    """Dump OSTree deployment properties to JSON"""
+    rev = deployment.get_csum()
+    _, commit, _ = repo.load_commit(rev)
+    metadata = commit.get_child_value(0)
+    version = metadata.lookup_value(OSTree.COMMIT_META_KEY_VERSION)
+    if version is not None:
+        version = version.unpack()
+
+    origin = deployment.get_origin()
+    refspec = None
+    try:
+        refspec = origin.get_string('origin', 'refspec')
+    except GLib.Error as err:
+        if not any(
+            err.matches(GLib.KeyFile.error_quark(),
+                        GLib.KeyFileError.GROUP_NOT_FOUND),
+            err.matches(GLib.KeyFile.error_quark(),
+                        GLib.KeyFileError.KEY_NOT_FOUND),
+        ):
+            raise
+
+    remote = remote_url = remote_collection_id = None
+    if refspec:
+        _, remote, _ = OSTree.parse_refspec(refspec)
+        try:
+            _, remote_url = repo.remote_get_url(remote)
+            _, remote_collection_id = repo.get_remote_option(
+                remote,
+                'collection-id',
+                None,
+            )
+        except GLib.Error as err:
+            if not err.matches(Gio.io_error_quark(),
+                               Gio.IOErrorEnum.NOT_FOUND):
+                raise
+
+    return {
+        'commit': rev,
+        'version': version,
+        'refspec': refspec,
+        'remote': remote,
+        'remote_url': remote_url,
+        'remote_collection_id': remote_collection_id,
+        'booted': is_booted,
+        'pending': is_pending,
+        'rollback': is_rollback,
+        'staged': deployment.is_staged(),
+        'pinned': deployment.is_pinned(),
+        'osname': deployment.get_osname(),
+        'path': path,
+        'deployserial': deployment.get_deployserial(),
+        'bootcsum': deployment.get_bootcsum(),
+        'bootserial': deployment.get_bootserial(),
+    }
+
+
+def print_sysroot_status(sysroot_file):
+    """Print OSTree sysroot status"""
+    sysroot = OSTree.Sysroot.new(sysroot_file)
+    sysroot.load()
+    _, repo = sysroot.get_repo()
+
+    booted = sysroot.get_booted_deployment()
+    if booted is not None:
+        pending, rollback = sysroot.query_deployments_for(None)
+    else:
+        pending, rollback = None
+
+    data = []
+    for deployment in sysroot.get_deployments():
+        deployment_dir = sysroot.get_deployment_directory(deployment)
+        status = get_deployment_status(
+            deployment,
+            repo,
+            path=deployment_dir.get_path(),
+            is_booted=(booted is not None and deployment == booted),
+            is_pending=(pending is not None and deployment == pending),
+            is_rollback=(rollback is not None and deployment == rollback),
+        )
+        data.append(status)
+
+    print(json.dumps(data, indent=2))
+
+
+def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description='Print OSTree sysroot status in JSON',
+    )
+    parser.add_argument('--sysroot', help='sysroot path')
+    args = parser.parse_args()
+
+    if args.sysroot:
+        sysroot_file = Gio.File.new_for_path(args.sysroot)
+    else:
+        sysroot_file = None
+
+    print_sysroot_status(sysroot_file)
+
+
+if __name__ == '__main__':
+    main()
