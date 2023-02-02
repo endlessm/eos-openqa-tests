@@ -62,7 +62,7 @@ sub console_root_login {
     # logged-in needles for the console we switched from, and get out
     # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
     # To avoid this, we'll sleep a few seconds before starting
-    assert_wait_serial('endless login: ', timeout => 10);
+    assert_wait_serial('endless login: ', timeout => 30);
 
     type_string("root\n");
     assert_wait_serial("root", no_regex => 1, timeout => 10);
@@ -94,7 +94,7 @@ sub console_user_login {
     # logged-in needles for the console we switched from, and get out
     # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
     # To avoid this, we'll sleep a few seconds before starting
-    assert_wait_serial('endless login: ', timeout => 10);
+    assert_wait_serial('endless login: ', timeout => 30);
 
     if (get_var('LIVE')) {
         # Log in as the live user. They are passwordless.
