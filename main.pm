@@ -61,6 +61,9 @@ if (!get_var('START_AFTER_TEST') && !get_var('BOOTFROM') && !get_var('FBE_TEST')
     # is often unhelpful.
     autotest::loadtest "tests/_enable_polkit_debugging.pm";
 
+    # Disable autoupdating so OS updates are predictable.
+    autotest::loadtest "tests/_disable_autoupdater.pm";
+
     # Disable notification popups because they get in the way of a lot of needles.
     # Similarly, disable the screensaver and Google Chrome installation.
     autotest::loadtest "tests/_disable_desktop_notifications.pm";
