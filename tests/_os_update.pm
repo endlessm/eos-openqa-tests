@@ -62,6 +62,13 @@ sub run {
         die("Unexpected version $booted_version instead of $expected_booted_version");
         return;
     }
+
+    # Workaround. Since milestone is set below, a snapshot of the
+    # terminal will be taken if the console is activated. That consumes
+    # the next login prompt and breaks the next console. That output
+    # should be buffered, but it doesn't appear to work. Possibly
+    # because there are 2 different virtio terminals.
+    reset_consoles();
 }
 
 sub test_flags {
