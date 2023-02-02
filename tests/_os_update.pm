@@ -13,12 +13,12 @@ sub run {
     my $update_to_stage = get_var('OS_UPDATE_TO_STAGE');
     script_run("eos-stage-ostree $update_to_stage", 180);
 
+    # Stop eos-updater to ensure it starts from a clean slate. eos-stage-ostree
+    # likely already did this, but let's be sure.
+    assert_script_run('systemctl stop eos-updater', timeout => 30);
+
     # Do the upgrade.
-    # FIXME: Currently we don’t fail if this fails, because the state management
-    # of `eos-updater-ctl update` is a bit flaky. We’ll catch any update
-    # mismatches with the version check below. It would be good to catch them
-    # sooner though, once eos-updater-ctl is a little less rubbish.
-    script_run('eos-updater-ctl update', 180);
+    assert_script_run('eos-updater-ctl update', 180);
 
     # Record the ostree sysroot status.
     my $ostree_status = script_output('ostree admin status', timeout => 10);
