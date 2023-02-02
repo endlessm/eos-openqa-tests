@@ -16,7 +16,7 @@ sub run {
 
     my @sysroot_status = decode_json(script_output('ostree-sysroot-status', timeout => 10));
     if (scalar(@sysroot_status) != 1) {
-        die("There should be one deployment in ${sysroot_status}");
+        die("There should be one deployment in @sysroot_status");
     }
 
     # Switch to the appropriate OS update repo stage.
