@@ -97,6 +97,7 @@ def send_request_for_image(image_type, image_url, manifest,
                            host=OPENQA_SERVER_HOST,
                            update_to=None,
                            update_to_stage=None,
+                           update_only=False,
                            api_key=None,
                            api_secret=None,
                            session=None,
@@ -123,8 +124,12 @@ def send_request_for_image(image_type, image_url, manifest,
     # personality, image type, and update path. We can’t include the actual
     # update version in the FLAVOR, since that would mean the `templates` file
     # in eos-openqa-tests.git would need updating for each release.
-    flavor = '{}_{}{}'.format(manifest['personality'], image_type,
-                              '_update' if update_to else '')
+    flavor = '{}_{}{}{}'.format(
+        manifest['personality'],
+        image_type,
+        '_update' if update_to else '',
+        '_only' if update_to and update_only else '',
+    )
 
     # Build an API request to send to OpenQA to add the new disk image to its
     # list of images, and hence instantiate tests from the job templates for
