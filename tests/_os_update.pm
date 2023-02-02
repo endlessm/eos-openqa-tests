@@ -20,6 +20,10 @@ sub run {
     # sooner though, once eos-updater-ctl is a little less rubbish.
     script_run('eos-updater-ctl update', 180);
 
+    # Record the ostree sysroot status.
+    my $ostree_status = script_output('ostree admin status', timeout => 10);
+    record_info('OSTree status', $ostree_status);
+
     # Upgrade complete; reboot. Sleep for 2s to avoid matching the shutdown
     # Plymouth screen.
     assert_script_run("systemctl mask --runtime plymouth-reboot.service", 10);
