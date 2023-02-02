@@ -79,6 +79,7 @@ sub console_root_exit {
     assert_wait_serial("# ", no_regex => 1, timeout => 10);
     enter_cmd("exit");
     assert_wait_serial("exit", no_regex => 1, timeout => 10);
+    assert_wait_serial("logout", no_regex => 1, timeout => 10);
 }
 
 # Same as console_root_login(), but for a non-root user.
@@ -125,6 +126,7 @@ sub console_user_exit {
     assert_wait_serial('$ ', no_regex => 1, timeout => 10);
     enter_cmd("exit");
     assert_wait_serial("exit", no_regex => 1, timeout => 10);
+    assert_wait_serial("logout", no_regex => 1, timeout => 10);
 }
 
 sub set_root_password {
