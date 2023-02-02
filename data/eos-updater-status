@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright © 2023 Endless OS Foundation, LLC
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# 02110-1301 USA
+
+import argparse
+from gi.repository import Gio
+import json
+
+UPDATER_STATES = [
+    "None",
+    "Ready",
+    "Error",
+    "Polling",
+    "UpdateAvailable",
+    "Fetching",
+    "UpdateReady",
+    "ApplyingUpdate",
+    "UpdateApplied"
+]
+
+
+def dump_properties_json(proxy):
+    """Dump com.endlessm.Updater properties to JSON"""
+    property_names = proxy.get_cached_property_names()
+    if not property_names:
+        raise Exception('Could not get properties')
+
+    data = {}
+    for name in property_names:
+        value = proxy.get_cached_property(name)
+        if name == "State":
+            # Convert the state integer to a name.
+            state = value.get_uint32()
+            data_value = UPDATER_STATES[state]
+        else:
+            data_value = value.unpack()
+
+        data[name] = data_value
+
+    print(json.dumps(data, indent=2))
+
+
+def print_updater_status():
+    """Print com.endlessm.Updater object status"""
+    bus = Gio.bus_get_sync(Gio.BusType.SYSTEM, None)
+    proxy = Gio.DBusProxy.new_sync(
+        bus,
+        Gio.DBusProxyFlags.NONE,
+        None,  # interface info
+        'com.endlessm.Updater',
+        '/com/endlessm/Updater',
+        'com.endlessm.Updater',
+    )
+    dump_properties_json(proxy)
+
+
+def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description='Print eos-updater properties in JSON',
+    )
+    parser.parse_args()
+    print_updater_status()
+
+
+if __name__ == '__main__':
+    main()

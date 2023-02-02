@@ -2,4 +2,5 @@
 # Include scripts in default file list
 filename =
     *.py,
+    ./data/eos-updater-status,
     ./eos-openqa-client/eos-openqa-client
