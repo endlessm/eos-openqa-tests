@@ -14,9 +14,10 @@ sub run {
     $self->ensure_eos_updater_status_available();
     $self->ensure_ostree_sysroot_status_available();
 
-    my @sysroot_status = decode_json(script_output('ostree-sysroot-status', timeout => 10));
-    if (scalar(@sysroot_status) != 1) {
-        die("There should be one deployment in @sysroot_status");
+    my $sysroot_status = decode_json(script_output('ostree-sysroot-status', timeout => 10));
+    my $num_deployments = scalar(@$sysroot_status);
+    if ($num_deployments != 1) {
+        die("There should be 1 deployment not $num_deployments");
     }
 
     # Switch to the appropriate OS update repo stage.
@@ -34,9 +35,9 @@ sub run {
     my $ostree_status = script_output('ostree admin status', timeout => 10);
     record_info('OSTree status', $ostree_status);
 
-    my %updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
-    if ($updater_status{State} ne "UpdateApplied") {
-        die("Updater state is $updater_status{State}, not UpdateApplied");
+    my $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
+    if ($updater_status->{State} ne "UpdateApplied") {
+        die("Updater state is $updater_status->{State}, not UpdateApplied");
     }
 
     # Upgrade complete; reboot. Sleep for 2s to avoid matching the shutdown
