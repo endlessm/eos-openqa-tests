@@ -34,6 +34,11 @@ sub run {
     my $ostree_status = script_output('ostree admin status', timeout => 10);
     record_info('OSTree status', $ostree_status);
 
+    my %updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
+    if ($updater_status{State} ne "UpdateApplied") {
+        die("Updater state is $updater_status{State}, not UpdateApplied");
+    }
+
     # Upgrade complete; reboot. Sleep for 2s to avoid matching the shutdown
     # Plymouth screen.
     assert_script_run("systemctl mask --runtime plymouth-reboot.service", 10);
