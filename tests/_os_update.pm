@@ -18,7 +18,7 @@ sub run {
     assert_script_run('systemctl stop eos-updater', timeout => 30);
 
     # Do the upgrade.
-    assert_script_run('eos-updater-ctl update', 180);
+    assert_script_run('eos-updater-ctl update', timeout => 300);
 
     # Record the ostree sysroot status.
     my $ostree_status = script_output('ostree admin status', timeout => 10);
