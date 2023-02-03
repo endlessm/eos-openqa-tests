@@ -33,7 +33,19 @@ sub run {
     # likely already did this, but let's be sure.
     assert_script_run('systemctl stop eos-updater', timeout => 30);
 
-    my $updater_state = "UpdateAvailable";
+    # Check if eos-updater thinks there are any more updates.
+    assert_script_run('eos-updater-ctl poll', timeout => 30);
+    my $updater_status;
+    my $updater_state = "Polling";
+    while ($updater_state eq "Polling") {
+        $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
+        $updater_state = $updater_status->{State};
+    }
+    if ($updater_state ne "UpdateAvailable") {
+        die "eos-updater reports no update available";
+    }
+    record_info('Update available', encode_json($updater_status));
+
     while ($updater_state eq "UpdateAvailable") {
         # Do the upgrade.
         assert_script_run('eos-updater-ctl update', timeout => 600);
@@ -42,7 +54,7 @@ sub run {
         my $ostree_status = script_output('ostree admin status', timeout => 10);
         record_info('OSTree status', $ostree_status);
 
-        my $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
+        $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
         if ($updater_status->{State} ne "UpdateApplied") {
             die("Updater state is $updater_status->{State}, not UpdateApplied");
         }
