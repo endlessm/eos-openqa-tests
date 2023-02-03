@@ -20,6 +20,11 @@ sub run {
         die("There should be 1 deployment not $num_deployments");
     }
 
+    my $booted_deployment = $sysroot_status->[0];
+    my $booted_refspec = $booted_deployment->{refspec};
+    my $initial_refspec = $booted_refspec;
+    my $expected_booted_refspec = get_var('OS_UPDATE_TO_REFSPEC') // $initial_refspec;
+
     # Switch to the appropriate OS update repo stage.
     my $update_to_stage = get_var('OS_UPDATE_TO_STAGE');
     script_run("eos-stage-ostree $update_to_stage", 180);
@@ -52,16 +57,41 @@ sub run {
     assert_screen('gdm_user_list', 600);
     reset_consoles();
 
-    # Check we’re now in the right version.
     $self->root_console();
+
+    # Check we’re now in the right version.
     my $expected_booted_version = get_var('OS_UPDATE_TO');
     my $booted_version = script_output('grep VERSION_ID /etc/os-release');
-    $self->exit_root_console();
-
     if ($booted_version ne "VERSION_ID=\"$expected_booted_version\"") {
         die("Unexpected version $booted_version instead of $expected_booted_version");
         return;
     }
+
+    # Check we're on the expected refspec.
+    $sysroot_status = decode_json(script_output('ostree-sysroot-status', timeout => 10));
+    $num_deployments = scalar(@$sysroot_status);
+    if ($num_deployments <= 1) {
+        die("There should be more than 1 deployment not $num_deployments");
+    }
+    $booted_deployment = $sysroot_status->[0];
+    $booted_refspec = $booted_deployment->{refspec};
+    if ($booted_refspec ne $expected_booted_refspec) {
+        die("Unexpected refspec $booted_refspec instead of $expected_booted_refspec");
+    }
+
+    # Check that eos-updater doesn't think there are any more updates.
+    assert_script_run('systemctl stop eos-updater', timeout => 30);
+    assert_script_run('eos-updater-ctl poll', timeout => 30);
+    my $updater_state = "Polling";
+    while ($updater_state eq "Polling") {
+        $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
+        $updater_state = $updater_statue->{State};
+    }
+    if ($updater_state ne "Ready") {
+        die("Updater state is $updater_state, not Ready");
+    }
+
+    $self->exit_root_console();
 }
 
 sub test_flags {
