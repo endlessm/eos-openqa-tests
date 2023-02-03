@@ -33,31 +33,49 @@ sub run {
     # likely already did this, but let's be sure.
     assert_script_run('systemctl stop eos-updater', timeout => 30);
 
-    # Do the upgrade.
-    assert_script_run('eos-updater-ctl update', timeout => 300);
+    my $updater_state = "UpdateAvailable";
+    while ($updater_state eq "UpdateAvailable") {
+        # Do the upgrade.
+        assert_script_run('eos-updater-ctl update', timeout => 300);
 
-    # Record the ostree sysroot status.
-    my $ostree_status = script_output('ostree admin status', timeout => 10);
-    record_info('OSTree status', $ostree_status);
+        # Record the ostree sysroot status.
+        my $ostree_status = script_output('ostree admin status', timeout => 10);
+        record_info('OSTree status', $ostree_status);
 
-    my $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
-    if ($updater_status->{State} ne "UpdateApplied") {
-        die("Updater state is $updater_status->{State}, not UpdateApplied");
+        my $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
+        if ($updater_status->{State} ne "UpdateApplied") {
+            die("Updater state is $updater_status->{State}, not UpdateApplied");
+        }
+
+        # Upgrade complete; reboot. Sleep for 2s to avoid matching the shutdown
+        # Plymouth screen.
+        assert_script_run("systemctl mask --runtime plymouth-reboot.service", 10);
+        type_string("reboot\n");
+        wait_serial("reboot");
+        if (check_screen('plymouth', 30)) {
+            # Press Esc to show the boot progress for debugging
+            send_key('esc');
+        }
+        assert_screen('gdm_user_list', 600);
+        reset_consoles();
+
+        $self->root_console();
+
+        # Check if eos-updater thinks there are any more updates.
+        assert_script_run('systemctl stop eos-updater', timeout => 30);
+        assert_script_run('eos-updater-ctl poll', timeout => 30);
+        $updater_state = "Polling";
+        while ($updater_state eq "Polling") {
+            $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
+            $updater_state = $updater_status->{State};
+        }
+        if ($updater_state eq "UpdateAvailable") {
+            record_info('Update available', $updater_status);
+        }
+        elsif ($updater_state ne "Ready") {
+            die("Updater state is $updater_state, not Ready");
+        }
     }
-
-    # Upgrade complete; reboot. Sleep for 2s to avoid matching the shutdown
-    # Plymouth screen.
-    assert_script_run("systemctl mask --runtime plymouth-reboot.service", 10);
-    type_string("reboot\n");
-    wait_serial("reboot");
-    if (check_screen('plymouth', 30)) {
-        # Press Esc to show the boot progress for debugging
-        send_key('esc');
-    }
-    assert_screen('gdm_user_list', 600);
-    reset_consoles();
-
-    $self->root_console();
 
     # Check we’re now in the right version.
     my $expected_booted_version = get_var('OS_UPDATE_TO');
@@ -77,24 +95,6 @@ sub run {
     $booted_refspec = $booted_deployment->{refspec};
     if ($booted_refspec ne $expected_booted_refspec) {
         die("Unexpected refspec $booted_refspec instead of $expected_booted_refspec");
-    }
-
-    # Check that eos-updater doesn't think there are any more updates.
-    assert_script_run('systemctl stop eos-updater', timeout => 30);
-    assert_script_run('eos-updater-ctl poll', timeout => 30);
-    my $updater_state = "Polling";
-    while ($updater_state eq "Polling") {
-        $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
-        $updater_state = $updater_status->{State};
-    }
-    if ($updater_state eq "UpdateAvailable") {
-        my $available_commit = $updater_status->{UpdateID};
-        my $available_version = $updater_status->{Version};
-
-        die("Unexpected update available $available_version ($available_commit)");
-    }
-    elsif ($updater_state ne "Ready") {
-        die("Updater state is $updater_state, not Ready");
     }
 
     $self->exit_root_console();
