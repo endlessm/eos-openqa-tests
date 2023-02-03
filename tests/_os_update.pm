@@ -87,7 +87,13 @@ sub run {
         $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
         $updater_state = $updater_status->{State};
     }
-    if ($updater_state ne "Ready") {
+    if ($updater_state eq "UpdateAvailable") {
+        my $available_commit = $updater_state->{UpdateID};
+        my $available_version = $updater_state->{Version};
+
+        die("Unexpected update available $available_version ($available_commit)");
+    }
+    elsif ($updater_state ne "Ready") {
         die("Updater state is $updater_state, not Ready");
     }
 
