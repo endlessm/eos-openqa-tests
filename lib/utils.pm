@@ -62,9 +62,9 @@ sub console_root_login {
     # logged-in needles for the console we switched from, and get out
     # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
     # To avoid this, we'll sleep a few seconds before starting
-    if (!wait_serial('endless login: ', timeout => 10)) {
+    if (!wait_serial('endless login: ', timeout => 30)) {
         send_key('ret');
-        assert_wait_serial('endless login: ', timeout => 10);
+        assert_wait_serial('endless login: ', timeout => 30);
     }
 
     type_string("root\n");
