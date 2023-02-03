@@ -88,8 +88,8 @@ sub run {
         $updater_state = $updater_status->{State};
     }
     if ($updater_state eq "UpdateAvailable") {
-        my $available_commit = $updater_state->{UpdateID};
-        my $available_version = $updater_state->{Version};
+        my $available_commit = $updater_status->{UpdateID};
+        my $available_version = $updater_status->{Version};
 
         die("Unexpected update available $available_version ($available_commit)");
     }
