@@ -3,7 +3,7 @@ use base 'installedtest';
 use strict;
 use testapi;
 use utils;
-use Mojo::JSON 'decode_json';
+use Mojo::JSON 'encode_json', 'decode_json';
 
 sub run {
     my $self = shift;
@@ -70,7 +70,7 @@ sub run {
             $updater_state = $updater_status->{State};
         }
         if ($updater_state eq "UpdateAvailable") {
-            record_info('Update available', $updater_status);
+            record_info('Update available', encode_json($updater_status));
         }
         elsif ($updater_state ne "Ready") {
             die("Updater state is $updater_state, not Ready");
