@@ -48,6 +48,14 @@ sub assert_wait_serial {
     wait_serial($regexp, @_) || die "assert_wait_serial did not find \"$regexp\" in output";
 }
 
+sub wait_for_login_prompt {
+    if (!wait_serial('endless login: ', timeout => 60)) {
+        # Try to induce the prompt by pressing RET and wait again.
+        send_key('ret');
+        assert_wait_serial('endless login: ', timeout => 30);
+    }
+}
+
 # Log in to a TTY (which must already be displayed; see root_console() from the
 # distribution class) and get a root console. On live images, we have to do this
 # by logging in as the live user then entering a sudo session, as that’s the
@@ -56,16 +64,7 @@ sub assert_wait_serial {
 sub console_root_login {
     my $password = get_password();
 
-    # There's a timing problem when we switch from a logged-in console
-    # to a non-logged in console and immediately call this function;
-    # if the switch lags a bit, this function will match one of the
-    # logged-in needles for the console we switched from, and get out
-    # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
-    # To avoid this, we'll sleep a few seconds before starting
-    if (!wait_serial('endless login: ', timeout => 30)) {
-        send_key('ret');
-        assert_wait_serial('endless login: ', timeout => 30);
-    }
+    wait_for_login_prompt();
 
     type_string("root\n");
     assert_wait_serial("root", no_regex => 1, timeout => 10);
@@ -92,16 +91,7 @@ sub console_user_login {
         set_password => 0,
         @_);
 
-    # There's a timing problem when we switch from a logged-in console
-    # to a non-logged in console and immediately call this function;
-    # if the switch lags a bit, this function will match one of the
-    # logged-in needles for the console we switched from, and get out
-    # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
-    # To avoid this, we'll sleep a few seconds before starting
-    if (!wait_serial('endless login: ', timeout => 10)) {
-        send_key('ret');
-        assert_wait_serial('endless login: ', timeout => 10);
-    }
+    wait_for_login_prompt();
 
     if (get_var('LIVE')) {
         # Log in as the live user. They are passwordless.
