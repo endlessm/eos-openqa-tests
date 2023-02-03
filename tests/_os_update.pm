@@ -85,7 +85,7 @@ sub run {
     my $updater_state = "Polling";
     while ($updater_state eq "Polling") {
         $updater_status = decode_json(script_output('eos-updater-status', timeout => 10));
-        $updater_state = $updater_statue->{State};
+        $updater_state = $updater_status->{State};
     }
     if ($updater_state ne "Ready") {
         die("Updater state is $updater_state, not Ready");
