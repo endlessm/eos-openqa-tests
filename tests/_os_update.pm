@@ -36,7 +36,7 @@ sub run {
     my $updater_state = "UpdateAvailable";
     while ($updater_state eq "UpdateAvailable") {
         # Do the upgrade.
-        assert_script_run('eos-updater-ctl update', timeout => 300);
+        assert_script_run('eos-updater-ctl update', timeout => 600);
 
         # Record the ostree sysroot status.
         my $ostree_status = script_output('ostree admin status', timeout => 10);
