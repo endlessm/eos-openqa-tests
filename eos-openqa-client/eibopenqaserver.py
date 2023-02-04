@@ -99,6 +99,7 @@ def send_request_for_image(image_type, image_url, manifest,
                            update_to_stage=None,
                            update_to_refspec=None,
                            update_only=False,
+                           smbios=None,
                            api_key=None,
                            api_secret=None,
                            session=None,
@@ -173,6 +174,8 @@ def send_request_for_image(image_type, image_url, manifest,
     }
     if 'image_language' in manifest:
         data['EOS_IMAGE_LANGUAGE'] = manifest['image_language']
+    if smbios:
+        data['QEMU_SMBIOS'] = smbios
     if update_to:
         data['OS_UPDATE_TO'] = update_to
         if update_to_stage is None:

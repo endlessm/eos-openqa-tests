@@ -123,6 +123,7 @@ def main():
                         help='OSTree refspec to update to')
     parser.add_argument('--update-only', action='store_true',
                         help='Schedule only update tests')
+    parser.add_argument('--smbios', help='QEMU -smbios option')
     parser.set_defaults(log_level='INFO')
     log_group = parser.add_mutually_exclusive_group()
     log_group.add_argument('-q', '--quiet', dest='log_level',
@@ -187,6 +188,7 @@ def main():
         update_to_stage=args.update_to_stage,
         update_to_refspec=args.update_to_refspec,
         update_only=args.update_only,
+        smbios=args.smbios,
         host=args.openqa_host,
         api_key=api_key,
         api_secret=api_secret,
