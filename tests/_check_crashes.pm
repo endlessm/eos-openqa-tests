@@ -12,16 +12,19 @@ sub run {
 
     # Check there are no errors in the journal.
     # FIXME: Ramp this up to check emerg..err. Currently a lot of true (unfixed) positives there.
-    assert_script_run('[[ ! $(journalctl --priority emerg..crit --quiet --no-pager) ]]');
+    my $journal_errors = script_output('journalctl --priority emerg..crit --quiet --no-pager');
+    if ($journal_errors ne '') {
+        die("There were errors in the journal:\n$journal_errors");
+    }
 
     # Check no systemd units failed to start up. This isn’t caught by the
     # test above, as systemd only emits a warning on unit failure, rather than
     # an error. Look at the ‘systemd-units.log’ log file for a test run to see
     # a list of systemd units and their statuses (including ‘failed’).
-    #
-    # Note: The logic is perverse here, as is-failed returns exit status 0 if
-    # any units failed, and exit status 1 if all units succeeded.
-    assert_script_run('! systemctl is-failed --quiet \'*\'');
+    if (!script_run('systemctl is-system-running')) {
+        my $failed_units = script_output('systemctl list-units --state=failed --quiet --no-pager');
+        die("The following units are failed:\n$failed_units");
+    }
 
     $self->exit_root_console();
 }
