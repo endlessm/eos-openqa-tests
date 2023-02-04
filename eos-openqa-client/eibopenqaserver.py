@@ -97,6 +97,7 @@ def send_request_for_image(image_type, image_url, manifest,
                            host=OPENQA_SERVER_HOST,
                            update_to=None,
                            update_to_stage=None,
+                           update_to_refspec=None,
                            update_only=False,
                            api_key=None,
                            api_secret=None,
@@ -177,6 +178,8 @@ def send_request_for_image(image_type, image_url, manifest,
         if update_to_stage is None:
             update_to_stage = 'prod'
         data['OS_UPDATE_TO_STAGE'] = update_to_stage
+        if update_to_refspec is not None:
+            data['OS_UPDATE_TO_REFSPEC'] = update_to_refspec
 
     # Add the image URI.
     if image_type == 'iso':

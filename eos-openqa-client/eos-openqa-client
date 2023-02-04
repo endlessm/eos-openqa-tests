@@ -119,6 +119,8 @@ def main():
     parser.add_argument('--update-to', help='OS release version to update to')
     parser.add_argument('--update-to-stage', choices=('prod', 'demo', 'dev'),
                         help='OSTree server stage use for update')
+    parser.add_argument('--update-to-refspec',
+                        help='OSTree refspec to update to')
     parser.add_argument('--update-only', action='store_true',
                         help='Schedule only update tests')
     parser.set_defaults(log_level='INFO')
@@ -183,6 +185,7 @@ def main():
     openqa_kwargs = dict(
         update_to=args.update_to,
         update_to_stage=args.update_to_stage,
+        update_to_refspec=args.update_to_refspec,
         update_only=args.update_only,
         host=args.openqa_host,
         api_key=api_key,
