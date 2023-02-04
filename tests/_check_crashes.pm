@@ -21,7 +21,7 @@ sub run {
     # test above, as systemd only emits a warning on unit failure, rather than
     # an error. Look at the ‘systemd-units.log’ log file for a test run to see
     # a list of systemd units and their statuses (including ‘failed’).
-    if (!script_run('systemctl is-system-running')) {
+    if (script_run('systemctl is-system-running') != 0) {
         my $failed_units = script_output('systemctl list-units --state=failed --quiet --no-pager');
         die("The following units are failed:\n$failed_units");
     }
